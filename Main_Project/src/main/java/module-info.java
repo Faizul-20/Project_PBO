@@ -6,4 +6,6 @@ module com.example.emuyhealthcare {
 
     opens com.example.main_project.GUI_Example to javafx.fxml;
     exports com.example.main_project.GUI_Example;
+    //exports  com.example.main_project;
+    opens com.example.main_project to javafx.fxml;
 }
