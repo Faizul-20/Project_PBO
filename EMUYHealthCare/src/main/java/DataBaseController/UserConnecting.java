@@ -20,6 +20,6 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
     }
 
     public void getPenyakit(){
-        
+
     }
 }
