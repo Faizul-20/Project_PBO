@@ -40,7 +40,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
             connection.close();
 
         } catch (SQLException e) {
-            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("Pesan Erorr : " + e.getMessage());
         }
     }
 }
