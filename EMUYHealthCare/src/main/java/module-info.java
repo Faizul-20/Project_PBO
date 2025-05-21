@@ -1,8 +1,8 @@
 module com.example.emuyhealthcare {
-    requires javafx.controls;
     requires javafx.fxml;
-    requires java.desktop;
     requires java.sql;
+    requires com.jfoenix;
+    requires javafx.controls;
 
 
     opens com.example.emuyhealthcare to javafx.fxml;

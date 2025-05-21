@@ -9,8 +9,10 @@ import javafx.stage.Window;
 import java.io.IOException;
 
 public class SceneController {
-    private final String LOGIN_LINK = "/com/example/emuyhealthcare/SignUp-view.fxml";
-    private final String SIGN_LINK = "/com/example/emuyhealthcare/DashBoard.fxml";
+    //private final String LOGIN_LINK = "/com/example/emuyhealthcare/SignUp-view.fxml";
+    private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard.fxml";
+    private final String LOGIN_LINK = "/com/example/emuyhealthcare/loginPage.fxml";
+
     //Method For Building New Window
     public void BuildWindow(String Url,Stage stage){
         try {
@@ -41,7 +43,11 @@ public class SceneController {
         return LOGIN_LINK;
     }
 
-    public String getSIGN_LINK() {
-        return SIGN_LINK;
+    public String getDASHBOARD_LINKK() {
+        return DASHBOARD_LINK;
+    }
+
+    public String getDASHBOARD_LINK() {
+        return DASHBOARD_LINK;
     }
 }

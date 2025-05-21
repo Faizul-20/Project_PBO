@@ -12,10 +12,10 @@ public class EmuyMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         UserConnecting Con = new UserConnecting();
         Con.ConnectToDatabase(Con.getUserData());
         SceneController Control = new SceneController();
-        //Control.BuildWindow(Control.getSIGN_LINK(),primaryStage);
+        Control.BuildWindow(Control.getLOGIN_LINK(),primaryStage);
     }
 }
