@@ -21,18 +21,17 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
         }
     }
 
-<<<<<<< HEAD
-    public void InsertDataUser(String username,String password,int tb,int bb,String ttl){
+    public void InsertDataUser(String username,String password,int tb,int bb,String ttl) {
         try {
-            Connection connection =  DriverManager.getConnection(getUserData());
+            Connection connection = DriverManager.getConnection(getUserData());
             String query = getINSERT_DATA();
             PreparedStatement pstmt = connection.prepareStatement(query);
 
-            pstmt.setString(1,username);
-            pstmt.setString(2,password);
-            pstmt.setInt(3,tb);
-            pstmt.setInt(4,bb);
-            pstmt.setString(5,ttl);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, tb);
+            pstmt.setInt(4, bb);
+            pstmt.setString(5, ttl);
 
             pstmt.executeUpdate();
             System.out.println("Data pengguna berhasil disimpan!");
@@ -40,12 +39,8 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
             pstmt.close();
             connection.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
-=======
-    public void getPenyakit(){
-        
->>>>>>> 23b1b4107e9c4adc70443b423b3bc0c48e536243
     }
 }
