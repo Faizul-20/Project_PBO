@@ -16,6 +16,6 @@ public class EmuyMain extends Application {
         UserConnecting Con = new UserConnecting();
         Con.ConnectToDatabase(Con.getUserData());
         SceneController Control = new SceneController();
-        Control.BuildWindow(Control.getLOGIN_LINK(),primaryStage);
+        Control.BuildWindow(Control.getLOGIN_PAGE(),primaryStage);
     }
 }

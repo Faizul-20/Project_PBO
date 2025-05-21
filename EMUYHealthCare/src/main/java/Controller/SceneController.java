@@ -12,6 +12,7 @@ public class SceneController {
     //private final String LOGIN_LINK = "/com/example/emuyhealthcare/SignUp-view.fxml";
     private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard.fxml";
     private final String LOGIN_LINK = "/com/example/emuyhealthcare/loginPage.fxml";
+    private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
 
     //Method For Building New Window
     public void BuildWindow(String Url,Stage stage){
@@ -49,5 +50,9 @@ public class SceneController {
 
     public String getDASHBOARD_LINK() {
         return DASHBOARD_LINK;
+    }
+
+    public String getLOGIN_PAGE() {
+        return LOGIN_PAGE;
     }
 }

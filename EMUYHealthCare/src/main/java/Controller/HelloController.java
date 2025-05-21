@@ -1,4 +1,4 @@
-package com.example.loginnew;
+package Controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
