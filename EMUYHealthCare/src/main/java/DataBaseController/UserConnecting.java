@@ -18,4 +18,8 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }
+
+    public void getPenyakit(){
+        
+    }
 }
