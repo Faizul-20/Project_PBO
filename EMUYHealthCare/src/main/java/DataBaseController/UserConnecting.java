@@ -2,11 +2,13 @@ package DataBaseController;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserConnecting extends ConnectionData implements SQLConnection{
+
     @Override
     public void ConnectToDatabase(String Url) {
         try {
@@ -19,7 +21,31 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
         }
     }
 
+<<<<<<< HEAD
     public void getPenyakit(){
 
+=======
+    public void InsertDataUser(String username,String password,int tb,int bb,String ttl) {
+        try {
+            Connection connection = DriverManager.getConnection(getUserData());
+            String query = getINSERT_DATA();
+            PreparedStatement pstmt = connection.prepareStatement(query);
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, tb);
+            pstmt.setInt(4, bb);
+            pstmt.setString(5, ttl);
+
+            pstmt.executeUpdate();
+            System.out.println("Data pengguna berhasil disimpan!");
+
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            System.out.println("Pesan Eror : " + e.getMessage());
+        }
+>>>>>>> 151b5e036e13c1d342322bbff673f384faaa44f9
     }
 }
