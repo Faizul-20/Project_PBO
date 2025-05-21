@@ -16,6 +16,5 @@ public class EmuyMain extends Application {
     public void start(Stage primaryStage) {
         SceneController Control = new SceneController();
         Control.BuildWindow(Control.getLOGIN_PAGE(),primaryStage);
-
     }
 }
