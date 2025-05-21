@@ -21,6 +21,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
         }
     }
 
+<<<<<<< HEAD
     public void InsertDataUser(String username,String password,int tb,int bb,String ttl){
         try {
             Connection connection =  DriverManager.getConnection(getUserData());
@@ -42,5 +43,9 @@ public class UserConnecting extends ConnectionData implements SQLConnection{
         }catch (SQLException e){
             System.out.println("Pesan Eror : " + e.getMessage());
         }
+=======
+    public void getPenyakit(){
+        
+>>>>>>> 23b1b4107e9c4adc70443b423b3bc0c48e536243
     }
 }
