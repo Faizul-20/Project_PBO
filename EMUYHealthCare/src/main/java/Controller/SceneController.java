@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class SceneController {
     private final String LOGIN_LINK = "/com/example/emuyhealthcare/SignUp-view.fxml";
-
+    private final String SIGN_LINK = "/com/example/emuyhealthcare/DashBoard.fxml";
     //Method For Building New Window
     public void BuildWindow(String Url,Stage stage){
         try {
@@ -39,5 +39,9 @@ public class SceneController {
 
     public String getLOGIN_LINK() {
         return LOGIN_LINK;
+    }
+
+    public String getSIGN_LINK() {
+        return SIGN_LINK;
     }
 }
