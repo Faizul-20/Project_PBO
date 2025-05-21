@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="layer1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="876.0" style="-fx-background-color: #0A192F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+<AnchorPane fx:id="layer1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="876.0" style="-fx-background-color: #0A192F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="Controller.SignUpController">
    <children>
       <AnchorPane fx:id="layout1" layoutY="-15.0" prefHeight="590.0" prefWidth="306.0" style="-fx-background-color: #000000;">
          <children>
@@ -52,16 +53,16 @@
             <Button fx:id="si5" layoutX="187.0" layoutY="355.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="158.0" style="-fx-background-color: #3B82F6;" text="Login" visible="false" />
             <AnchorPane fx:id="layer21" layoutY="6.0" prefHeight="575.0" prefWidth="566.0">
                <children>
-                  <PasswordField fx:id="su5" layoutX="157.0" layoutY="346.0" prefHeight="27.0" prefWidth="218.0" promptText="Password" />
-                  <Button fx:id="su6" layoutX="187.0" layoutY="406.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="158.0" style="-fx-background-color: #3B82F6;" text="sigh up" />
-                  <TextField fx:id="su2" layoutX="157.0" layoutY="188.0" prefHeight="30.0" prefWidth="218.0" promptText="Username" />
-                  <DatePicker fx:id="su4" layoutX="157.0" layoutY="288.0" prefHeight="30.0" prefWidth="218.0" />
+                  <PasswordField fx:id="PasswordText" layoutX="157.0" layoutY="346.0" prefHeight="27.0" prefWidth="218.0" promptText="Password" />
+                  <Button fx:id="SignUpBtn" layoutX="187.0" layoutY="406.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="158.0" style="-fx-background-color: #3B82F6;" text="sigh up" />
+                  <TextField fx:id="UsernameText" layoutX="157.0" layoutY="188.0" prefHeight="30.0" prefWidth="218.0" promptText="Username" />
+                  <DatePicker fx:id="DatePicking" layoutX="157.0" layoutY="288.0" prefHeight="30.0" prefWidth="218.0" />
                   <Label fx:id="su1" layoutX="169.0" layoutY="43.0" prefHeight="54.0" prefWidth="228.0" text="sigh up" textFill="WHITE">
                      <font>
                         <Font size="57.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="su3" layoutX="157.0" layoutY="240.0" prefHeight="30.0" prefWidth="218.0" promptText="BB/TB" />
+                  <TextField fx:id="BB_TB" layoutX="157.0" layoutY="240.0" prefHeight="30.0" prefWidth="218.0" promptText="BB/TB" />
                </children>
             </AnchorPane>
          </children>
