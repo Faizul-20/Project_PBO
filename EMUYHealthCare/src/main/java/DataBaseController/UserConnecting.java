@@ -25,7 +25,6 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         // isi nanti jika dibutuhkan
     }
 
-    @Override
     public void InsertDataUser(String username, String password, int tb, int bb, String ttl) {
         try {
             Connection connection = DriverManager.getConnection(getUserData());
