@@ -14,8 +14,8 @@ public class Main {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
         inputGejala = userInput.toLowerCase();
-
         Tokenization.Gejala(inputGejala);
+
 
     }
 }
