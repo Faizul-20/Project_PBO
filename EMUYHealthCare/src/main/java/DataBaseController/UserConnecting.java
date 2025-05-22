@@ -14,23 +14,18 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         try {
             Connection connection = DriverManager.getConnection(Url);
             System.out.println("Data Berhasil Terhubung!!");
-
         } catch (SQLException e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Data Tidak Terhubung Periksa Koneksi Anda");
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }
 
-<<<<<<< Updated upstream
-    public void getPenyakit(){
-
+    public void getPenyakit() {
+        // isi nanti jika dibutuhkan
     }
 
     @Override
-    public void InsertDataUser(String username,String password,int tb,int bb,String ttl) {
-=======
     public void InsertDataUser(String username, String password, int tb, int bb, String ttl) {
->>>>>>> Stashed changes
         try {
             Connection connection = DriverManager.getConnection(getUserData());
             String query = getINSERT_DATA();
@@ -51,9 +46,5 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         } catch (SQLException e) {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     }
 }
