@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserConnecting extends ConnectionData implements SQLConnection {
+    private final String INSERT_DATA ="INSERT INTO \"users\" VALUES (NULL,?, ?, ?, ?, ?)";
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -46,5 +47,10 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         } catch (SQLException e) {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
+    }
+
+    public String getINSERT_DATA() {
+        return INSERT_DATA;
+
     }
 }

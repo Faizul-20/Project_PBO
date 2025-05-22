@@ -2,6 +2,7 @@ package chatBotEngine;
 
 import java.util.HashSet;
 import java.lang.String;
+import DataBaseController.UserConnecting;
 
 public class Tokenization {
     public static void Gejala(String inputGejala){
@@ -12,9 +13,9 @@ public class Tokenization {
         for(String data : division){
             gejala.add(data);
         }
-        for (String a : gejala){
-            System.out.println(a);
-        }
+
+        UserConnecting connecting = new UserConnecting();
+        connecting.ConnectToDatabase(connecting.getPENYAKIT_DATA());
     }
 
 
