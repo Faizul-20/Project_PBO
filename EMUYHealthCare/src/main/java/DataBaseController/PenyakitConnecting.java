@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PenyakitConnecting extends ConnectionData implements SQLConnection{
-    private final String QUERY_selectData = "SELECT Nama, Gejala FROM DaftarPenyakit";
+    private final String QUERY_selectData = "SELECT Nama, Gejala FROM JenisPenyakit";
 
     @Override
     public void ConnectToDatabase(String Url) {
