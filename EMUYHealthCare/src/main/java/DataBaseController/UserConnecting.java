@@ -18,7 +18,6 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }
-    
 
     public void InsertDataUser(String username, String password, int tb, int bb, String ttl) {
         try {
