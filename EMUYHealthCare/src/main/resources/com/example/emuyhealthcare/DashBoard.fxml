@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DachboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
     <children>
         <AnchorPane layoutX="-3.0" layoutY="-3.0" prefHeight="775.0" prefWidth="183.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="-4.2000000000000455" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="1186.0" AnchorPane.topAnchor="-3.2000000000000455">
             <children>

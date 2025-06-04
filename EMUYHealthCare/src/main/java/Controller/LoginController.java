@@ -1,5 +1,7 @@
 package Controller;
 
+import API.LoginAPI;
+import API.SignUpAPI;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -15,83 +17,216 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements initialize{
+public class LoginController implements Initializable {
 
+    @FXML
+    private AnchorPane layer1;
 
+    @FXML
+    private AnchorPane layer2;
 
+    @FXML
+    private Label Logintext1;
 
-        @FXML
-        private AnchorPane layer1;
+    @FXML
+    private Label Logintext2;
 
-        @FXML
-        private AnchorPane layer2;
+    @FXML
+    private Button BtnSi;
 
-        @FXML
-        private Label Logintext1;
+    @FXML
+    private Label daftar1;
 
-        @FXML
-        private Label Logintext2;
+    @FXML
+    private Label daftar2;
 
-        @FXML
-        private Button BtnSi;
+    @FXML
+    private Button BtnSu;
 
-        @FXML
-        private Label daftar1;
+    @FXML
+    private Label judul;
 
-        @FXML
-        private Label daftar2;
+    @FXML
+    private Label signUp;
 
-        @FXML
-        private Button BtnSu;
+    @FXML
+    private TextField signUpusername;
 
-        @FXML
-        private Label judul;
+    @FXML
+    private PasswordField signInpass;
 
-        @FXML
-        private Label signUp;
+    @FXML
+    private JFXButton signInlogin;
 
-        @FXML
-        private TextField signUpusername;
+    @FXML
+    private TextField signInusername;
 
-        @FXML
-        private PasswordField signInpass;
+    @FXML
+    private DatePicker signUplahir;
 
-        @FXML
-        private JFXButton signInlogin;
+    @FXML
+    private TextField signUpBB;
 
-        @FXML
-        private TextField signInusername;
+    @FXML
+    private TextField signUpTB;
 
-        @FXML
-        private DatePicker signUplahir;
+    @FXML
+    private PasswordField signUppass;
 
-        @FXML
-        private TextField signUpBB;
+    @FXML
+    private JFXButton signUpbutton;
 
-        @FXML
-        private TextField signUpTB;
+    @FXML
+    private Label signIn;
 
-        @FXML
-        private PasswordField signUppass;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Menyembunyikan elemen-elemen saat aplikasi dimulai
+        Logintext1.setVisible(false);
+        Logintext2.setVisible(false);
+        BtnSi.setVisible(false);
+        BtnSu.setVisible(true);
+        daftar1.setVisible(true);
+        daftar2.setVisible(true);
+        judul.setVisible(true);
 
-        @FXML
-        private JFXButton signUpbutton;
+        // Mengatur tampilan awal form
+        signIn.setVisible(false);
+        signInusername.setVisible(false);
+        signInpass.setVisible(false);
+        signInlogin.setVisible(false);
 
-        @FXML
-        private Label signIn;
+        signUp.setVisible(true);
+        signUpusername.setVisible(true);
+        signUplahir.setVisible(true);
+        signUpBB.setVisible(true);
+        signUpTB.setVisible(true);
+        signUppass.setVisible(true);
+        signUpbutton.setVisible(true);
 
-        @Override
-        public void initialize(URL url, ResourceBundle resourceBundle) {
-            // Menyembunyikan elemen-elemen saat aplikasi dimulai
-            Logintext1.setVisible(false);
-            Logintext2.setVisible(false);
+        // Menambahkan event handler untuk tombol-tombol
+        BtnSi.setOnMouseClicked(this::btnSignin);
+        BtnSu.setOnMouseClicked(this::btnSignup);
+        signInlogin.setOnMouseClicked(this::handleLogin);
+        signUpbutton.setOnMouseClicked(this::handleSignup);
+
+        setupEnterKeyHandling();
+    }
+
+    private void setupEnterKeyHandling() {
+        signInusername.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                signInpass.requestFocus();
+            }
+        });
+
+        signInpass.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleLogin(null);
+            }
+        });
+    }
+
+    private void addFadeTransition(Node node, boolean fadeIn) {
+        FadeTransition fade = new FadeTransition(Duration.millis(300), node);
+        fade.setFromValue(fadeIn ? 0.0 : 1.0);
+        fade.setToValue(fadeIn ? 1.0 : 0.0);
+        fade.play();
+    }
+
+    @FXML
+    private void btnSignin(MouseEvent event) {
+        // Animasi slide untuk layer2 (ke kanan)
+        TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer2);
+        slideLayer2.setToX(465);
+
+        // Animasi slide untuk layer1 (ke kiri)
+        TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer1);
+        slideLayer1.setToX(-309);
+
+        // Jalankan kedua animasi
+        slideLayer2.play();
+        slideLayer1.play();
+
+        slideLayer2.setOnFinished((e) -> {
+            // Fade out elemen signup
+            addFadeTransition(signUp, false);
+            addFadeTransition(signUpusername, false);
+            addFadeTransition(signUplahir, false);
+            addFadeTransition(signUpBB, false);
+            addFadeTransition(signUpTB, false);
+            addFadeTransition(signUppass, false);
+            addFadeTransition(signUpbutton, false);
+
+            // Fade in elemen signin
+            addFadeTransition(signIn, true);
+            addFadeTransition(signInusername, true);
+            addFadeTransition(signInpass, true);
+            addFadeTransition(signInlogin, true);
+
+            // Mengubah visibilitas button dan label
             BtnSi.setVisible(false);
             BtnSu.setVisible(true);
+            Logintext1.setVisible(false);
+            Logintext2.setVisible(false);
             daftar1.setVisible(true);
             daftar2.setVisible(true);
-            judul.setVisible(true);
 
-            // Mengatur tampilan awal form
+            // Mengubah visibilitas form
+            signIn.setVisible(true);
+            signInusername.setVisible(true);
+            signInpass.setVisible(true);
+            signInlogin.setVisible(true);
+
+            signUp.setVisible(false);
+            signUpusername.setVisible(false);
+            signUplahir.setVisible(false);
+            signUpBB.setVisible(false);
+            signUpTB.setVisible(false);
+            signUppass.setVisible(false);
+            signUpbutton.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void btnSignup(MouseEvent event) {
+        // Animasi slide untuk layer2 (ke kiri)
+        TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer2);
+        slideLayer2.setToX(0);
+
+        // Animasi slide untuk layer1 (ke kanan)
+        TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer1);
+        slideLayer1.setToX(0);
+
+        // Jalankan kedua animasi
+        slideLayer2.play();
+        slideLayer1.play();
+
+        slideLayer2.setOnFinished((e) -> {
+            // Fade out elemen signin
+            addFadeTransition(signIn, false);
+            addFadeTransition(signInusername, false);
+            addFadeTransition(signInpass, false);
+            addFadeTransition(signInlogin, false);
+
+            // Fade in elemen signup
+            addFadeTransition(signUp, true);
+            addFadeTransition(signUpusername, true);
+            addFadeTransition(signUplahir, true);
+            addFadeTransition(signUpBB, true);
+            addFadeTransition(signUpTB, true);
+            addFadeTransition(signUppass, true);
+            addFadeTransition(signUpbutton, true);
+
+            // Mengubah visibilitas button dan label
+            BtnSi.setVisible(true);
+            BtnSu.setVisible(false);
+            Logintext1.setVisible(true);
+            Logintext2.setVisible(true);
+            daftar1.setVisible(false);
+            daftar2.setVisible(false);
+
+            // Mengubah visibilitas form
             signIn.setVisible(false);
             signInusername.setVisible(false);
             signInpass.setVisible(false);
@@ -104,219 +239,84 @@ public class LoginController implements initialize{
             signUpTB.setVisible(true);
             signUppass.setVisible(true);
             signUpbutton.setVisible(true);
+        });
+    }
 
-            // Menambahkan event handler untuk tombol-tombol
-            BtnSi.setOnMouseClicked(this::btnSignin);
-            BtnSu.setOnMouseClicked(this::btnSignup);
-            signInlogin.setOnMouseClicked(this::handleLogin);
-            signUpbutton.setOnMouseClicked(this::handleSignup);
+    @FXML
+    private void handleLogin(MouseEvent event) {
+        String username = signInusername.getText().trim();
+        String password = signInpass.getText().trim();
 
-            setupEnterKeyHandling();
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert("Login Error", "Username dan password tidak boleh kosong!");
+            return;
         }
 
-        private void setupEnterKeyHandling() {
-            signInusername.setOnKeyPressed(event -> {
-                if (event.getCode() == KeyCode.ENTER) {
-                    signInpass.requestFocus();
-                }
-            });
+        // Contoh sederhana autentikasi
+       /* if (username.equals("admin") && password.equals("admin")) {
+            showAlert("Login Berhasil", "Selamat datang di Emuy Health Care!");
+            // Tambahkan kode untuk navigasi ke halaman utama
+        } else {
+            showAlert("Login Gagal", "Username atau password salah!");
+        }*/
+        LoginAPI loginAPI = new LoginAPI(username,password);
+        loginAPI.CekValue();
+    }
 
-            signInpass.setOnKeyPressed(event -> {
-                if (event.getCode() == KeyCode.ENTER) {
-                    handleLogin(null);
-                }
-            });
+    @FXML
+    private void handleSignup(MouseEvent event) {
+        String username = signUpusername.getText().trim();
+        String password = signUppass.getText().trim();
+        String bb = signUpBB.getText().trim();
+        String tb = signUpTB.getText().trim();
+        String UlangTahun = signUplahir.getValue().toString();
+
+
+        if (username.length() < 3) {
+            showAlert("Registrasi Error", "Username harus minimal 3 karakter!");
+            return;
+        }
+        if (password.length() < 6) {
+            showAlert("Registrasi Error", "Password harus minimal 6 karakter!");
+            return;
         }
 
-        private void addFadeTransition(Node node, boolean fadeIn) {
-            FadeTransition fade = new FadeTransition(Duration.millis(300), node);
-            fade.setFromValue(fadeIn ? 0.0 : 1.0);
-            fade.setToValue(fadeIn ? 1.0 : 0.0);
-            fade.play();
+        if (signUplahir.getValue() == null) {
+            showAlert("Registrasi Error", "Tanggal lahir harus diisi!");
+            return;
         }
 
-        @FXML
-        private void btnSignin(MouseEvent event) {
-            // Animasi slide untuk layer2 (ke kanan)
-            TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer2);
-            slideLayer2.setToX(465);
+        try {
+            double beratBadan = Double.parseDouble(bb);
+            double tinggiBadan = Double.parseDouble(tb);
 
-            // Animasi slide untuk layer1 (ke kiri)
-            TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer1);
-            slideLayer1.setToX(-309);
-
-            // Jalankan kedua animasi
-            slideLayer2.play();
-            slideLayer1.play();
-
-            slideLayer2.setOnFinished((e) -> {
-                // Fade out elemen signup
-                addFadeTransition(signUp, false);
-                addFadeTransition(signUpusername, false);
-                addFadeTransition(signUplahir, false);
-                addFadeTransition(signUpBB, false);
-                addFadeTransition(signUpTB, false);
-                addFadeTransition(signUppass, false);
-                addFadeTransition(signUpbutton, false);
-
-                // Fade in elemen signin
-                addFadeTransition(signIn, true);
-                addFadeTransition(signInusername, true);
-                addFadeTransition(signInpass, true);
-                addFadeTransition(signInlogin, true);
-
-                // Mengubah visibilitas button dan label
-                BtnSi.setVisible(false);
-                BtnSu.setVisible(true);
-                Logintext1.setVisible(false);
-                Logintext2.setVisible(false);
-                daftar1.setVisible(true);
-                daftar2.setVisible(true);
-
-                // Mengubah visibilitas form
-                signIn.setVisible(true);
-                signInusername.setVisible(true);
-                signInpass.setVisible(true);
-                signInlogin.setVisible(true);
-
-                signUp.setVisible(false);
-                signUpusername.setVisible(false);
-                signUplahir.setVisible(false);
-                signUpBB.setVisible(false);
-                signUpTB.setVisible(false);
-                signUppass.setVisible(false);
-                signUpbutton.setVisible(false);
-            });
-        }
-
-        @FXML
-        private void btnSignup(MouseEvent event) {
-            // Animasi slide untuk layer2 (ke kiri)
-            TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer2);
-            slideLayer2.setToX(0);
-
-            // Animasi slide untuk layer1 (ke kanan)
-            TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer1);
-            slideLayer1.setToX(0);
-
-            // Jalankan kedua animasi
-            slideLayer2.play();
-            slideLayer1.play();
-
-            slideLayer2.setOnFinished((e) -> {
-                // Fade out elemen signin
-                addFadeTransition(signIn, false);
-                addFadeTransition(signInusername, false);
-                addFadeTransition(signInpass, false);
-                addFadeTransition(signInlogin, false);
-
-                // Fade in elemen signup
-                addFadeTransition(signUp, true);
-                addFadeTransition(signUpusername, true);
-                addFadeTransition(signUplahir, true);
-                addFadeTransition(signUpBB, true);
-                addFadeTransition(signUpTB, true);
-                addFadeTransition(signUppass, true);
-                addFadeTransition(signUpbutton, true);
-
-                // Mengubah visibilitas button dan label
-                BtnSi.setVisible(true);
-                BtnSu.setVisible(false);
-                Logintext1.setVisible(true);
-                Logintext2.setVisible(true);
-                daftar1.setVisible(false);
-                daftar2.setVisible(false);
-
-                // Mengubah visibilitas form
-                signIn.setVisible(false);
-                signInusername.setVisible(false);
-                signInpass.setVisible(false);
-                signInlogin.setVisible(false);
-
-                signUp.setVisible(true);
-                signUpusername.setVisible(true);
-                signUplahir.setVisible(true);
-                signUpBB.setVisible(true);
-                signUpTB.setVisible(true);
-                signUppass.setVisible(true);
-                signUpbutton.setVisible(true);
-            });
-        }
-
-        @FXML
-        private void handleLogin(MouseEvent event) {
-            String username = signInusername.getText().trim();
-            String password = signInpass.getText().trim();
-
-            if (username.isEmpty() || password.isEmpty()) {
-                showAlert("Login Error", "Username dan password tidak boleh kosong!");
+            if (beratBadan <= 0 || tinggiBadan <= 0) {
+                showAlert("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
                 return;
             }
+            SignUpAPI SignUp = new SignUpAPI(username,password,UlangTahun,bb,tb);
+            showAlert("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
 
-            // Contoh sederhana autentikasi
-            if (username.equals("admin") && password.equals("admin")) {
-                showAlert("Login Berhasil", "Selamat datang di Emuy Health Care!");
-                // Tambahkan kode untuk navigasi ke halaman utama
-            } else {
-                showAlert("Login Gagal", "Username atau password salah!");
-            }
-        }
+            // Reset form
+            signUpusername.clear();
+            signUppass.clear();
+            signUpBB.clear();
+            signUpTB.clear();
+            signUplahir.setValue(null);
 
-        @FXML
-        private void handleSignup(MouseEvent event) {
-            String username = signUpusername.getText().trim();
-            String password = signUppass.getText().trim();
-            String bb = signUpBB.getText().trim();
-            String tb = signUpTB.getText().trim();
+            // Beralih ke tampilan login
+            btnSignin(null);
 
-            if (username.length() < 3) {
-                showAlert("Registrasi Error", "Username harus minimal 3 karakter!");
-                return;
-            }
-
-            if (password.length() < 6) {
-                showAlert("Registrasi Error", "Password harus minimal 6 karakter!");
-                return;
-            }
-
-            if (signUplahir.getValue() == null) {
-                showAlert("Registrasi Error", "Tanggal lahir harus diisi!");
-                return;
-            }
-
-            try {
-                double beratBadan = Double.parseDouble(bb);
-                double tinggiBadan = Double.parseDouble(tb);
-
-                if (beratBadan <= 0 || tinggiBadan <= 0) {
-                    showAlert("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
-                    return;
-                }
-
-                showAlert("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
-
-                // Reset form
-                signUpusername.clear();
-                signUppass.clear();
-                signUpBB.clear();
-                signUpTB.clear();
-                signUplahir.setValue(null);
-
-                // Beralih ke tampilan login
-                btnSignin(null);
-
-            } catch (NumberFormatException e) {
-                showAlert("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
-            }
-        }
-
-        private void showAlert(String title, String message) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
         }
     }
 
-
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}
