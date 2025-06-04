@@ -5,6 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserConnecting extends ConnectionData implements SQLConnection {
+    private final String INSERT_DATA ="INSERT INTO users VALUES (NULL,?, ?, ?, ?, ?)";
+    private final String SIGN_IN ="SELECT * FROM users WHERE Username = ? AND Password = ?";
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -16,8 +18,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }
-
-
+    
 
     public void InsertDataUser(String username, String password, int tb, int bb, String ttl) {
         try {
@@ -81,6 +82,14 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
 
+    }
+
+    public String getINSERT_DATA(){
+        return INSERT_DATA;
+    }
+
+    public String getSIGN_IN() {
+        return SIGN_IN;
     }
 
 }
