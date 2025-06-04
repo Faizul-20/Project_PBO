@@ -22,7 +22,7 @@ public class Main {
         PenyakitConnecting penyakitConnecting = new PenyakitConnecting();
         penyakitConnecting.AddPenyakit();
         for (Map.Entry<String, String> entry : PenyakitAPI.DataPenyakit.entrySet()){
-            System.out.println(entry.getKey() + entry.getValue());
+            System.out.println(entry.getValue());
         }
 
 

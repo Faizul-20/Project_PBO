@@ -21,16 +21,9 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         }
     }
 
-<<<<<<< HEAD
 
-    public void InsertDataUser(String username,String password,int tb,int bb,String ttl) {
-=======
-    public void getPenyakit() {
-        // isi nanti jika dibutuhkan
-    }
 
     public void InsertDataUser(String username, String password, int tb, int bb, String ttl) {
->>>>>>> 94634e197bdfa1a247bf4591ee9b7150b247cb14
         try {
             Connection connection = DriverManager.getConnection(getUserData());
             String query = getINSERT_DATA();
@@ -51,13 +44,11 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         } catch (SQLException e) {
             System.out.println("Pesan Erorr : " + e.getMessage());
         }
-<<<<<<< HEAD
-=======
     }
 
     public String getINSERT_DATA() {
         return INSERT_DATA;
-
->>>>>>> 94634e197bdfa1a247bf4591ee9b7150b247cb14
     }
 }
+
+

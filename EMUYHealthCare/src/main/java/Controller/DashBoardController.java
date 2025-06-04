@@ -1,4 +1,4 @@
-package com.example.demo;
+package Controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 import static com.sun.javafx.logging.PulseLogger.newInput;
 
 
-public class HelloController {
+public class DashBoardController {
     @FXML
     private AnchorPane layer;
     @FXML
@@ -113,21 +113,21 @@ public class HelloController {
     @FXML
     private LineChart tabelOlaraga;
 
-    @FXML
-    public void initialize(){
-        loginnew.setVisible(true);
-        inputNewlogin.setOnAction(actionEvent -> newInput());
+    //@FXML
+//    public void initialize(){
+//        loginnew.setVisible(true);
+//        inputNewlogin.setOnAction(actionEvent -> newInput());
+//
+//
+//    }
 
-
-    }
-
-    private handleInput(){
-        String gulaDarah = inputGUladarah;
-        String tekananDarah = inputTekanandarah;
-        String result = validasiInput(inputGUladarah, inputTekanandarah);
-        result
-
-    }
+//    private handleInput(){
+//        String gulaDarah = inputGUladarah;
+//        String tekananDarah = inputTekanandarah;
+//        String result = validasiInput(inputGUladarah, inputTekanandarah);
+//        result
+//
+//    }
 
 }
 

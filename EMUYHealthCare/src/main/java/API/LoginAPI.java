@@ -8,6 +8,10 @@ public class LoginAPI {
         this.Username = Username;
         this.Password = Password;
     }
+    static {
+        LoginAPI.Username = "admin";
+        LoginAPI.Password = "admin";
+    }
 
     public void CekValue(){
         System.out.println("Username : " + Username);
