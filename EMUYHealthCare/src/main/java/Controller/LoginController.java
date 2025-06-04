@@ -2,6 +2,7 @@ package Controller;
 
 import API.LoginAPI;
 import API.SignUpAPI;
+import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -294,7 +295,12 @@ public class LoginController implements Initializable {
                 showAlert("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
                 return;
             }
+
+
             SignUpAPI SignUp = new SignUpAPI(username,password,UlangTahun,bb,tb);
+            SignUp.CekValue();
+            SignUp.PostDataUserTodatabase();
+
             showAlert("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
 
             // Reset form
