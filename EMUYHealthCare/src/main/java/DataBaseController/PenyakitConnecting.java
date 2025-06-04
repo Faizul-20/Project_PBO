@@ -28,8 +28,8 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
             while (rs.next()){
                 String nama = rs.getString("Nama");
                 String gejala = rs.getString("Gejala");
-                PenyakitAPI penyakitAPI = new PenyakitAPI(nama,gejala);
-                PenyakitAPI.DataPenyakit.put(nama,gejala);
+                PenyakitAPI penyakitAPI = new PenyakitAPI(gejala, nama);
+                PenyakitAPI.DataPenyakit.put(gejala, nama);
             }
             rs.close();
             statement.close();
