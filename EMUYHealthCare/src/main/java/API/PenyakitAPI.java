@@ -6,9 +6,9 @@ public class PenyakitAPI {
     private String nama;
     private String gejala;
 
-    public PenyakitAPI(String nama, String gejala){
-        this.nama = nama;
+    public PenyakitAPI(String gejala, String nama){
         this.gejala = gejala;
+        this.nama = nama;
     }
     public static HashMap<String,String> DataPenyakit = new HashMap<>();
 }
