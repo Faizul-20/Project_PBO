@@ -23,16 +23,16 @@ public class Tokenization {
         }
     }
 
-    public static void KeyMap(HashMap<String, String> penyakit){
-        Map.Entry<String, String[]> keyWordsMap = new HashMap<>();
-        Pattern pattern =Pattern.compile("\\s+");
-        for (Map<String, String> row : PenyakitAPI.DataPenyakit.entrySet()){
-            for (String key : row.keySet()){
-                String[] words = pattern.split(key.toLowerCase());
-                keyWordsMap.put(key, words);
-            }
-        }
-    }
+//    public static void KeyMap(HashMap<String, String> penyakit){
+//       // Map.Entry<String, String[]> keyWordsMap = new HashMap<>();
+//        Pattern pattern =Pattern.compile("\\s+");
+//        for (Map<String, String> row : PenyakitAPI.DataPenyakit.entrySet()){
+//            for (String key : row.keySet()){
+//                String[] words = pattern.split(key.toLowerCase());
+//                keyWordsMap.put(key, words);
+//            }
+//        }
+//    }
 
 
 

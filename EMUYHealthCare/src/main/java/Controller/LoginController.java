@@ -105,10 +105,14 @@ public class LoginController implements Initializable {
         signUppass.setVisible(true);
         signUpbutton.setVisible(true);
 
+
+        /*
+        * Mengganti Tombol login menggunakan enter
+        * */
         // Menambahkan event handler untuk tombol-tombol
         BtnSi.setOnMouseClicked(this::btnSignin);
         BtnSu.setOnMouseClicked(this::btnSignup);
-        signInlogin.setOnMouseClicked(this::handleLogin);
+        //signInlogin.setOnMouseClicked(this::handleLogin);
         signUpbutton.setOnMouseClicked(this::handleSignup);
 
         setupEnterKeyHandling();
@@ -123,7 +127,7 @@ public class LoginController implements Initializable {
 
         signInpass.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                handleLogin(null);
+                handleLogin();
             }
         });
     }
@@ -244,7 +248,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void handleLogin(MouseEvent event) {
+    private void handleLogin() {
         String username = signInusername.getText().trim();
         String password = signInpass.getText().trim();
 
@@ -262,6 +266,9 @@ public class LoginController implements Initializable {
         }*/
         LoginAPI loginAPI = new LoginAPI(username,password);
         loginAPI.CekValue();
+        loginAPI.Login();
+        signInusername.clear();
+        signInpass.clear();
     }
 
     @FXML

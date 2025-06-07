@@ -55,7 +55,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         }
     }
 
-    public void SignIn(String username,String password){
+    public boolean SignIn(String username,String password){
 
         try {
             Connection connection =  DriverManager.getConnection(getUserData());
@@ -68,10 +68,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next() ) {
-                System.out.println("Login berhasil! Selamat datang, " + username + "!");
-            } else {
-                System.out.println("Username atau password salah.");
-
+                return true;
             }
 
             pstmt.close();
@@ -80,7 +77,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         }catch (SQLException e){
             System.out.println("Pesan Eror : " + e.getMessage());
         }
-
+        return false;
     }
 
     public String getINSERT_DATA(){

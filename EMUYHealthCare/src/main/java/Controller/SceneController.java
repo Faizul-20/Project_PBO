@@ -14,11 +14,21 @@ public class SceneController {
     Image Icon = new Image(getClass().getResourceAsStream("/Kelinci.png"));
     private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
+    Stage stage;
+
+
+    //Constructor injection
+
+    public SceneController(Stage stage) {
+        this.stage = stage;
+    }
+    public SceneController(){};
 
     //Method For Building New Window
-    public void BuildWindow(String Url,Stage stage){
+    public void BuildWindow(String Url){
         try {
             Parent Load = FXMLLoader.load(getClass().getResource(Url));
+            stage.centerOnScreen();
             stage.setScene(new Scene(Load));
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
@@ -33,7 +43,8 @@ public class SceneController {
     public void SceneChange(String Url){
         try {
             Parent Loader = FXMLLoader.load(getClass().getResource(Url));
-            Stage stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
+            stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
+            stage.centerOnScreen();
             stage.setScene(new Scene(Loader));
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
@@ -43,10 +54,6 @@ public class SceneController {
         }
     }
 
-
-    public String getDASHBOARD_LINKK() {
-        return DASHBOARD_LINK;
-    }
 
     public String getDASHBOARD_LINK() {
         return DASHBOARD_LINK;

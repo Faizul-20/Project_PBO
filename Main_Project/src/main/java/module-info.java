@@ -1,11 +1,13 @@
-module com.example.emuyhealthcare {
+module com.example.main_project {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
-
+    requires javafx.graphics;
 
     opens com.example.main_project.GUI_Example to javafx.fxml;
     exports com.example.main_project.GUI_Example;
+    exports com.example.main_project;
     //exports  com.example.main_project;
     opens com.example.main_project to javafx.fxml;
+
 }
