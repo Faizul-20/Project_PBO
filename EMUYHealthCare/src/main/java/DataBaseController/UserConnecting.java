@@ -5,6 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserConnecting extends ConnectionData implements SQLConnection {
+    private final String INSERT_DATA ="INSERT INTO users VALUES (NULL,?, ?, ?, ?, ?)";
+    private final String SIGN_IN ="SELECT * FROM users WHERE Username = ? AND Password = ?";
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -16,8 +18,6 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }
-
-
 
     public void InsertDataUser(String username, String password, int tb, int bb, String ttl) {
         try {
@@ -55,7 +55,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         }
     }
 
-    public void SignIn(String username,String password){
+    public boolean SignIn(String username,String password){
 
         try {
             Connection connection =  DriverManager.getConnection(getUserData());
@@ -68,10 +68,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next() ) {
-                System.out.println("Login berhasil! Selamat datang, " + username + "!");
-            } else {
-                System.out.println("Username atau password salah.");
-
+                return true;
             }
 
             pstmt.close();
@@ -80,7 +77,15 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
         }catch (SQLException e){
             System.out.println("Pesan Eror : " + e.getMessage());
         }
+        return false;
+    }
 
+    public String getINSERT_DATA(){
+        return INSERT_DATA;
+    }
+
+    public String getSIGN_IN() {
+        return SIGN_IN;
     }
 
 }
