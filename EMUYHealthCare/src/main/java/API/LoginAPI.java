@@ -4,8 +4,13 @@ import Controller.SceneController;
 import DataBaseController.UserConnecting;
 
 public class LoginAPI {
-    public String Username;
-    public String Password;
+    String Username;
+    String Password;
+    double tinggiBadan;
+    double beratBadan;
+    double BMIIndeksBadan;
+    double gulaDarah;
+
     UserConnecting userConnecting = new UserConnecting();
     SceneController sceneController = new SceneController();
 
@@ -32,6 +37,35 @@ public class LoginAPI {
         }
     }
 
+    public double getTinggiBadan() {
+        return tinggiBadan;
+    }
 
+    public void setTinggiBadan(double tinggiBadan) {
+        this.tinggiBadan = tinggiBadan;
+    }
 
+    public double getBeratBadan() {
+        return beratBadan;
+    }
+
+    public void setBeratBadan(double beratBadan) {
+        this.beratBadan = beratBadan;
+    }
+
+    public double getBMIIndeksBadan() {
+        return BMIIndeksBadan;
+    }
+
+    public void setBMIIndeksBadan(double BMIIndeksBadan) {
+        this.BMIIndeksBadan = BMIIndeksBadan;
+    }
+
+    public double getGulaDarah() {
+        return gulaDarah;
+    }
+
+    public void setGulaDarah(double gulaDarah) {
+        this.gulaDarah = gulaDarah;
+    }
 }
