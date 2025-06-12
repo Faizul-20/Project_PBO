@@ -33,7 +33,7 @@ public class Tokenization {
         return keyWordsMap;
     }
 
-    public static void Compare()
+    public static void Compare(){};
 
 
 
