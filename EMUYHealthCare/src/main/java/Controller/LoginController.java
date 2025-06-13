@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -79,6 +80,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private Label signIn;
+
+    @FXML
+    private ImageView gambar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
