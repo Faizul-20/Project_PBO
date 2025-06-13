@@ -44,8 +44,8 @@ public class LoginApiV2 {
             System.out.println("Tekanan Darah : " + TekananDarah);
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
-            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
             cetakTarget();
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
 
         }else {
             System.out.println("Login Failed");
