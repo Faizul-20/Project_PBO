@@ -3,6 +3,11 @@ package API;
 import Controller.SceneController;
 import DataBaseController.UserConnecting;
 
+
+/**
+ * @deprecated class sudah usang Gunakan V2 sebagai gantinya {@link LoginApiV2}
+ * */
+@Deprecated
 public class LoginAPI {
     String Username;
     String Password;

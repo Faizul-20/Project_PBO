@@ -1,100 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-           prefHeight="583.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/17"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane fx:id="layer2" prefHeight="583.0" prefWidth="459.0" style="-fx-background-color: #121212;">
+            <AnchorPane fx:id="layer2" prefHeight="583.0" prefWidth="459.0" style="-fx-background-color: #000000;">
                <children>
-                  <Label fx:id="Logintext1" layoutX="26.0" layoutY="311.0" prefHeight="67.0" prefWidth="405.0"
-                         text="Selamat datang di Ayo Sehat! Login untuk mulai pantau kesehatanmu" textFill="WHITE">
+                  <Label fx:id="Logintext1" layoutX="29.0" layoutY="384.0" prefHeight="26.0" prefWidth="406.0" text="Selamat datang di Ayo Sehat! Login untuk mulai pantau kesehatanmu" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="Logintext2" layoutX="79.0" layoutY="354.0" prefHeight="8.0" prefWidth="298.0"
-                         text="Masuk ke akunmu dan mulai hidup lebih sehat hari ini." textFill="WHITE" />
-                  <Label fx:id="daftar1" layoutX="26.0" layoutY="335.0" prefHeight="19.0" prefWidth="423.0"
-                         text="Baru di Ayo Sehat? Daftar sekarang dan mulai perjalanan hidup sehatmu!" textFill="WHITE">
+                  <Label fx:id="Logintext2" layoutX="79.0" layoutY="411.0" prefHeight="8.0" prefWidth="298.0" text="Masuk ke akunmu dan mulai hidup lebih sehat hari ini." textFill="WHITE" />
+                  <Label fx:id="daftar1" layoutX="20.0" layoutY="387.0" prefHeight="19.0" prefWidth="423.0" text="Baru di Ayo Sehat? Daftar sekarang dan mulai perjalanan hidup sehatmu!" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="daftar2" layoutX="26.0" layoutY="353.0" prefHeight="18.0" prefWidth="438.0"
-                         text="Buat akunmu hari ini untuk mencatat dan memantau kesehatan dengan mudah." textFill="WHITE" />
-                  <Label fx:id="judul" layoutX="71.0" layoutY="31.0" prefHeight="56.0" prefWidth="314.0"
-                         text="Emuy Health Care" textAlignment="RIGHT" textFill="WHITE">
+                  <Label fx:id="daftar2" layoutX="26.0" layoutY="411.0" prefHeight="18.0" prefWidth="438.0" text="Buat akunmu hari ini untuk mencatat dan memantau kesehatan dengan mudah." textFill="WHITE" />
+                  <Label fx:id="judul" layoutX="71.0" layoutY="31.0" prefHeight="56.0" prefWidth="314.0" text="Emuy Health Care" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font size="39.0" />
                      </font>
                   </Label>
-                  <Button fx:id="BtnSi" layoutX="166.0" layoutY="468.0" mnemonicParsing="false"
-                          prefHeight="56.0" prefWidth="98.0"
-                          style="-fx-background-color: #4E71FF; -fx-background-radius: 10;" text="Sign In">
+                  <Button fx:id="BtnSi" layoutX="166.0" layoutY="468.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="98.0" style="-fx-background-color: #4E71FF; -fx-background-radius: 10;" text="Sign In">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BtnSu" layoutX="167.0" layoutY="465.0" mnemonicParsing="false"
-                          prefHeight="56.0" prefWidth="98.0"
-                          style="-fx-background-color: #4E71FF; -fx-background-radius: 10;" text="Sign Up">
+                  <Button fx:id="BtnSu" layoutX="167.0" layoutY="465.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="98.0" style="-fx-background-color: #4E71FF; -fx-background-radius: 10;" text="Sign Up">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
+                  <ImageView fx:id="gambar" fitHeight="304.0" fitWidth="308.0" layoutX="76.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/dokter.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="layer1" layoutX="465.0" prefHeight="583.0" prefWidth="465.0"
-                        style="-fx-background-color: #ffffff;">
+            <AnchorPane fx:id="layer1" layoutX="465.0" prefHeight="583.0" prefWidth="465.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <Label fx:id="signUp" layoutX="162.0" layoutY="102.0" prefHeight="74.0" prefWidth="137.0"
-                         text="Sign Up" textAlignment="CENTER">
+                  <Label fx:id="signUp" layoutX="162.0" layoutY="102.0" prefHeight="74.0" prefWidth="137.0" text="Sign Up" textAlignment="CENTER">
                      <font>
                         <Font size="37.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="signUpusername" layoutX="125.0" layoutY="209.0" prefHeight="26.0"
-                             prefWidth="207.0" promptText="Username" style="-fx-background-radius: 55;" />
-                  <PasswordField fx:id="signInpass" layoutX="126.0" layoutY="265.0" prefHeight="26.0"
-                                 prefWidth="207.0" promptText="Password" style="-fx-background-radius: 55;" />
-                  <JFXButton fx:id="signInlogin" layoutX="176.0" layoutY="325.0" prefHeight="46.0"
-                             prefWidth="97.0" style="-fx-background-color: #4E71FF; -fx-background-radius: 20;"
-                             text="Login">
+                  <TextField fx:id="signUpusername" layoutX="125.0" layoutY="209.0" prefHeight="26.0" prefWidth="207.0" promptText="Username" style="-fx-background-radius: 55;" />
+                  <PasswordField fx:id="signInpass" layoutX="126.0" layoutY="265.0" prefHeight="26.0" prefWidth="207.0" promptText="Password" style="-fx-background-radius: 55;" />
+                  <JFXButton fx:id="signInlogin" layoutX="176.0" layoutY="325.0" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: #4E71FF; -fx-background-radius: 20;" text="Login">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXButton>
-                  <TextField fx:id="signInusername" layoutX="127.0" layoutY="209.0" prefHeight="26.0"
-                             prefWidth="207.0" promptText="Username" style="-fx-background-radius: 55;" />
-                  <DatePicker fx:id="signUplahir" layoutX="127.0" layoutY="245.0" prefHeight="26.0"
-                              prefWidth="207.0" promptText="Date" />
-                  <TextField fx:id="signUpBB" layoutX="127.0" layoutY="278.0" prefHeight="26.0"
-                             prefWidth="56.0" promptText="BB" style="-fx-background-radius: 55;" />
-                  <TextField fx:id="signUpTB" layoutX="197.0" layoutY="278.0" prefHeight="26.0"
-                             prefWidth="56.0" promptText="TB" style="-fx-background-radius: 55;" />
-                  <PasswordField fx:id="signUppass" layoutX="127.0" layoutY="312.0" prefHeight="26.0"
-                                 prefWidth="207.0" promptText="Password" style="-fx-background-radius: 55;" />
-                  <JFXButton fx:id="signUpbutton" layoutX="176.0" layoutY="348.0" prefHeight="46.0"
-                             prefWidth="97.0" style="-fx-background-color: #4E71FF; -fx-background-radius: 20;"
-                             text="Sign Up">
+                  <TextField fx:id="signInusername" layoutX="127.0" layoutY="209.0" prefHeight="26.0" prefWidth="207.0" promptText="Username" style="-fx-background-radius: 55;" />
+                  <DatePicker fx:id="signUplahir" layoutX="127.0" layoutY="245.0" prefHeight="26.0" prefWidth="207.0" promptText="Date" />
+                  <TextField fx:id="signUpBB" layoutX="127.0" layoutY="278.0" prefHeight="26.0" prefWidth="56.0" promptText="BB" style="-fx-background-radius: 55;" />
+                  <TextField fx:id="signUpTB" layoutX="197.0" layoutY="278.0" prefHeight="26.0" prefWidth="56.0" promptText="TB" style="-fx-background-radius: 55;" />
+                  <PasswordField fx:id="signUppass" layoutX="127.0" layoutY="312.0" prefHeight="26.0" prefWidth="207.0" promptText="Password" style="-fx-background-radius: 55;" />
+                  <JFXButton fx:id="signUpbutton" layoutX="176.0" layoutY="348.0" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: #4E71FF; -fx-background-radius: 20;" text="Sign Up">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="signIn" layoutX="162.0" layoutY="102.0" prefHeight="74.0" prefWidth="125.0"
-                         text="Sign In" textAlignment="CENTER">
+                  <Label fx:id="signIn" layoutX="162.0" layoutY="102.0" prefHeight="74.0" prefWidth="125.0" text="Sign In" textAlignment="CENTER">
                      <font>
                         <Font size="37.0" />
                      </font>

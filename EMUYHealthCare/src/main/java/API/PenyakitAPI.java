@@ -27,6 +27,9 @@ public class PenyakitAPI {
                if (tokenization.gejala.contains(PenyakitConnecting.result)){
                    count++;
                }
+               if (!tokenization.gejala.contains(PenyakitConnecting.result)){
+                   System.out.println("tidak ada kecocokan");
+               }
            }
            matches.add(count);
         }
