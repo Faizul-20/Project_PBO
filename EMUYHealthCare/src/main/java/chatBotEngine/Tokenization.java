@@ -44,19 +44,7 @@ public class Tokenization {
 
     }
     
-    public static Map<String, String[]> KeyMap(){
-        Map<String, String[]> keyWordsMap = new HashMap<>();
-        Pattern pattern = Pattern.compile("\\s+");
 
-        for (Map.Entry<String, String> entry : PenyakitAPI.DataPenyakit.entrySet()){
-                String key = entry.getKey();
-                String[] words = pattern.split(key.toLowerCase());
-                keyWordsMap.put(key, words);
-        }
-        return keyWordsMap;
-    }
-
-    public static void Compare(){};
 
 
 
