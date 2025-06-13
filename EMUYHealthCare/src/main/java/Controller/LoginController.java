@@ -122,6 +122,9 @@ public class LoginController implements Initializable {
 
     }
 
+    private void handleLogin(MouseEvent mouseEvent) {
+    }
+
     private void setupEnterKeyHandling() {
         signInusername.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {

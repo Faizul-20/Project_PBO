@@ -65,7 +65,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
 
 
     /**
-     * @deprecated Gunakan method Sign_inV2 sebagai gantinya
+     * @deprecated method sudah tidak dapat di pakai,Gunakan method {@link #SIGN_INV2} sebagai gantinya
      * */
     @Deprecated
     public boolean SignIn(String username,String password){
