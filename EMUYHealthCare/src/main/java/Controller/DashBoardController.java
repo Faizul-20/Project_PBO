@@ -65,15 +65,6 @@ public class DashBoardController {
     private AnchorPane tabelGuladarahnormal;
     @FXML
     private Label labelGuladarahnormal; // iki angka indikator
-    @FXML
-    private AnchorPane tabelGuladarahwaspada;
-    @FXML
-    private Label labelGuladarahwaspada; // iki angka indikator
-    @FXML
-    private AnchorPane tabelGuladarahbahaya;
-    @FXML
-    private Label labelGuladarahbahaya; // iki angka indikator
-
     //tabel Tekanan darah
     @FXML
     private AnchorPane TabelTekanandarah;
@@ -126,6 +117,31 @@ public class DashBoardController {
     @FXML
     private NumberAxis YAxis;
 
+    //warna indikator tabel darah
+    @FXML
+    private AnchorPane indikatorGuladarah;
+    @FXML
+    private  AnchorPane indikatorTekanandarah;
+
+    //judul user name
+    @FXML
+    private  Label judulUsername;
+    //indikator ideal
+    @FXML
+    private  Label indikatorideal;
+
+    //schedule
+    @FXML
+    private Label jarakLari;
+    @FXML
+    private Label tanggal;
+
+    //foto sek on process
+
+//collor palet indikator
+    //bahaya #ff0000
+    //waspada #ff8c00
+    //normal #00ff0d
 
 
     @FXML
