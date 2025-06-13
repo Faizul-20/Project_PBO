@@ -40,8 +40,7 @@ public class Tokenization {
         }
 
     }
-
-<<<<<<< HEAD
+    
     public static Map<String, String[]> KeyMap(){
         Map<String, String[]> keyWordsMap = new HashMap<>();
         Pattern pattern =Pattern.compile("\\s+");
@@ -59,8 +58,7 @@ public class Tokenization {
 
 
 
-=======
->>>>>>> b37c73882dd2953772b43a29f9b835cdae357a00
+
 
 
 
