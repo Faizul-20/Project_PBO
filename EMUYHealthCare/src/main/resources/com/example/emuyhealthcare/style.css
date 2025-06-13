@@ -1,0 +1,13 @@
+.user-bubble {
+    -fx-background-color: linear-gradient(to right, #DCF8C6, #ffffff);
+    -fx-background-radius: 15;
+    -fx-font-size: 14px;
+    -fx-border-radius: 15;
+}
+
+.bot-bubble {
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 15;
+    -fx-font-size: 14px;
+    -fx-border-radius: 15;
+}

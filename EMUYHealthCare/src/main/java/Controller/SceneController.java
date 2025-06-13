@@ -38,7 +38,7 @@ public class SceneController {
             stage.show();
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Pesan Eror : " + e.getMessage());
             System.out.println("Tidak Berhasil Menampilkan Layar");
         }
     }
@@ -56,7 +56,7 @@ public class SceneController {
             stage.show();
         }catch (IOException e){
             System.out.println("Tidak Berhasil Menampilkan Layar");
-            System.out.println(e.getMessage());
+            System.err.println("Pesan Eror : "+ e.getMessage());
         }
     }
 
