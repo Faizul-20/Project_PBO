@@ -3,13 +3,18 @@ package Controller;
 import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+
+import java.util.Map;
 
 import static com.sun.javafx.logging.PulseLogger.newInput;
 
@@ -115,7 +120,11 @@ public class DashBoardController {
 
     //tabel olahraga
     @FXML
-    private LineChart tabelOlaraga;
+    private LineChart<String,Number> tabelOlaraga;
+    @FXML
+    private CategoryAxis XAxis;
+    @FXML
+    private NumberAxis YAxis;
 
 
 
@@ -124,8 +133,7 @@ public class DashBoardController {
         loginnew.setVisible(false);
         getValuesLogin();
         bmiArrowIndikator();
-        System.out.println("Kursor Y : " + kursorIndikator.getLayoutY());
-        System.out.println("Kursor X : " + kursorIndikator.getLayoutY());
+        getTargetUser();
 
     }
 
@@ -152,6 +160,22 @@ public class DashBoardController {
     }
     private double map(double value, double inMin, double inMax, double outMin, double outMax) {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    }
+
+    private void getTargetUser() {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName(null);
+
+        //Memasukan nilai Target ke dalam LineChart
+        for (Map.Entry<String, Double> entry : LoginApiV2.Target.entrySet()) {
+            try {
+                series.getData().add(new XYChart.Data<>(entry.getKey(),entry.getValue()));
+            } catch (NumberFormatException e) {
+                System.err.println("Error parsing value: " + entry.getValue());
+            }
+        }
+        // Tambahkan series ke chart
+        tabelOlaraga.getData().add(series);
     }
 
 

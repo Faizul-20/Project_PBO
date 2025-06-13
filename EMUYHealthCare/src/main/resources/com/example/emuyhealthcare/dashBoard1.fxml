@@ -141,10 +141,10 @@
             </children></AnchorPane>
         <LineChart fx:id="tabelOlaraga" layoutX="214.0" layoutY="262.0" prefHeight="390.0" prefWidth="706.0" title="table">
             <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis fx:id="XAxis" side="BOTTOM" />
             </xAxis>
             <yAxis>
-                <NumberAxis prefHeight="222.0" prefWidth="28.0" side="LEFT" />
+                <NumberAxis fx:id="YAxis" prefHeight="222.0" prefWidth="28.0" side="LEFT" />
             </yAxis>
             <opaqueInsets>
                 <Insets />
@@ -278,7 +278,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="loginnew" layoutX="381.0" layoutY="290.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
+        <AnchorPane fx:id="loginnew" layoutX="492.0" layoutY="29.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
             <children>
                 <Label layoutX="46.0" layoutY="24.0" prefHeight="51.0" prefWidth="399.0" text="Hallo Pengguna Baru Masukan Data ">
                     <font>
