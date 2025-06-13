@@ -83,12 +83,13 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Menyembunyikan elemen-elemen saat aplikasi dimulai
+        gambar.setVisible(false);
         Logintext1.setVisible(false);
         Logintext2.setVisible(false);
         BtnSi.setVisible(false);
-        BtnSu.setVisible(true);
-        daftar1.setVisible(true);
-        daftar2.setVisible(true);
+        BtnSu.setVisible(false);
+        daftar1.setVisible(false);
+        daftar2.setVisible(false);
         judul.setVisible(true);
 
         // Mengatur tampilan awal form
@@ -97,25 +98,23 @@ public class LoginController implements Initializable {
         signInpass.setVisible(false);
         signInlogin.setVisible(false);
 
-        signUp.setVisible(true);
-        signUpusername.setVisible(true);
-        signUplahir.setVisible(true);
-        signUpBB.setVisible(true);
-        signUpTB.setVisible(true);
-        signUppass.setVisible(true);
-        signUpbutton.setVisible(true);
+        signUp.setVisible(false);
+        signUpusername.setVisible(false);
+        signUplahir.setVisible(false);
+        signUpBB.setVisible(false);
+        signUpTB.setVisible(false);
+        signUppass.setVisible(false);
+        signUpbutton.setVisible(false);
 
-
-        /*
-        * Mengganti Tombol login menggunakan enter
-        * */
         // Menambahkan event handler untuk tombol-tombol
         BtnSi.setOnMouseClicked(this::btnSignin);
         BtnSu.setOnMouseClicked(this::btnSignup);
-        //signInlogin.setOnMouseClicked(this::handleLogin);
+        signInlogin.setOnMouseClicked(this::handleLogin);
         signUpbutton.setOnMouseClicked(this::handleSignup);
 
         setupEnterKeyHandling();
+        btnSignin(null);
+
     }
 
     private void setupEnterKeyHandling() {
@@ -143,16 +142,16 @@ public class LoginController implements Initializable {
     private void btnSignin(MouseEvent event) {
         // Animasi slide untuk layer2 (ke kanan)
         TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer2);
-        slideLayer2.setToX(465);
+        slideLayer2.setToX(0);
 
         // Animasi slide untuk layer1 (ke kiri)
         TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer1);
-        slideLayer1.setToX(-309);
+        slideLayer1.setToX(0);
 
         // Jalankan kedua animasi
         slideLayer2.play();
         slideLayer1.play();
-
+        // menunggu layer 2 selasai slide ke kanan baru sistem beroperasi
         slideLayer2.setOnFinished((e) -> {
             // Fade out elemen signup
             addFadeTransition(signUp, false);
@@ -170,6 +169,7 @@ public class LoginController implements Initializable {
             addFadeTransition(signInlogin, true);
 
             // Mengubah visibilitas button dan label
+            gambar.setVisible(true);
             BtnSi.setVisible(false);
             BtnSu.setVisible(true);
             Logintext1.setVisible(false);
@@ -196,12 +196,12 @@ public class LoginController implements Initializable {
     @FXML
     private void btnSignup(MouseEvent event) {
         // Animasi slide untuk layer2 (ke kiri)
-        TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer2);
-        slideLayer2.setToX(0);
+        TranslateTransition slideLayer2 = new TranslateTransition(Duration.seconds(0.7), layer1);
+        slideLayer2.setToX(-465);
 
         // Animasi slide untuk layer1 (ke kanan)
-        TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer1);
-        slideLayer1.setToX(0);
+        TranslateTransition slideLayer1 = new TranslateTransition(Duration.seconds(0.7), layer2);
+        slideLayer1.setToX(465);
 
         // Jalankan kedua animasi
         slideLayer2.play();
@@ -223,7 +223,9 @@ public class LoginController implements Initializable {
             addFadeTransition(signUppass, true);
             addFadeTransition(signUpbutton, true);
 
+            judul.setVisible(true);
             // Mengubah visibilitas button dan label
+            gambar.setVisible(true);
             BtnSi.setVisible(true);
             BtnSu.setVisible(false);
             Logintext1.setVisible(true);
