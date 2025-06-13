@@ -1,6 +1,7 @@
 package Controller;
 
 import API.LoginAPI;
+import API.LoginApiV2;
 import API.SignUpAPI;
 import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
@@ -270,7 +271,7 @@ public class LoginController implements Initializable {
         } else {
             showAlert("Login Gagal", "Username atau password salah!");
         }*/
-        LoginAPI loginAPI = new LoginAPI(username,password);
+        LoginApiV2 loginAPI = new LoginApiV2(username,password);
         loginAPI.CekValue();
         loginAPI.Login();
         signInusername.clear();
