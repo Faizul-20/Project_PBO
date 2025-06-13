@@ -18,6 +18,7 @@ public class LoginApiV2 {
     public static double beratBadan;
     public static double BMIIndeksBadan;
     public static double gulaDarah;
+    public static double TekananDarah;
     public static Map<String,Double> Target = new LinkedHashMap<>();
 
     UserConnecting userConnecting = new UserConnecting();
@@ -40,8 +41,10 @@ public class LoginApiV2 {
             System.out.println("Password : " + Password);
             System.out.println("BMI : " + BMICalculate(tinggiBadan,beratBadan));
             System.out.println("Gula Darah : " + gulaDarah);
+            System.out.println("Tekanan Darah : " + TekananDarah);
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
             cetakTarget();
 
         }else {
@@ -54,7 +57,7 @@ public class LoginApiV2 {
 
     public double BMICalculate(double TinggiBadan,double BeratBadan){
         double BMI = BeratBadan/Math.pow((TinggiBadan/100),2);
-        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(1, BigDecimal.ROUND_HALF_UP);
         BMIIndeksBadan = bigDecimal.doubleValue();
         return BMIIndeksBadan;
     }

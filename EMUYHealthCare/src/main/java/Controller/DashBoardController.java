@@ -1,5 +1,6 @@
 package Controller;
 
+import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -94,12 +95,12 @@ public class DashBoardController {
     @FXML
     private AnchorPane tabelTinggibadan;
     @FXML
-    private AnchorPane labelTinggibadan;
+    private Label labelTInggibadan;
     //tabel berat badan
     @FXML
     private AnchorPane tabelBeratbadan;
     @FXML
-    private AnchorPane labelBeratbadan;
+    private Label labelBeratbadan;
 
     //indikator
     @FXML
@@ -109,25 +110,50 @@ public class DashBoardController {
     @FXML
     private Rectangle tableIndikator;
 
+    @FXML
+    private Label labelBmivalue;
+
     //tabel olahraga
     @FXML
     private LineChart tabelOlaraga;
 
-    //@FXML
-//    public void initialize(){
-//        loginnew.setVisible(true);
-//        inputNewlogin.setOnAction(actionEvent -> newInput());
-//
-//
-//    }
 
-//    private handleInput(){
-//        String gulaDarah = inputGUladarah;
-//        String tekananDarah = inputTekanandarah;
-//        String result = validasiInput(inputGUladarah, inputTekanandarah);
-//        result
-//
-//    }
+
+    @FXML
+    public void initialize(){
+        loginnew.setVisible(false);
+        getValuesLogin();
+        bmiArrowIndikator();
+        System.out.println("Kursor Y : " + kursorIndikator.getLayoutY());
+        System.out.println("Kursor X : " + kursorIndikator.getLayoutY());
+
+    }
+
+    private void handleInput(){
+    }
+
+    private void getValuesLogin(){
+        labelBmivalue.setText(String.valueOf(LoginApiV2.BMIIndeksBadan));
+        labelTInggibadan.setText(String.valueOf(LoginApiV2.tinggiBadan));
+        labelBeratbadan.setText(String.valueOf(LoginApiV2.beratBadan));
+    }
+
+    private boolean checkMember(){
+        if (LoginApiV2.gulaDarah == 0 && LoginApiV2.TekananDarah == 0){
+            return false;
+        }
+        return true;
+    }
+    private void bmiArrowIndikator(){
+        kursorIndikator.setLayoutY(kursorIndikator.getLayoutY());
+
+        double x = map(LoginApiV2.BMIIndeksBadan,10,40,3,190);
+        kursorIndikator.setLayoutX(x);
+    }
+    private double map(double value, double inMin, double inMax, double outMin, double outMax) {
+        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    }
+
 
 }
 
