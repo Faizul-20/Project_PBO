@@ -18,7 +18,7 @@
                     <children>
                         <ImageView fx:id="fotoKelinci" fitHeight="152.0" fitWidth="130.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <!---<Image url="@../../../../../../../../../../../../foto%20bahan/dokp.png" />-->
+                                <Image url="@../../../images/dokterblack.png" />
                             </image>
                         </ImageView>
                         <Label layoutX="146.0" layoutY="49.0" prefHeight="64.0" prefWidth="140.0" text="Dokter Emuy">
@@ -60,9 +60,9 @@
                                     <font>
                                         <Font size="16.0" />
                                     </font></TextField>
-                                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="557.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="kitimChat" fitHeight="50.0" fitWidth="50.0" layoutX="557.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                      <!---  <Image url="@../../../../../../../../../../../../foto%20bahan/20250414_003506.png" />-->
+                                        <Image url="@../../../images/kirimChat.png" />
                                     </image>
                                 </ImageView>
                                 <JFXButton fx:id="buttonkirimChat" layoutX="557.0" layoutY="4.0" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 30;" text="," />
