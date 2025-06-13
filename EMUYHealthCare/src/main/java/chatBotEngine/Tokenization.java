@@ -1,14 +1,17 @@
 package chatBotEngine;
 
+import API.PenyakitAPI;
+
 import java.util.*;
 import java.lang.String;
+import java.util.regex.Pattern;
 
 public class Tokenization {
 
     public static Set<String> gejala = new HashSet<>();
 
     public static void Gejala(String inputGejala) {
-        String stopWords[] = {
+        String[] stopWords = {
                 "saya", "aku", "kami", "kita", "anda", "gue", "nih", "ya", "lah", "deh", "dong",
                 "cuma", "aja", "kok", "lagi", "kayaknya", "kayak", "seperti", "macam", "mirip",
                 "yang", "itu", "ini", "tersebut", "terasa", "rasanya", "begitu", "banget", "sekali",
@@ -43,7 +46,7 @@ public class Tokenization {
     
     public static Map<String, String[]> KeyMap(){
         Map<String, String[]> keyWordsMap = new HashMap<>();
-        Pattern pattern =Pattern.compile("\\s+");
+        Pattern pattern = Pattern.compile("\\s+");
 
         for (Map.Entry<String, String> entry : PenyakitAPI.DataPenyakit.entrySet()){
                 String key = entry.getKey();
