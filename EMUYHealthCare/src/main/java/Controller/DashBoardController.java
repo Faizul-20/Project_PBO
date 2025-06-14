@@ -161,7 +161,7 @@ public class DashBoardController {
     @FXML
     public void initialize(){
         try {
-            judulUsername.setText("Hello " + LoginApiV2.getUsername());
+            //judulUsername.setText("Hello " + LoginApiV2.getUsername());
             getValuesLogin();
             bmiArrowIndikator();
             getTargetUser();

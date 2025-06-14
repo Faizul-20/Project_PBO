@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SceneController {
 
     Image Icon = new Image(getClass().getResourceAsStream("/Kelinci.png"));
-    private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard.fxml";
+    private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard1.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
     private final String CHATBOT_LINK = "/com/example/emuyhealthcare/chatBot.fxml";
     Stage stage;

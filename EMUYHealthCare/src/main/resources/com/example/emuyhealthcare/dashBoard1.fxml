@@ -23,7 +23,7 @@
             <children>
                 <ImageView fx:id="logoChatBot" fitHeight="193.0" fitWidth="198.0" layoutX="-11.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/logoemuy.png" />
+                        <Image url="@../../../images/logoemuy.png" />
                     </image>
                 </ImageView>
                 <ImageView fx:id="fotomenuBMI" fitHeight="99.0" fitWidth="64.0" layoutX="56.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
