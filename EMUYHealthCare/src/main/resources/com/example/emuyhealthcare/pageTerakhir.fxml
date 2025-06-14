@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PageTerakhircontroller">
+    <children>
+        <AnchorPane fx:id="menuDasboard" prefHeight="775.0" prefWidth="183.0" style="-fx-background-color: #000000;">
+            <children>
+                <ImageView fx:id="logoChatBot" fitHeight="193.0" fitWidth="198.0" layoutX="-11.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/logoemuy.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="fotomenuBMI" fitHeight="99.0" fitWidth="64.0" layoutX="56.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/logoNO3.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="fotologout" fitHeight="64.0" fitWidth="43.0" layoutX="70.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/logologout.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="fotomenuChatbot" fitHeight="64.0" fitWidth="49.0" layoutX="66.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/logochatbot.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="fotomenudashboard" fitHeight="64.0" fitWidth="45.0" layoutX="66.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/logohome.png" />
+                    </image>
+                </ImageView>
+                <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text="." />
+                <JFXButton fx:id="bodyMesh" layoutX="66.0" layoutY="337.0" prefHeight="64.0" prefWidth="50.0" text=".">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></JFXButton>
+                <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text="." />
+                <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text="." />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

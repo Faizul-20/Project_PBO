@@ -66,7 +66,7 @@
                                 <Polygon fx:id="kursorIndikator" fill="WHITE" layoutX="102.0" points="-11.800048828125, -4.0, -1.4000244140625, 10.600006103515625, 8.2000732421875, -4.0" stroke="BLACK" strokeType="INSIDE" />
                             </children>
                         </AnchorPane>
-                        <Rectangle fx:id="tabelIndikator" arcHeight="4.0" blendMode="SRC_ATOP" disable="true" height="18.0" layoutX="15.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" style="visibility: 20;" width="200.0">
+                        <Rectangle fx:id="tabelIndikator" arcHeight="4.0" blendMode="SRC_ATOP" disable="true" height="18.0" layoutX="15.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" style="visibility: true" width="200.0">
                             <fill>
                                 <LinearGradient endX="1.0" endY="1.0" startY="1.0">
                                     <stops>
