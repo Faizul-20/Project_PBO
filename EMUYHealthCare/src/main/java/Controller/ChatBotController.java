@@ -2,6 +2,9 @@ package Controller;
 
 import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -14,10 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import static com.sun.javafx.logging.PulseLogger.newInput;
 
@@ -70,6 +75,7 @@ public class ChatBotController {
 
     SceneController sceneController = new SceneController();
     public void initialize() {
+        layearbublechat.setFillWidth(true);
         handleMenuDashboard();
         InisialisasiAwal();
         kolomtext.setOnAction(e-> buttonkirimChat.fire());
@@ -77,32 +83,72 @@ public class ChatBotController {
     }
 
     private void sendMessage() {
-            Pesan = kolomtext.getText();
+        Pesan = kolomtext.getText();
 
-        if (!Pesan.isEmpty()){
-            HBox userChat = createBubbleMessage(Pesan,Pos.CENTER_RIGHT, "#375FAD","White");
+        if (!Pesan.isEmpty()) {
+            HBox userChat = createBubbleMessage(Pesan, Pos.CENTER_RIGHT, "#375FAD", "White");
             layearbublechat.getChildren().add(userChat);
             kolomtext.clear();
 
-            HBox BotChat = createBubbleMessage("Ini Jawaban Bot",Pos.CENTER_LEFT,"White","Black");
-            layearbublechat.getChildren().add(BotChat);
+            Label typingLabel = new Label("Bot sedang mengetik...");
+            typingLabel.setStyle("-fx-font-style: italic; -fx-text-fill: grey;");
+            HBox typingBubble = new HBox(typingLabel);
+            typingBubble.setAlignment(Pos.CENTER_LEFT);
+            typingBubble.setPadding(new Insets(5));
+            layearbublechat.getChildren().add(typingBubble);
             scrollToBottom();
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+            delay.setOnFinished(event -> {
+                layearbublechat.getChildren().remove(typingBubble);
+                showTypingBot("Ini adalah Jawaban Dari Chat Bot");
+            });
+            delay.play();
         }
     }
 
-    HBox createBubbleMessage(String text, Pos Alignment,String Color,String TextColor) {
+    private void showTypingBot(String fullText) {
+        HBox botBubble = createBubbleMessage("", Pos.CENTER_LEFT, "White", "black");
+        Label botLabel = (Label) botBubble.getChildren().get(0);
+        layearbublechat.getChildren().add(botBubble);
+        scrollToBottom();
+
+        StringBuilder sb = new StringBuilder();
+        Timeline tl = new Timeline();
+        for (int i = 0; i < fullText.length(); i++) {
+            int j = i;
+            tl.getKeyFrames().add(new KeyFrame(Duration.millis(40 * (j + 1)), e -> {
+                sb.append(fullText.charAt(j));
+                botLabel.setText(sb.toString());
+                scrollToBottom();
+            }));
+        }
+        tl.play();
+    }
+
+
+    HBox createBubbleMessage(String text, Pos alignment, String color, String textColor) {
         Label label = new Label(text);
         label.setWrapText(true);
         label.setPadding(new Insets(10));
         label.setTextAlignment(TextAlignment.LEFT);
-        label.setStyle("-fx-background-color: " + Color + "; -fx-background-radius: 10;" +
-                "-fx-text-fill:" + TextColor + ";-fx-font-size: 15");
+        label.setStyle("-fx-background-color: " + color + "; -fx-background-radius: 10;"
+                + "-fx-text-fill:" + textColor + ";-fx-font-size: 15");
         label.setMaxWidth(300);
 
-        HBox Wrapper = new HBox(label);
-        Wrapper.setAlignment(Alignment);
-        Wrapper.setPadding(new Insets(5));
-        return Wrapper;
+        // Perbaikan: Gunakan Region.USE_PREF_SIZE dan Region.USE_COMPUTED_SIZE
+        label.setMinHeight(Region.USE_PREF_SIZE);
+        label.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        HBox wrapper = new HBox(label);
+        wrapper.setAlignment(alignment);
+        wrapper.setPadding(new Insets(5));
+
+        // Perbaikan: Tambahkan konfigurasi untuk wrapper
+        wrapper.setMinHeight(Region.USE_PREF_SIZE);
+        wrapper.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        return wrapper;
     }
 
     private void scrollToBottom(){
