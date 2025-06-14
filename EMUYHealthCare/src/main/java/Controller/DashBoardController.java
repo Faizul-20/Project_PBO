@@ -1,6 +1,8 @@
 package Controller;
 
+import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Label;
@@ -113,15 +115,6 @@ public class DashBoardController {
     @FXML
     private LineChart tabelOlaraga;
 
-<<<<<<< HEAD
-    //@FXML
-//    public void initialize(){
-//        loginnew.setVisible(true);
-//        inputNewlogin.setOnAction(actionEvent -> newInput());
-//
-//
-//    }
-=======
     //warna indikator tabel darah
     @FXML
     private AnchorPane indikatorGuladarah;
@@ -260,8 +253,8 @@ public class DashBoardController {
 
     private Color gulaDarahColor(double value){
         if (value <= 100){
-        labelIndikatorGulaDarah.setText("Normal");
-        return Color.rgb(91,221,91);
+            labelIndikatorGulaDarah.setText("Normal");
+            return Color.rgb(91,221,91);
         } else if (value <= 140) {
             labelIndikatorGulaDarah.setText("Pradiabetes");
             double rasio = (value - 100) / 40;
@@ -329,17 +322,3 @@ public class DashBoardController {
         JarakLari.setText("Lari " + targetLari.getValue().toString() + " KM");
 
     }
->>>>>>> d993d703c95463dad35e33dc04aa4cf310098ea7
-
-//    private handleInput(){
-//        String gulaDarah = inputGUladarah;
-//        String tekananDarah = inputTekanandarah;
-//        String result = validasiInput(inputGUladarah, inputTekanandarah);
-//        result
-//
-//    }
-
-}
-
-
-
