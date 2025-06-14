@@ -17,7 +17,8 @@ public class LoginApiV2 {
     public static double tinggiBadan;
     public static double beratBadan;
     public static double BMIIndeksBadan;
-    public static double gulaDarah;
+    public static double gulaDarah = 80;
+    public static double TekananDarah = 80;
     public static Map<String,Double> Target = new LinkedHashMap<>();
 
     UserConnecting userConnecting = new UserConnecting();
@@ -40,9 +41,11 @@ public class LoginApiV2 {
             System.out.println("Password : " + Password);
             System.out.println("BMI : " + BMICalculate(tinggiBadan,beratBadan));
             System.out.println("Gula Darah : " + gulaDarah);
+            System.out.println("Tekanan Darah : " + TekananDarah);
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
             cetakTarget();
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
 
         }else {
             System.out.println("Login Failed");
@@ -54,7 +57,7 @@ public class LoginApiV2 {
 
     public double BMICalculate(double TinggiBadan,double BeratBadan){
         double BMI = BeratBadan/Math.pow((TinggiBadan/100),2);
-        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(1, BigDecimal.ROUND_HALF_UP);
         BMIIndeksBadan = bigDecimal.doubleValue();
         return BMIIndeksBadan;
     }
@@ -67,7 +70,29 @@ public class LoginApiV2 {
         }
     }
 
+    public static void Logout(){
+        setUsername(null);
+        setPassword(null);
+        setBeratBadan(0);
+        setTinggiBadan(0);
+        setGulaDarah(0);
+        setTekananDarah(0);
+        setBMIIndeksBadan(0);
+        Map<String,Double> NewTarget = new LinkedHashMap<>();
+        setTarget(NewTarget);
 
+    }
+
+    public static void CetakValue(){
+        System.out.println("Username : " + Username);
+        System.out.println("Password : " + Password);
+        System.out.println("Tinggi Badan : " + tinggiBadan);
+        System.out.println("Berat Badan : " + beratBadan);
+        System.out.println("Gula Darah : " + gulaDarah);
+        System.out.println("Tekanan Darah : " + TekananDarah);
+        System.out.println("Berat Badan : " + tinggiBadan);
+        System.out.println("Target : " + Target);
+    }
 
     public static String getUsername() {
         return Username;
@@ -87,5 +112,37 @@ public class LoginApiV2 {
 
     public static double getBMIIndeksBadan() {
         return BMIIndeksBadan;
+    }
+
+    public static void setUsername(String username) {
+        Username = username;
+    }
+
+    public static void setPassword(String password) {
+        Password = password;
+    }
+
+    public static void setTinggiBadan(double tinggiBadan) {
+        LoginApiV2.tinggiBadan = tinggiBadan;
+    }
+
+    public static void setBeratBadan(double beratBadan) {
+        LoginApiV2.beratBadan = beratBadan;
+    }
+
+    public static void setBMIIndeksBadan(double BMIIndeksBadan) {
+        LoginApiV2.BMIIndeksBadan = BMIIndeksBadan;
+    }
+
+    public static void setGulaDarah(double gulaDarah) {
+        LoginApiV2.gulaDarah = gulaDarah;
+    }
+
+    public static void setTekananDarah(double tekananDarah) {
+        TekananDarah = tekananDarah;
+    }
+
+    public static void setTarget(Map<String, Double> target) {
+        Target = target;
     }
 }
