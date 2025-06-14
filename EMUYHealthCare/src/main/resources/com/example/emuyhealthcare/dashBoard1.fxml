@@ -138,6 +138,11 @@
                       <!--  <Image url="@../../../../../../../../../../../foto%20bahan/20250327_131231.png" /> -->
                     </image>
                 </ImageView>
+            <Label layoutX="154.0" layoutY="686.0" prefHeight="15.0" prefWidth="83.0" text="Ideal">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
             </children></AnchorPane>
         <LineChart fx:id="tabelOlaraga" layoutX="214.0" layoutY="262.0" prefHeight="390.0" prefWidth="706.0" title="table">
             <xAxis>
@@ -152,10 +157,10 @@
         </LineChart>
         <AnchorPane fx:id="tabelGuladarah" layoutX="256.0" layoutY="90.0" prefHeight="141.0" prefWidth="283.0" style="-fx-background-color: #ffffff; -fx-background-radius: 14;">
             <children>
-                <AnchorPane fx:id="tabelGuladarahnormal" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0">
+                <AnchorPane fx:id="tabelGuladarahnormal" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-radius: 20;">
                     <children>
                         <Label layoutX="38.0" layoutY="14.0" text="Mg/DL" />
-                        <Label fx:id="labelGuladarahnormal" layoutX="14.0" layoutY="9.0" text="88">
+                        <Label fx:id="angkaGuladarah" layoutX="14.0" layoutY="9.0" text="88">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -184,7 +189,14 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <AnchorPane layoutX="156.0" layoutY="16.0" prefHeight="30.0" prefWidth="238.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;" />
+                <AnchorPane layoutX="156.0" layoutY="16.0" prefHeight="30.0" prefWidth="238.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
+               <children>
+                  <Label fx:id="tanggal" alignment="TOP_CENTER" layoutX="45.0" layoutY="6.0" prefHeight="30.0" prefWidth="158.0" text="14-10-2025" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
                 <Label layoutX="465.0" layoutY="17.0" prefHeight="28.0" prefWidth="70.0" text="Lari 2km">
                     <font>
                         <Font size="16.0" />
@@ -192,21 +204,6 @@
             </children></AnchorPane>
         <AnchorPane fx:id="TabelTekanandarah" layoutX="624.0" layoutY="90.0" prefHeight="142.0" prefWidth="283.0" style="-fx-background-color: #ffffff; -fx-background-radius: 14;">
             <children>
-                <AnchorPane fx:id="tabelTekanandarahnormal" disable="true" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0">
-                    <children>
-                        <Label layoutX="43.0" layoutY="14.0" text="mmHg" />
-                        <Label layoutX="14.0" layoutY="32.0" text="Normal">
-                            <font>
-                                <Font size="21.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="labelTekanandarahnormal" layoutX="13.0" layoutY="8.0" text="88">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
                 <ImageView fx:id="logoTekanandarah" fitHeight="110.0" fitWidth="111.0" layoutX="-6.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/tekanandarah.png" />
@@ -217,6 +214,21 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
+            <AnchorPane fx:id="tabelTekanandarahnormal" layoutX="99.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-radius: 20;">
+               <children>
+                  <Label layoutX="38.0" layoutY="14.0" text="MmHg" />
+                  <Label fx:id="angkaTekanandarah" layoutX="14.0" layoutY="9.0" text="88">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="34.0" text="Normal">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="loginnew" layoutX="356.0" layoutY="311.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
