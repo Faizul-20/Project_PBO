@@ -11,12 +11,12 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
     private final String SIGN_IN ="SELECT * FROM users WHERE Username = ? AND Password = ?";
     private final String SIGN_INV2 =
             "SELECT users.*, riwayat.Target, riwayat.Tanggal, " +
-                    "rgt.gula_darah,rgt.tekanan_darah,rgt.tanggal_gula "+
+                    "rgt.gula_darah,rgt.tekanan_darah  "+
                     "FROM users " +
                     "LEFT JOIN riwayat ON users.id = riwayat.id " +
                     "LEFT JOIN riwayat_gula_tekanan rgt ON users.id = rgt.id "+
                     "WHERE users.Username = ? AND users.Password = ? " +
-                    "ORDER BY riwayat.Tanggal ASC,rgt.tanggal_gula ASC" ;
+                    "ORDER BY riwayat.Tanggal ASC" ;
 
 
     @Override
@@ -126,6 +126,10 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
                 String tanggal = rs.getString("Tanggal");
                 double gula = rs.getDouble("gula_darah");
                 double tekanan = rs.getDouble("tekanan_darah");
+                if (gula != 0 && tekanan != 0) {
+                    LoginApiV2.gulaDarah = gula;
+                    LoginApiV2.TekananDarah = tekanan;
+                }
 
                 if (tanggal != null) {
                     LoginApiV2.Target.put(tanggal, target);

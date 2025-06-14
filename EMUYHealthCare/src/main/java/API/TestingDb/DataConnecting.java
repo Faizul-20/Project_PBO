@@ -1,6 +1,5 @@
 package API.TestingDb;
 
-import API.Testing.UserConnectingtest;
 import DataBaseController.SQLConnection;
 
 import java.sql.Connection;

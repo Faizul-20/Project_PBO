@@ -1,6 +1,7 @@
 package Controller;
 
 import API.LoginApiV2;
+import chatBotEngine.TestingCakapEmuy.CakapEmuyService;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -23,6 +24,8 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+
+import java.sql.SQLException;
 
 import static com.sun.javafx.logging.PulseLogger.newInput;
 
@@ -72,6 +75,15 @@ public class ChatBotController {
     private TextArea kolomDiagnosa;
 
     String Pesan = "";
+    CakapEmuyService EmuyService;
+
+    {
+        try {
+            EmuyService = new CakapEmuyService();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     SceneController sceneController = new SceneController();
     public void initialize() {
@@ -84,6 +96,7 @@ public class ChatBotController {
 
     private void sendMessage() {
         Pesan = kolomtext.getText();
+        String Input = EmuyService.processInput(Pesan);
 
         if (!Pesan.isEmpty()) {
             HBox userChat = createBubbleMessage(Pesan, Pos.CENTER_RIGHT, "#375FAD", "White");
@@ -101,7 +114,7 @@ public class ChatBotController {
             PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
             delay.setOnFinished(event -> {
                 layearbublechat.getChildren().remove(typingBubble);
-                showTypingBot("Ini adalah Jawaban Dari Chat Bot");
+                showTypingBot(Input);
             });
             delay.play();
         }
@@ -117,7 +130,7 @@ public class ChatBotController {
         Timeline tl = new Timeline();
         for (int i = 0; i < fullText.length(); i++) {
             int j = i;
-            tl.getKeyFrames().add(new KeyFrame(Duration.millis(40 * (j + 1)), e -> {
+            tl.getKeyFrames().add(new KeyFrame(Duration.millis(10 * (j + 1)), e -> {
                 sb.append(fullText.charAt(j));
                 botLabel.setText(sb.toString());
                 scrollToBottom();
