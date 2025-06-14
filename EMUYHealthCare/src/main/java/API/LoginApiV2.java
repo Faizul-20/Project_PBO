@@ -1,12 +1,9 @@
 package API;
 
-import API.Testing.TestingDb1;
-import API.Testing.UserConnectingtest;
 import Controller.SceneController;
 import DataBaseController.UserConnecting;
 
 import java.math.BigDecimal;
-import java.sql.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -27,6 +24,26 @@ public class LoginApiV2 {
     public LoginApiV2(String Username, String Password){
         this.Username = Username;
         this.Password = Password;
+    }
+
+    public static void Logout() {
+        Map<String,Double> target = new LinkedHashMap<>();
+        setTarget(target);
+        setUsername(null);
+        setPassword(null);
+        setBeratBadan(0);
+        setBMIIndeksBadan(0);
+        setGulaDarah(0);
+        setTarget(target);
+    }
+
+    public static void CetakValue() {
+        System.out.println("CetakValue");
+        System.out.println("Username: " + Username + " Password: " + Password);
+        System.out.println("Target: " + Target);
+        System.out.println("Berat: " + beratBadan);
+        System.out.println("BMI: " + BMIIndeksBadan);
+        System.out.println("Gula: " + gulaDarah);
     }
 
     public void CekValue(){
@@ -62,12 +79,14 @@ public class LoginApiV2 {
         return BMIIndeksBadan;
     }
     private void cetakTarget(){
+        System.out.println("================= Daftar Target " + getUsername() +" ============");
         Iterator it = Target.entrySet().iterator();
-        System.out.println("Cetak Target " +  Target.size() + "Buah");
+        System.out.println("Cetak Target " +  Target.size() + "Buah\n");
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             System.out.println(pair.getKey() + " : " + pair.getValue());
         }
+        System.out.println("=============================================================================");
     }
 
 
@@ -90,5 +109,33 @@ public class LoginApiV2 {
 
     public static double getBMIIndeksBadan() {
         return BMIIndeksBadan;
+    }
+
+    public static void setUsername(String username) {
+        Username = username;
+    }
+
+    public static void setPassword(String password) {
+        Password = password;
+    }
+
+    public static void setTinggiBadan(double tinggiBadan) {
+        LoginApiV2.tinggiBadan = tinggiBadan;
+    }
+
+    public static void setBeratBadan(double beratBadan) {
+        LoginApiV2.beratBadan = beratBadan;
+    }
+
+    public static void setBMIIndeksBadan(double BMIIndeksBadan) {
+        LoginApiV2.BMIIndeksBadan = BMIIndeksBadan;
+    }
+
+    public static void setGulaDarah(double gulaDarah) {
+        LoginApiV2.gulaDarah = gulaDarah;
+    }
+
+    public static void setTarget(Map<String, Double> target) {
+        Target = target;
     }
 }

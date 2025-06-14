@@ -1,6 +1,4 @@
-package API.Testing;
-
-import DataBaseController.UserConnecting;
+package Testing;
 
 import java.util.Scanner;
 

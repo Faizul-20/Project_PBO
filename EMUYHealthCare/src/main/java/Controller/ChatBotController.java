@@ -1,30 +1,36 @@
 package Controller;
 
+import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import static com.sun.javafx.logging.PulseLogger.newInput;
 
 
 public class ChatBotController {
-    @FXML
-    private AnchorPane layer;
-    @FXML
-    private  AnchorPane loginnew;
-    @FXML
-    private TextField inputGUladarah;
-    @FXML
-    private TextField inputTekanandarah;
-    @FXML
-    private  JFXButton inputNewlogin;
-    //tombol menu sisi kanan
+
+
+    // MenuBoard DI sisi Kanan
     @FXML
     private AnchorPane menuDasboard;
     @FXML
@@ -47,87 +53,132 @@ public class ChatBotController {
     @FXML
     private JFXButton buttonLogout;
 
-    //tabel gula darah
-    @FXML
-    private AnchorPane tabelGuladarah;
-    @FXML
-    private ImageView logoGuladarah;
-    @FXML
-    private Label labelGuladarah;
-    //indikator tak gawe 3
-    @FXML
-    private AnchorPane tabelGuladarahnormal;
-    @FXML
-    private Label labelGuladarahnormal; // iki angka indikator
-    @FXML
-    private AnchorPane tabelGuladarahwaspada;
-    @FXML
-    private Label labelGuladarahwaspada; // iki angka indikator
-    @FXML
-    private AnchorPane tabelGuladarahbahaya;
-    @FXML
-    private Label labelGuladarahbahaya; // iki angka indikator
 
-    //tabel Tekanan darah
+    //Layar Percakapan
     @FXML
-    private AnchorPane TabelTekanandarah;
+    private VBox layearbublechat;
     @FXML
-    private ImageView logoTekanandarah;
+    private TextField kolomtext;
     @FXML
-    private Label labelTekanandarah;
-    //indikator tak gawe 3
+    private JFXButton buttonkirimChat;
     @FXML
-    private AnchorPane tabelTekanandarahnormal;
-    @FXML
-    private Label labelTekanandarahnormal; // iki angka indikator
-    @FXML
-    private AnchorPane tabelTekanandarahwaspada;
-    @FXML
-    private Label labelTekanandarahwaspada; // iki angka indikator
-    @FXML
-    private AnchorPane tabelTekanandarahbahaya;
-    @FXML
-    private Label labelTekanandarahbahaya; // iki angka indikator
+    private ScrollPane kolomChatGeser;
 
-    //tabel bmi
-    //tabel tinggi badan
-    @FXML
-    private AnchorPane tabelTinggibadan;
-    @FXML
-    private AnchorPane labelTinggibadan;
-    //tabel berat badan
-    @FXML
-    private AnchorPane tabelBeratbadan;
-    @FXML
-    private AnchorPane labelBeratbadan;
 
-    //indikator
+    //Layar Diagnosis
     @FXML
-    private AnchorPane tabelIndikatorbmi;
+    private TextArea kolomGejalaDiterima;
     @FXML
-    private Polygon kursorIndikator;
-    @FXML
-    private Rectangle tableIndikator;
+    private TextArea kolomDiagnosa;
 
-    //tabel olahraga
-    @FXML
-    private LineChart tabelOlaraga;
+    String Pesan = "";
 
-//    @FXML
-//    public void initialize(){
-//        loginnew.setVisible(true);
-//        inputNewlogin.setOnAction(actionEvent -> newInput());
-//
-//
-//    }
+    SceneController sceneController = new SceneController();
+    public void initialize() {
+        layearbublechat.setFillWidth(true);
+        handleMenuDashboard();
+        InisialisasiAwal();
+        kolomtext.setOnAction(e-> buttonkirimChat.fire());
+        buttonkirimChat.setOnAction(event -> sendMessage());
+    }
 
-//    private handleInput(){
-//        String gulaDarah = inputGUladarah;
-//        String tekananDarah = inputTekanandarah;
-//        String result = validasiInput(inputGUladarah, inputTekanandarah);
-//        result
-//
-//    }
+    private void sendMessage() {
+        Pesan = kolomtext.getText();
+
+        if (!Pesan.isEmpty()) {
+            HBox userChat = createBubbleMessage(Pesan, Pos.CENTER_RIGHT, "#375FAD", "White");
+            layearbublechat.getChildren().add(userChat);
+            kolomtext.clear();
+
+            Label typingLabel = new Label("Bot sedang mengetik...");
+            typingLabel.setStyle("-fx-font-style: italic; -fx-text-fill: grey;");
+            HBox typingBubble = new HBox(typingLabel);
+            typingBubble.setAlignment(Pos.CENTER_LEFT);
+            typingBubble.setPadding(new Insets(5));
+            layearbublechat.getChildren().add(typingBubble);
+            scrollToBottom();
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+            delay.setOnFinished(event -> {
+                layearbublechat.getChildren().remove(typingBubble);
+                showTypingBot("Ini adalah Jawaban Dari Chat Bot");
+            });
+            delay.play();
+        }
+    }
+
+    private void showTypingBot(String fullText) {
+        HBox botBubble = createBubbleMessage("", Pos.CENTER_LEFT, "White", "black");
+        Label botLabel = (Label) botBubble.getChildren().get(0);
+        layearbublechat.getChildren().add(botBubble);
+        scrollToBottom();
+
+        StringBuilder sb = new StringBuilder();
+        Timeline tl = new Timeline();
+        for (int i = 0; i < fullText.length(); i++) {
+            int j = i;
+            tl.getKeyFrames().add(new KeyFrame(Duration.millis(40 * (j + 1)), e -> {
+                sb.append(fullText.charAt(j));
+                botLabel.setText(sb.toString());
+                scrollToBottom();
+            }));
+        }
+        tl.play();
+    }
+
+
+    HBox createBubbleMessage(String text, Pos alignment, String color, String textColor) {
+        Label label = new Label(text);
+        label.setWrapText(true);
+        label.setPadding(new Insets(10));
+        label.setTextAlignment(TextAlignment.LEFT);
+        label.setStyle("-fx-background-color: " + color + "; -fx-background-radius: 10;"
+                + "-fx-text-fill:" + textColor + ";-fx-font-size: 15");
+        label.setMaxWidth(300);
+
+        // Perbaikan: Gunakan Region.USE_PREF_SIZE dan Region.USE_COMPUTED_SIZE
+        label.setMinHeight(Region.USE_PREF_SIZE);
+        label.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        HBox wrapper = new HBox(label);
+        wrapper.setAlignment(alignment);
+        wrapper.setPadding(new Insets(5));
+
+        // Perbaikan: Tambahkan konfigurasi untuk wrapper
+        wrapper.setMinHeight(Region.USE_PREF_SIZE);
+        wrapper.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        return wrapper;
+    }
+
+    private void scrollToBottom(){
+        Platform.runLater(()->kolomChatGeser.setVvalue(1.0));
+    }
+
+    private void InisialisasiAwal(){
+        String PesanEmuyDefault = "Hai " + LoginApiV2.getUsername() +"!!\n"
+               + "Apa Kabarmu Hari ini?";
+        HBox PesanDefault = createBubbleMessage(PesanEmuyDefault,Pos.CENTER_LEFT,"WHite","Black");
+        layearbublechat.getChildren().add(PesanDefault);
+    }
+    private void handleMenuDashboard(){
+        //Pilihan Dashboard
+        hoMe.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+        });
+        //Pilihan Chatbot
+        chatBot.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getCHATBOT_LINK());
+        });
+        // Pilihan Logout
+        buttonLogout.setOnAction(e -> {
+            LoginApiV2.Logout();
+            sceneController.SceneChange(sceneController.getLOGIN_PAGE());
+            LoginApiV2.CetakValue();
+        });
+    }
+
+
 
 }
 

@@ -1,7 +1,6 @@
 package DataBaseController;
 
 import API.LoginApiV2;
-import API.Testing.TestingDb1;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -11,10 +10,14 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
     private final String INSERT_DATA ="INSERT INTO users VALUES (NULL,?, ?, ?, ?, ?)";
     private final String SIGN_IN ="SELECT * FROM users WHERE Username = ? AND Password = ?";
     private final String SIGN_INV2 =
-            "SELECT users.*, riwayat.Target, riwayat.Tanggal " +
-                    "FROM users LEFT JOIN riwayat ON users.id = riwayat.id " +
+            "SELECT users.*, riwayat.Target, riwayat.Tanggal, " +
+                    "rgt.gula_darah,rgt.tekanan_darah,rgt.tanggal_gula "+
+                    "FROM users " +
+                    "LEFT JOIN riwayat ON users.id = riwayat.id " +
+                    "LEFT JOIN riwayat_gula_tekanan rgt ON users.id = rgt.id "+
                     "WHERE users.Username = ? AND users.Password = ? " +
-                    "ORDER BY riwayat.Tanggal ASC";
+                    "ORDER BY riwayat.Tanggal ASC,rgt.tanggal_gula ASC" ;
+
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -121,9 +124,14 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
                 // Pastikan Target dan Tanggal tidak null
                 double target = rs.getDouble("Target");
                 String tanggal = rs.getString("Tanggal");
+                double gula = rs.getDouble("gula_darah");
+                double tekanan = rs.getDouble("tekanan_darah");
+
                 if (tanggal != null) {
                     LoginApiV2.Target.put(tanggal, target);
                     i++;
+                }else {
+                    LoginApiV2.Target.put("Null",0.0);
                 }
                 hasData = true;
             }

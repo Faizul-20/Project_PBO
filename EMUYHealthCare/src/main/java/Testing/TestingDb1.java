@@ -1,9 +1,7 @@
-package API.Testing;
+package Testing;
 
 import Controller.SceneController;
-import DataBaseController.UserConnecting;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
