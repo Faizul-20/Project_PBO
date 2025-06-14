@@ -125,8 +125,7 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
                 double target = rs.getDouble("Target");
                 String tanggal = rs.getString("Tanggal");
                 double gula = rs.getDouble("gula_darah");
-                String tekanan = rs.getString("tekanan_darah");
-                String tanggalGula = rs.getString("tanggal_gula");
+                double tekanan = rs.getDouble("tekanan_darah");
 
                 if (tanggal != null) {
                     LoginApiV2.Target.put(tanggal, target);
