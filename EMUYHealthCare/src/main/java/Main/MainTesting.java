@@ -4,6 +4,8 @@ import Controller.SceneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainTesting extends Application {
 
     public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class MainTesting extends Application {
     public void start(Stage primaryStage) {
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
-        Control.BuildWindow(Control.getDASHBOARD_LINK());
+        Control.BuildWindow(Control.getCHATBOT_LINK());
+
     }
 }

@@ -109,7 +109,7 @@ public class DashBoardController {
     @FXML
     private AnchorPane tabelBeratbadan;
     @FXML
-    private Label labelBeratbadan;
+    private Label labelBeratbedan;
 
     //indikator
     @FXML
@@ -161,6 +161,7 @@ public class DashBoardController {
     @FXML
     public void initialize(){
         try {
+            loginnew.setVisible(false);
             //judulUsername.setText("Hello " + LoginApiV2.getUsername());
             getValuesLogin();
             bmiArrowIndikator();
@@ -202,7 +203,7 @@ public class DashBoardController {
     private void getValuesLogin(){
         labelBmivalue.setText(String.valueOf(LoginApiV2.BMIIndeksBadan));
         labelTInggibadan.setText(String.valueOf(LoginApiV2.tinggiBadan));
-        labelBeratbadan.setText(String.valueOf(LoginApiV2.beratBadan));
+        labelBeratbedan.setText(String.valueOf(LoginApiV2.beratBadan));
     }
 
     private boolean checkMember(){

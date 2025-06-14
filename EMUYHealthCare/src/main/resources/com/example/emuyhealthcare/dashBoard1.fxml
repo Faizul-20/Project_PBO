@@ -28,22 +28,22 @@
                 </ImageView>
                 <ImageView fx:id="fotomenuBMI" fitHeight="99.0" fitWidth="64.0" layoutX="56.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/logoNO3.png" />
+                        <Image url="@../../../images/logoNO3.png" />
                     </image>
                 </ImageView>
                 <ImageView fx:id="fotologout" fitHeight="64.0" fitWidth="43.0" layoutX="70.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/logologout.png" />
+                        <Image url="@../../../images/logologout.png" />
                     </image>
                 </ImageView>
                 <ImageView fx:id="fotomenuChatbot" fitHeight="64.0" fitWidth="49.0" layoutX="66.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/logochatbot.png" />
+                        <Image url="@../../../images/logochatbot.png" />
                     </image>
                 </ImageView>
                 <ImageView fx:id="fotomenudashboard" fitHeight="64.0" fitWidth="45.0" layoutX="66.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/logohome.png" />
+                        <Image url="@../../../images/logohome.png" />
                     </image>
                 </ImageView>
                 <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text="." />
@@ -123,7 +123,7 @@
                 <AnchorPane fx:id="tabelBeratbadan" layoutX="22.0" layoutY="183.0" prefHeight="81.0" prefWidth="100.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
                     <children>
                         <Label layoutX="21.0" layoutY="5.0" text="Berat Badan" textFill="WHITE" />
-                        <Label fx:id="labelBeratbedan" layoutX="31.0" layoutY="28.0" prefHeight="40.0" prefWidth="43.0" text="90" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="labelBeratbedan" alignment="CENTER" layoutX="14.0" layoutY="28.0" prefHeight="40.0" prefWidth="67.0" text="90" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font size="28.0" />
                             </font></Label>
@@ -152,7 +152,7 @@
         </LineChart>
         <AnchorPane fx:id="tabelGuladarah" layoutX="256.0" layoutY="90.0" prefHeight="141.0" prefWidth="283.0" style="-fx-background-color: #ffffff; -fx-background-radius: 14;">
             <children>
-                <AnchorPane fx:id="tabelGuladarahnormal" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-color: E52020; -fx-background-radius: 20;">
+                <AnchorPane fx:id="tabelGuladarahnormal" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0">
                     <children>
                         <Label layoutX="38.0" layoutY="14.0" text="Mg/DL" />
                         <Label fx:id="labelGuladarahnormal" layoutX="14.0" layoutY="9.0" text="88">
@@ -167,38 +167,9 @@
                         </Label>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="tabelGuladarahbahaya" disable="true" layoutX="94.0" layoutY="33.0" prefHeight="64.0" prefWidth="150.0" style="-fx-background-color: #F44336; -fx-background-radius: 20;">
-                    <children>
-                        <Label layoutX="38.0" layoutY="14.0" text="Mg/DL" />
-                        <Label layoutX="14.0" layoutY="9.0" text="88">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="32.0" text="Bahaya">
-                            <font>
-                                <Font size="21.0" />
-                            </font>
-                        </Label>
-                    </children></AnchorPane>
-                <AnchorPane fx:id="tabelGuladarahwaspada" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-color: FBA518; -fx-background-radius: 20;">
-                    <children>
-                        <Label layoutX="38.0" layoutY="14.0" text="Mg/DL" />
-                        <Label fx:id="labelGuladarahwaspada" layoutX="14.0" layoutY="9.0" text="88">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="34.0" text="Waspada">
-                            <font>
-                                <Font size="21.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
                 <ImageView fx:id="logoGuladarah" fitHeight="68.0" fitWidth="64.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/logoguladarah.png" />
+                        <Image url="@../../../images/logoguladarah.png" />
                     </image>
                 </ImageView>
                 <Label fx:id="labelGuladarah" layoutX="95.0" prefHeight="40.0" prefWidth="96.0" text="Gula darah">
@@ -221,64 +192,34 @@
             </children></AnchorPane>
         <AnchorPane fx:id="TabelTekanandarah" layoutX="624.0" layoutY="90.0" prefHeight="142.0" prefWidth="283.0" style="-fx-background-color: #ffffff; -fx-background-radius: 14;">
             <children>
-                <AnchorPane fx:id="tabelTekanandarahbahaya" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-color: #F44336; -fx-background-radius: 20;">
+                <AnchorPane fx:id="tabelTekanandarahnormal" disable="true" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0">
                     <children>
-                        <Label layoutX="38.0" layoutY="14.0" text="mmHg" />
-                        <Label fx:id="labelTekanandarahbahaya" layoutX="14.0" layoutY="9.0" text="88">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="34.0" text="Bahaya">
-                            <font>
-                                <Font size="21.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="tabelTekanandarahnormal" disable="true" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-color: #00ff0d; -fx-background-radius: 20;">
-                    <children>
-                        <Label layoutX="38.0" layoutY="14.0" text="mmHg" />
-                        <Label fx:id="labelTekanandarahnormal" layoutX="14.0" layoutY="9.0" text="88">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
+                        <Label layoutX="43.0" layoutY="14.0" text="mmHg" />
                         <Label layoutX="14.0" layoutY="32.0" text="Normal">
                             <font>
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="tabelTekanandarahwaspada" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-color: FBA518; -fx-background-radius: 20;">
-                    <children>
-                        <Label layoutX="38.0" layoutY="14.0" text="mmHg" />
-                        <Label fx:id="labelTekanandarahwaspada" layoutX="14.0" layoutY="9.0" text="88">
+                        <Label fx:id="labelTekanandarahnormal" layoutX="13.0" layoutY="8.0" text="88">
                             <font>
                                 <Font size="19.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="34.0" text="Waspada">
-                            <font>
-                                <Font size="21.0" />
                             </font>
                         </Label>
                     </children>
                 </AnchorPane>
                 <ImageView fx:id="logoTekanandarah" fitHeight="110.0" fitWidth="111.0" layoutX="-6.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@/images/tekanandarah.png" />
+                        <Image url="@../../../images/tekanandarah.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="95.0" prefHeight="40.0" prefWidth="158.0" text="TEkanan Darah">
+                <Label layoutX="95.0" prefHeight="40.0" prefWidth="158.0" text="Tekanan Darah">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="loginnew" layoutX="379.0" layoutY="194.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
+        <AnchorPane fx:id="loginnew" layoutX="356.0" layoutY="311.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
             <children>
                 <Label layoutX="46.0" layoutY="24.0" prefHeight="51.0" prefWidth="399.0" text="Hallo Pengguna Baru Masukan Data ">
                     <font>

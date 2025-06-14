@@ -76,7 +76,7 @@ public class LoginApiV2 {
 
     public double BMICalculate(double TinggiBadan,double BeratBadan){
         double BMI = BeratBadan/Math.pow((TinggiBadan/100),2);
-        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(1, BigDecimal.ROUND_HALF_UP);
         BMIIndeksBadan = bigDecimal.doubleValue();
         return BMIIndeksBadan;
     }
