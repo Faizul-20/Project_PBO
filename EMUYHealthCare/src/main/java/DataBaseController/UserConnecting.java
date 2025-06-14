@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserConnecting extends ConnectionData implements SQLConnection {
+public class UserConnecting extends ConnectionData  implements SQLConnection {
     private final String INSERT_DATA ="INSERT INTO users VALUES (NULL,?, ?, ?, ?, ?)";
     private final String SIGN_IN ="SELECT * FROM users WHERE Username = ? AND Password = ?";
     private final String SIGN_INV2 =

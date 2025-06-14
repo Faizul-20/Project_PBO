@@ -1,14 +1,17 @@
 package API;
 
-import java.util.HashMap;
 
 public class PenyakitAPI {
-    private String nama;
-    private String gejala;
+    public static String gejalaUser;
+    public static String feedback;
+    public static String diagnosa;
 
-    public PenyakitAPI(String gejala, String nama){
-        this.gejala = gejala;
-        this.nama = nama;
+    public PenyakitAPI(String gejalaUser, String feedback, String diagnosa){
+        this.gejalaUser = gejalaUser;
+        this.feedback = feedback;
+        this.diagnosa = diagnosa;
     }
-    public static HashMap<String,String> DataPenyakit = new HashMap<>();
+
+
+
 }
