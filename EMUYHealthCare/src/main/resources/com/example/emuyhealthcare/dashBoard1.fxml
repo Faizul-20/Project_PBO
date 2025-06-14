@@ -138,7 +138,7 @@
                       <!--  <Image url="@../../../../../../../../../../../foto%20bahan/20250327_131231.png" /> -->
                     </image>
                 </ImageView>
-            <Label layoutX="154.0" layoutY="686.0" prefHeight="15.0" prefWidth="83.0" text="Ideal">
+            <Label fx:id="indikatorIdeal" layoutX="154.0" layoutY="686.0" prefHeight="15.0" prefWidth="83.0" text="Ideal">
                <font>
                   <Font size="38.0" />
                </font>
