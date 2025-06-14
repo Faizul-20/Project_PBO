@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class PenyakitConnecting extends ConnectionData implements SQLConnection{
     private final String QUERY_selectTabelGejala = "SELECT kodeGejala, gejala FROM gejala";
+    private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -74,6 +75,30 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
         }
 
         return matchedKode;
+    }
+
+    public LinkedHashMap<Integer, ArrayList<String>> tabelPenyakitGejala(){
+        LinkedHashMap<String, ArrayList<String>> mapPenyakitGejala = new LinkedHashMap<>();
+
+        try {
+            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_selectTabelPenyakitGejala);
+
+            while (resultSet.next()){
+                Integer Id_Penyakit = resultSet.getString("Id_penyakit");
+                String kodeGejala = resultSet.getS
+            }
+
+
+
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
 

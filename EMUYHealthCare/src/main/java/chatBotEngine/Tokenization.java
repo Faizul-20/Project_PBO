@@ -1,16 +1,11 @@
 package chatBotEngine;
 
-import API.PenyakitAPI;
-
 import java.util.*;
 import java.lang.String;
-import java.util.regex.Pattern;
 
 public class Tokenization {
 
-    public static Set<String> gejala = new HashSet<>();
-
-    public static void Gejala(String inputGejala) {
+    public static HashSet<String> Gejala(String inputGejala) {
         String[] stopWords = {
                 "saya", "aku", "kami", "kita", "anda", "gue", "nih", "ya", "lah", "deh", "dong",
                 "cuma", "aja", "kok", "lagi", "kayaknya", "kayak", "seperti", "macam", "mirip",
@@ -53,11 +48,14 @@ public class Tokenization {
         String cleanedInput = inputGejala.replaceAll("[\\p{Punct}]", " ");
         String[] tokens = cleanedInput.toLowerCase().split("\\s+");
 
+        HashSet<String> gejala = new HashSet<>();
+
         for (String word : tokens) {
             if (!word.isEmpty() && !stopWordSet.contains(word)) {
                 gejala.add(word);
             }
         }
+        return gejala;
 
     }
     

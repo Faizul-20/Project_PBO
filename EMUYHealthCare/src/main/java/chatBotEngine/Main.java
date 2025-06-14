@@ -26,12 +26,24 @@ public class Main {
 
        //Tes isi tabel gejala
         LinkedHashMap<String, ArrayList<String>> dataGejala = penyakitConnecting.addMapGejala();
-        for (Map.Entry<String, ArrayList<String>> entry : dataGejala.entrySet()) {
-            System.out.println("Kode: " + entry.getKey());
-            System.out.println("Gejala: " + entry.getValue());
+//        for (Map.Entry<String, ArrayList<String>> entry : dataGejala.entrySet()) {
+//            System.out.println("Kode: " + entry.getKey());
+//            System.out.println("Gejala: " + entry.getValue());
+//        }
+
+        //Tes kode gejala match
+        HashSet<String> InputUser = Tokenization.Gejala(inputGejala);
+        ArrayList<String> resultMatchCode = penyakitConnecting.getMatchedKodeGejala(InputUser, dataGejala);
+        if (resultMatchCode.isEmpty()) {
+            System.out.println("Tidak ada gejala yang cocok.");
+        } else {
+            System.out.println("Gejala cocok ditemukan untuk kode:");
+            for (String kode : resultMatchCode) {
+                System.out.println("- " + kode);
+            }
         }
 
-        ArrayList<String> resultMatchCode = penyakitConnecting.getMatchedKodeGejala(Tokenization.Gejala(inputGejala), dataGejala);
+        
 
 
     }
