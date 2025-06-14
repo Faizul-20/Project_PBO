@@ -261,24 +261,8 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
         // ===== IF: Semua gejala cocok pada 1 penyakit =====
         if (FullMatch) {
-            HashMap<String, String> kodeKeGejalaAsli = penyakitConnecting.getKodeKeGejalaAsli();
-
-            ArrayList<String> daftarGejalaUser = new ArrayList<>();
-            for (String kode : matchedKode) {
-                if (kodeKeGejalaAsli.containsKey(kode)) {
-                    daftarGejalaUser.add(kodeKeGejalaAsli.get(kode));
-                }
-            }
-
-            // Ambil nama penyakit dari IdFullMatch
-            LinkedHashMap<Integer, String> mapPenyakit = penyakitConnecting.tabelPenyakit();
-            String namaPenyakit = mapPenyakit.getOrDefault(IdFullMatch, "Tidak Diketahui");
-
-            // Simpan ke API
-            PenyakitAPI.gejalaUser = inputGejala;
-            PenyakitAPI.feedback = "Anda tampaknya terkena " + namaPenyakit;
+            
         }
-
 
 
         // ===== ELSE IF: Tidak ada yang cocok sempurna, tampilkan top 3 dan kode tidak terpakai =====
