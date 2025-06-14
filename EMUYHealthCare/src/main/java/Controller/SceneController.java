@@ -50,8 +50,10 @@ public class SceneController {
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
+            System.out.println("Berhasil menampilkan layar");
         }catch (IOException e){
-
+            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("Tidak Dapat menampilkan Layar");
         }
     }
 

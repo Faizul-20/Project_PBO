@@ -63,6 +63,7 @@ public class LoginApiV2 {
             System.out.println("Gula Darah : " + gulaDarah);
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
             cetakTarget();
 
         }else {

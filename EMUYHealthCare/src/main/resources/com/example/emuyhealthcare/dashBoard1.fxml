@@ -104,7 +104,7 @@
                                 <Font size="23.0" />
                             </font>
                         </Label>
-                        <Label layoutX="26.0" layoutY="35.0" text="32.8" textFill="WHITE">
+                        <Label fx:id="labelBmivalue" layoutX="26.0" layoutY="35.0" text="32.8" textFill="WHITE">
                             <font>
                                 <Font size="32.0" />
                             </font>

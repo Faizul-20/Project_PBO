@@ -104,12 +104,12 @@ public class DashBoardController {
     @FXML
     private AnchorPane tabelTinggibadan;
     @FXML
-    private AnchorPane labelTInggibadan;
+    private Label labelTInggibadan;
     //tabel berat badan
     @FXML
     private AnchorPane tabelBeratbadan;
     @FXML
-    private AnchorPane labelBeratbadan;
+    private Label labelBeratbadan;
 
     //indikator
     @FXML
@@ -118,6 +118,8 @@ public class DashBoardController {
     private Polygon kursorIndikator;
     @FXML
     private Rectangle tableIndikator;
+    @FXML
+    private Label labelBmivalue;
 
     //tabel olahraga
     @FXML
@@ -204,7 +206,7 @@ public class DashBoardController {
     }
 
     private boolean checkMember(){
-        if (LoginApiV2.gulaDarah == 0 && LoginApiV2. == 0){
+        if (LoginApiV2.gulaDarah == 0 && LoginApiV2.TekananDarah == 0){
             return false;
         }
         return true;
@@ -283,7 +285,7 @@ public class DashBoardController {
     }
 
     private void updateTekananDarahColor(){
-        labelTekananDarah.setText(String.valueOf(LoginApiV2.TekananDarah));
+        //labelTekananDarah.setText(String.valueOf(LoginApiV2.TekananDarah));
         Color color = TekananDarahColor(LoginApiV2.TekananDarah);
         CornerRadii radii = new CornerRadii(20);
         indikatorTekanandarah.setBackground(new Background(new BackgroundFill(color,radii, Insets.EMPTY)));
