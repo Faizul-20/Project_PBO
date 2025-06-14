@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PageTerakhircontroller">
     <children>
-        <AnchorPane fx:id="menuDasboard" prefHeight="775.0" prefWidth="183.0" style="-fx-background-color: #000000;">
+        <AnchorPane fx:id="menuDasboard" prefHeight="768.0" prefWidth="183.0" style="-fx-background-color: #000000;">
             <children>
                 <ImageView fx:id="logoChatBot" fitHeight="193.0" fitWidth="198.0" layoutX="-11.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                     <image>

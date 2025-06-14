@@ -144,7 +144,7 @@
                </font>
             </Label>
             </children></AnchorPane>
-        <LineChart fx:id="tabelOlaraga" layoutX="214.0" layoutY="262.0" prefHeight="390.0" prefWidth="706.0" title="table">
+        <LineChart fx:id="tabelOlaraga" layoutX="214.0" layoutY="262.0" prefHeight="390.0" prefWidth="706.0">
             <xAxis>
                 <CategoryAxis side="BOTTOM" />
             </xAxis>
@@ -262,5 +262,10 @@
                 </JFXButton>
             </children>
         </AnchorPane>
+      <Label layoutX="256.0" layoutY="27.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
