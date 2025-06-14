@@ -1,4 +1,4 @@
-package API.Testing;
+package Testing;
 
 import DataBaseController.ConnectionData;
 import DataBaseController.SQLConnection;

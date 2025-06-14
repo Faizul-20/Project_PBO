@@ -65,18 +65,7 @@ public class DashBoardController {
     @FXML
     private Label labelGuladarah;
     //indikator tak gawe 3
-    @FXML
-    private AnchorPane tabelGuladarahnormal;
-    @FXML
-    private Label labelGuladarahnormal; // iki angka indikator
-    @FXML
-    private AnchorPane tabelGuladarahwaspada;
-    @FXML
-    private Label labelGuladarahwaspada; // iki angka indikator
-    @FXML
-    private AnchorPane tabelGuladarahbahaya;
-    @FXML
-    private Label labelGuladarahbahaya; // iki angka indikator
+
 
     //tabel Tekanan darah
     @FXML
@@ -127,7 +116,7 @@ public class DashBoardController {
 
     //warna indikator tabel darah
     @FXML
-    private AnchorPane indikatorGuladarah;
+    private AnchorPane tabelGuladarahnormal;
 
     @FXML
     private Label labelIndikatorGulaDarah;
@@ -142,7 +131,7 @@ public class DashBoardController {
     private  Label judulUsername;
     //indikator ideal
     @FXML
-    private  Label indikatoIdeal;
+    private  Label indikatorIdeal;
 
     //schedule
     @FXML
@@ -162,8 +151,9 @@ public class DashBoardController {
     @FXML
     public void initialize(){
         try {
+            handleMenuDashboard();
             loginnew.setVisible(false);
-            //judulUsername.setText("Hello " + LoginApiV2.getUsername());
+            judulUsername.setText("Hai " + LoginApiV2.getUsername() + " !!");
             getValuesLogin();
             bmiArrowIndikator();
             getTargetUser();
@@ -171,7 +161,7 @@ public class DashBoardController {
             BMIvalues(LoginApiV2.BMIIndeksBadan);
             Platform.runLater(() -> updateGulaDarahColor());
             Platform.runLater(() -> updateTekananDarahColor());
-            handleMenuDashboard();
+
 
         } catch (Exception e) {
             System.err.println("Terjadi Eror");
@@ -240,27 +230,27 @@ public class DashBoardController {
 
     private void BMIvalues(double value){
         if (value <= 18.5){
-            indikatoIdeal.setText("Berat badan kurang");
+            indikatorIdeal.setText("Berat badan kurang");
         } else if (value > 18.5 && value < 25   ) {
-            indikatoIdeal.setText("Ideal");
+            indikatorIdeal.setText("Ideal");
         }else if (value > 25 && value < 30){
-            indikatoIdeal.setText("Kelebihan Berat Badan");
+            indikatorIdeal.setText("Kelebihan Berat Badan");
         } else if (value > 30 && value < 35) {
-            indikatoIdeal.setText("Obesitas 1");
+            indikatorIdeal.setText("Obesitas 1");
         } else if (value > 35 && value < 40) {
-            indikatoIdeal.setText("Obesitas 2");
+            indikatorIdeal.setText("Obesitas 2");
         } else if (value > 40) {
-            indikatoIdeal.setText("Obesitas 3");
+            indikatorIdeal.setText("Obesitas 3");
         }
     }
 
 
 
     private void updateGulaDarahColor(){
-        labelGuladarahnormal.setText(String.valueOf(LoginApiV2.gulaDarah));
+        angkaGuladarah.setText(String.valueOf(LoginApiV2.gulaDarah));
         Color color = gulaDarahColor(LoginApiV2.gulaDarah);
         CornerRadii radii = new CornerRadii(20);
-        indikatorGuladarah.setBackground(new Background(new BackgroundFill(color,radii, Insets.EMPTY)));
+        tabelGuladarahnormal.setBackground(new Background(new BackgroundFill(color,radii, Insets.EMPTY)));
     }
 
     private Color gulaDarahColor(double value){
@@ -287,10 +277,10 @@ public class DashBoardController {
     }
 
     private void updateTekananDarahColor(){
-        //labelTekananDarah.setText(String.valueOf(LoginApiV2.TekananDarah));
+        angkaTekanandarah.setText(String.valueOf(LoginApiV2.TekananDarah));
         Color color = TekananDarahColor(LoginApiV2.TekananDarah);
         CornerRadii radii = new CornerRadii(20);
-        indikatorTekanandarah.setBackground(new Background(new BackgroundFill(color,radii, Insets.EMPTY)));
+        tabelTekanandarahnormal.setBackground(new Background(new BackgroundFill(color,radii, Insets.EMPTY)));
     }
 
     private Color TekananDarahColor(double value){

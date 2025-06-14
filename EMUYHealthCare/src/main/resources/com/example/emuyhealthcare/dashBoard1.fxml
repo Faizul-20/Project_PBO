@@ -165,7 +165,7 @@
                                 <Font size="19.0" />
                             </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="34.0" text="Normal">
+                        <Label fx:id="labelIndikatorGulaDarah" layoutX="14.0" layoutY="34.0" text="Normal">
                             <font>
                                 <Font size="21.0" />
                             </font>
@@ -191,13 +191,13 @@
                 </Label>
                 <AnchorPane layoutX="156.0" layoutY="16.0" prefHeight="30.0" prefWidth="238.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
                <children>
-                  <Label fx:id="tanggal" alignment="TOP_CENTER" layoutX="45.0" layoutY="6.0" prefHeight="30.0" prefWidth="158.0" text="14-10-2025" textFill="WHITE">
+                  <Label fx:id="tanggal" alignment="TOP_CENTER" layoutX="45.0" layoutY="4.0" prefHeight="30.0" prefWidth="158.0" text="14-10-2025" textFill="WHITE">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="22.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
-                <Label layoutX="465.0" layoutY="17.0" prefHeight="28.0" prefWidth="70.0" text="Lari 2km">
+                <Label fx:id="JarakLari" layoutX="465.0" layoutY="17.0" prefHeight="28.0" prefWidth="70.0" text="Lari 2km">
                     <font>
                         <Font size="16.0" />
                     </font></Label>
@@ -222,7 +222,7 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="14.0" layoutY="34.0" text="Normal">
+                  <Label fx:id="labelIndikatorTekananDarah" layoutX="14.0" layoutY="34.0" text="Normal">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -262,7 +262,7 @@
                 </JFXButton>
             </children>
         </AnchorPane>
-      <Label layoutX="256.0" layoutY="27.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
+      <Label fx:id="judulUsername" layoutX="256.0" layoutY="27.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>

@@ -1,12 +1,9 @@
 package API;
 
-import API.Testing.TestingDb1;
-import API.Testing.UserConnectingtest;
 import Controller.SceneController;
 import DataBaseController.UserConnecting;
 
 import java.math.BigDecimal;
-import java.sql.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -61,6 +58,7 @@ public class LoginApiV2 {
             System.out.println("Password : " + Password);
             System.out.println("BMI : " + BMICalculate(tinggiBadan,beratBadan));
             System.out.println("Gula Darah : " + gulaDarah);
+            System.out.println("Tekanan Darah : " + TekananDarah);
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
             sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
@@ -81,12 +79,14 @@ public class LoginApiV2 {
         return BMIIndeksBadan;
     }
     private void cetakTarget(){
+        System.out.println("================= Daftar Target " + getUsername() +" ============");
         Iterator it = Target.entrySet().iterator();
-        System.out.println("Cetak Target " +  Target.size() + "Buah");
+        System.out.println("Cetak Target " +  Target.size() + "Buah\n");
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             System.out.println(pair.getKey() + " : " + pair.getValue());
         }
+        System.out.println("=============================================================================");
     }
 
 
