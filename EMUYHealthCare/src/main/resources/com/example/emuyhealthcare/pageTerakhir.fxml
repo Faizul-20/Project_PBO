@@ -1,48 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PageTerakhircontroller">
-    <children>
-        <AnchorPane fx:id="menuDasboard" prefHeight="768.0" prefWidth="183.0" style="-fx-background-color: #000000;">
-            <children>
-                <ImageView fx:id="logoChatBot" fitHeight="193.0" fitWidth="198.0" layoutX="-11.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../images/logoemuy.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="fotomenuBMI" fitHeight="99.0" fitWidth="64.0" layoutX="56.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../images/logoNO3.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="fotologout" fitHeight="64.0" fitWidth="43.0" layoutX="70.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../images/logologout.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="fotomenuChatbot" fitHeight="64.0" fitWidth="49.0" layoutX="66.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../images/logochatbot.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="fotomenudashboard" fitHeight="64.0" fitWidth="45.0" layoutX="66.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../images/logohome.png" />
-                    </image>
-                </ImageView>
-                <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text="." />
-                <JFXButton fx:id="bodyMesh" layoutX="66.0" layoutY="337.0" prefHeight="64.0" prefWidth="50.0" text=".">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor></JFXButton>
-                <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text="." />
-                <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text="." />
-            </children>
-        </AnchorPane>
-    </children>
-</AnchorPane>
+<children>
+            <AnchorPane fx:id="menuDasboard" layoutX="-3.0" layoutY="-3.0" prefHeight="775.0" prefWidth="183.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="-4.2000000000000455" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="1186.0" AnchorPane.topAnchor="-3.2000000000000455">
+                <children>
+                    <ImageView fx:id="logoChatBot" fitHeight="193.0" fitWidth="198.0" layoutX="-11.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logoemuy.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fx:id="fotomenuBMI" fitHeight="99.0" fitWidth="64.0" layoutX="56.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logoNO3.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fx:id="fotologout" fitHeight="64.0" fitWidth="43.0" layoutX="70.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logologout.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fx:id="fotomenuChatbot" fitHeight="64.0" fitWidth="49.0" layoutX="66.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logochatbot.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fx:id="fotomenudashboard" fitHeight="64.0" fitWidth="45.0" layoutX="66.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logohome.png" />
+                        </image>
+                    </ImageView>
+                    <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text="." />
+                    <JFXButton fx:id="bodyMesh" layoutX="66.0" layoutY="337.0" prefHeight="64.0" prefWidth="50.0" text="." />
+                    <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text="." />
+                    <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text="." />
+                </children>
+            </AnchorPane>
+            <AnchorPane fx:id="layerBMI" layoutX="976.0" prefHeight="770.0" prefWidth="392.0" style="-fx-background-color: #ffffff;">
+                <children>
+                    <AnchorPane fx:id="tabelIndikatorbmi" layoutX="135.0" layoutY="89.0" prefHeight="176.0" prefWidth="230.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
+                        <children>
+                            <Label fx:id="labelBMI" layoutX="97.0" layoutY="25.0" prefHeight="34.0" prefWidth="118.0" text="Body Mesh" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                                <font>
+                                    <Font size="23.0" />
+                                </font>
+                            </Label>
+                            <AnchorPane layoutX="15.0" layoutY="112.0" prefHeight="18.0" prefWidth="200.0">
+                                <children>
+                                    <Polygon fx:id="kursorIndikator" fill="WHITE" layoutX="102.0" points="-11.800048828125, -4.0, -1.4000244140625, 10.600006103515625, 8.2000732421875, -4.0" stroke="BLACK" strokeType="INSIDE" />
+                                </children>
+                            </AnchorPane>
+                            <Rectangle fx:id="tabelIndikator" arcHeight="4.0" blendMode="SRC_ATOP" disable="true" height="18.0" layoutX="15.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" style="visibility: true" width="200.0">
+                                <fill>
+                                    <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                                        <stops>
+                                            <Stop>
+                                                <color>
+                                                    <Color red="1.0" />
+                                                </color>
+                                            </Stop>
+                                            <Stop offset="0.25853658536585367">
+                                                <color>
+                                                    <Color red="1.0" green="0.5490196347236633" />
+                                                </color>
+                                            </Stop>
+                                            <Stop offset="0.49588024816991105">
+                                                <color>
+                                                    <Color green="1.0" blue="0.05098039284348488" />
+                                                </color>
+                                            </Stop>
+                                            <Stop offset="0.7475297902373371">
+                                                <color>
+                                                    <Color red="1.0" green="0.5490196347236633" />
+                                                </color>
+                                            </Stop>
+                                            <Stop offset="1.0">
+                                                <color>
+                                                    <Color red="1.0" />
+                                                </color>
+                                            </Stop>
+                                        </stops>
+                                    </LinearGradient>
+                                </fill>
+                            </Rectangle>
+                            <Label fx:id="labelBMI1" layoutX="97.0" layoutY="59.0" prefHeight="34.0" prefWidth="118.0" text="Index" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                                <font>
+                                    <Font size="23.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="labelBmivalue" layoutX="26.0" layoutY="35.0" text="32.8" textFill="WHITE">
+                                <font>
+                                    <Font size="32.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane fx:id="tabelTinggibadan" layoutX="22.0" layoutY="95.0" prefHeight="81.0" prefWidth="100.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
+                        <children>
+                            <Label layoutX="15.0" layoutY="5.0" text="Tinggi Badan" textFill="WHITE" />
+                            <Label fx:id="labelTInggibadan" layoutX="18.0" layoutY="32.0" prefHeight="30.0" prefWidth="64.0" text="180.0" textFill="WHITE">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Label>
+                        </children></AnchorPane>
+                    <AnchorPane fx:id="tabelBeratbadan" layoutX="22.0" layoutY="183.0" prefHeight="81.0" prefWidth="100.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
+                        <children>
+                            <Label layoutX="21.0" layoutY="5.0" text="Berat Badan" textFill="WHITE" />
+                            <Label fx:id="labelBeratbedan" alignment="CENTER" layoutX="14.0" layoutY="28.0" prefHeight="40.0" prefWidth="67.0" text="90" textAlignment="CENTER" textFill="WHITE">
+                                <font>
+                                    <Font size="28.0" />
+                                </font></Label>
+                        </children></AnchorPane>
+                    <Label layoutX="39.0" layoutY="14.0" prefHeight="64.0" prefWidth="314.0" text="Komposisi Tubuh">
+                        <font>
+                            <Font size="39.0" />
+                        </font>
+                    </Label>
+                    <ImageView fx:id="fotoBmi" fitHeight="343.0" fitWidth="265.0" layoutX="63.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <!--  <Image url="@../../../../../../../../../../../foto%20bahan/20250327_131231.png" /> -->
+                        </image>
+                    </ImageView>
+                    <Label fx:id="indikatorIdeal" layoutX="154.0" layoutY="686.0" prefHeight="15.0" prefWidth="83.0" text="Ideal">
+                        <font>
+                            <Font size="38.0" />
+                        </font>
+                    </Label>
+                </children></AnchorPane>
+            <Label layoutX="256.0" layoutY="27.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
+                <font>
+                    <Font size="25.0" />
+                </font>
+            </Label>
+        </children>
+    </AnchorPane>
