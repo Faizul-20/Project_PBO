@@ -171,11 +171,11 @@
             <TextField layoutX="31.0" layoutY="98.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
          </children>
       </AnchorPane>
-      <TableView fx:id="tabel" layoutX="248.0" layoutY="239.0" prefHeight="482.0" prefWidth="1026.0">
+      <TableView fx:id="tabel" layoutX="248.0" layoutY="239.0" prefHeight="482.0" prefWidth="1026.0" style="-fx-background-color: #ffffff;">
         <columns>
-          <TableColumn prefWidth="45.60003662109375" text="no" />
-          <TableColumn prefWidth="383.20001220703125" text="Tanggal" />
-            <TableColumn prefWidth="45.60003662109375" text="target"/>
+          <TableColumn prefWidth="99.7332763671875" text="no" />
+          <TableColumn prefWidth="330.6667175292969" text="Tanggal" />
+            <TableColumn prefWidth="595.1999877929688" text="target" />
         </columns>
       </TableView>
         </children>
