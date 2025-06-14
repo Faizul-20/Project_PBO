@@ -2,8 +2,7 @@ package DataBaseController;
 
 public abstract class ConnectionData {
     private final String USER_DATA = "jdbc:sqlite:EMUYHealthCare/Database/User/Users.db";
-    private final String PENYAKIT_DATA = "jdbc:sqlite:EMUYHealthCare/Database/Engine Data/DaftarPenyakit.db";
-
+    private final String PENYAKIT_DATA = "jdbc:sqlite:EMUYHealthCare/Database/Engine Data/healthcaree.db";
 
 
     public String getUserData() {
