@@ -18,6 +18,7 @@ public class LoginApiV2 {
     public static double beratBadan;
     public static double BMIIndeksBadan;
     public static double gulaDarah;
+    public static double TekananDarah;
     public static Map<String,Double> Target = new LinkedHashMap<>();
 
     UserConnecting userConnecting = new UserConnecting();

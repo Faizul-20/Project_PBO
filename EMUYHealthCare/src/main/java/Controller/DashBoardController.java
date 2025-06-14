@@ -4,12 +4,16 @@ import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -100,7 +104,7 @@ public class DashBoardController {
     @FXML
     private AnchorPane tabelTinggibadan;
     @FXML
-    private AnchorPane labelTinggibadan;
+    private AnchorPane labelTInggibadan;
     //tabel berat badan
     @FXML
     private AnchorPane tabelBeratbadan;
@@ -200,7 +204,7 @@ public class DashBoardController {
     }
 
     private boolean checkMember(){
-        if (LoginApiV2.gulaDarah == 0 && LoginApiV2.TekananDarah == 0){
+        if (LoginApiV2.gulaDarah == 0 && LoginApiV2. == 0){
             return false;
         }
         return true;
