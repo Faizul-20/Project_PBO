@@ -149,13 +149,14 @@ public class DashBoardController {
     private Label JarakLari;
     @FXML
     private Label tanggal;
+// angka indikator tekanan
+    @FXML
+    private Label angkaGuladarah;
 
-    //foto sek on process
+    @FXML
+    private Label angkaTekanandarah;
 
-//collor palet indikator
-    //bahaya #ff0000
-    //waspada #ff8c00
-    //normal #00ff0d
+
 
     SceneController sceneController = new SceneController();
     @FXML
