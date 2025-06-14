@@ -1,27 +1,14 @@
 package Controller;
 
-import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.sun.javafx.logging.PulseLogger.newInput;
 
@@ -72,25 +59,47 @@ public class DashBoardController {
     private AnchorPane tabelGuladarahnormal;
     @FXML
     private Label labelGuladarahnormal; // iki angka indikator
+    @FXML
+    private AnchorPane tabelGuladarahwaspada;
+    @FXML
+    private Label labelGuladarahwaspada; // iki angka indikator
+    @FXML
+    private AnchorPane tabelGuladarahbahaya;
+    @FXML
+    private Label labelGuladarahbahaya; // iki angka indikator
+
     //tabel Tekanan darah
     @FXML
     private AnchorPane TabelTekanandarah;
     @FXML
-    private Label labelTekananDarah;
-    @FXML
     private ImageView logoTekanandarah;
+    @FXML
+    private Label labelTekanandarah;
+    //indikator tak gawe 3
+    @FXML
+    private AnchorPane tabelTekanandarahnormal;
+    @FXML
+    private Label labelTekanandarahnormal; // iki angka indikator
+    @FXML
+    private AnchorPane tabelTekanandarahwaspada;
+    @FXML
+    private Label labelTekanandarahwaspada; // iki angka indikator
+    @FXML
+    private AnchorPane tabelTekanandarahbahaya;
+    @FXML
+    private Label labelTekanandarahbahaya; // iki angka indikator
 
     //tabel bmi
     //tabel tinggi badan
     @FXML
     private AnchorPane tabelTinggibadan;
     @FXML
-    private Label labelTInggibadan;
+    private AnchorPane labelTinggibadan;
     //tabel berat badan
     @FXML
     private AnchorPane tabelBeratbadan;
     @FXML
-    private Label labelBeratbadan;
+    private AnchorPane labelBeratbadan;
 
     //indikator
     @FXML
@@ -100,17 +109,11 @@ public class DashBoardController {
     @FXML
     private Rectangle tableIndikator;
 
-    @FXML
-    private Label labelBmivalue;
-
     //tabel olahraga
     @FXML
-    private LineChart<String,Number> tabelOlaraga;
-    @FXML
-    private CategoryAxis XAxis;
-    @FXML
-    private NumberAxis YAxis;
+    private LineChart tabelOlaraga;
 
+<<<<<<< HEAD
     //warna indikator tabel darah
     @FXML
     private AnchorPane indikatorGuladarah;
@@ -318,7 +321,23 @@ public class DashBoardController {
         JarakLari.setText("Lari " + targetLari.getValue().toString() + " KM");
 
     }
+=======
+    //@FXML
+//    public void initialize(){
+//        loginnew.setVisible(true);
+//        inputNewlogin.setOnAction(actionEvent -> newInput());
+//
+//
+//    }
+>>>>>>> 99d32c58d320000a1dc2d342b761e6a347d104cb
 
+//    private handleInput(){
+//        String gulaDarah = inputGUladarah;
+//        String tekananDarah = inputTekanandarah;
+//        String result = validasiInput(inputGUladarah, inputTekanandarah);
+//        result
+//
+//    }
 
 }
 
