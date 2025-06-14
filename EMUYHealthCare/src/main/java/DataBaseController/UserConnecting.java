@@ -124,6 +124,8 @@ public class UserConnecting extends ConnectionData implements SQLConnection {
                 if (tanggal != null) {
                     LoginApiV2.Target.put(tanggal,target);
                     i++;
+                }else {
+                    LoginApiV2.Target.put("Null",0.0);
                 }
                 hasData = true;
             }

@@ -155,11 +155,8 @@ public class DashBoardController {
             BMIvalues(LoginApiV2.BMIIndeksBadan);
             Platform.runLater(() -> updateGulaDarahColor());
             Platform.runLater(() -> updateTekananDarahColor());
-            buttonLogout.setOnAction(e -> {
-              LoginApiV2.Logout();
-              sceneController.SceneChange(sceneController.getLOGIN_PAGE());
-              LoginApiV2.CetakValue();
-            });
+            handleMenuDashboard();
+
         } catch (Exception e) {
             System.err.println("Terjadi Eror");
             System.out.println("Pesan Eror :"+ e.getMessage());
@@ -169,6 +166,23 @@ public class DashBoardController {
     }
 
     private void handleInput(){
+    }
+
+    private void handleMenuDashboard(){
+        //Pilihan Dashboard
+        hoMe.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+        });
+        //Pilihan Chatbot
+        chatBot.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getCHATBOT_LINK());
+        });
+        // Pilihan Logout
+        buttonLogout.setOnAction(e -> {
+            LoginApiV2.Logout();
+            sceneController.SceneChange(sceneController.getLOGIN_PAGE());
+            LoginApiV2.CetakValue();
+        });
     }
 
     private void getValuesLogin(){

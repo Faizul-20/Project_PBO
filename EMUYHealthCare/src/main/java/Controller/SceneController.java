@@ -15,6 +15,7 @@ public class SceneController {
     Image Icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Kelinci.png")));
     private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard1.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
+    private final String CHATBOT_LINK = "/com/example/emuyhealthcare/chatBot.fxml";
     Stage stage;
 
 
@@ -67,5 +68,8 @@ public class SceneController {
 
     public String getLOGIN_PAGE() {
         return LOGIN_PAGE;
+    }
+    public String getCHATBOT_LINK() {
+        return CHATBOT_LINK;
     }
 }
