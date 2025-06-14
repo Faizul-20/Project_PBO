@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -74,7 +75,7 @@
                  <Image url="@../../../images/logoguladarah.png" />
              </ImageView>
          </children></AnchorPane>
-      <AnchorPane layoutX="410.0" layoutY="56.0" prefHeight="130.0" prefWidth="208.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+      <AnchorPane layoutX="400.0" layoutY="56.0" prefHeight="130.0" prefWidth="208.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
             <ImageView fx:id="gambarTekanandarah" fitHeight="112.0" fitWidth="118.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
              <ImageView fitHeight="104.0" fitWidth="90.0" layoutX="-14.0" layoutY="2.0">
@@ -98,10 +99,10 @@
             <TextField layoutX="18.0" layoutY="92.0" prefHeight="27.0" prefWidth="142.0" promptText="Perbarui Data" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="647.0" layoutY="56.0" prefHeight="130.0" prefWidth="208.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+      <AnchorPane layoutX="620.0" layoutY="56.0" prefHeight="130.0" prefWidth="208.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
             <ImageView fx:id="gamabarOlga" fitHeight="112.0" fitWidth="118.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
-             <ImageView fitHeight="82.0" fitWidth="77.0" layoutX="14.0" layoutY="11.0">
+             <ImageView fitHeight="91.0" fitWidth="89.0" layoutX="14.0" layoutY="11.0">
                  <Image url="@../../../images/lari.png" />
              </ImageView>
             <Label layoutX="93.0" layoutY="17.0" prefHeight="35.0" prefWidth="108.0" text="Olah raga">
@@ -119,10 +120,10 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <TextField layoutX="14.0" layoutY="93.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
+            <DatePicker layoutX="27.0" layoutY="96.0" prefHeight="26.0" prefWidth="141.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1110.0" layoutY="56.0" prefHeight="130.0" prefWidth="243.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+      <AnchorPane layoutX="1085.0" layoutY="56.0" prefHeight="134.0" prefWidth="243.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
             <ImageView fx:id="gambarBerat" fitHeight="112.0" fitWidth="118.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
              <ImageView fitHeight="89.0" fitWidth="90.0" layoutX="14.0" layoutY="11.0">
@@ -146,7 +147,7 @@
             <TextField layoutX="23.0" layoutY="102.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="860.0" layoutY="56.0" prefHeight="130.0" prefWidth="222.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+      <AnchorPane layoutX="835.0" layoutY="56.0" prefHeight="130.0" prefWidth="222.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
             <ImageView fx:id="gambarTinggi" fitHeight="112.0" fitWidth="118.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
              <ImageView fitHeight="82.0" fitWidth="77.0" layoutX="14.0" layoutY="16.0">
@@ -170,10 +171,11 @@
             <TextField layoutX="31.0" layoutY="98.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
          </children>
       </AnchorPane>
-      <TableView layoutX="248.0" layoutY="239.0" prefHeight="482.0" prefWidth="1026.0">
+      <TableView fx:id="tabel" layoutX="248.0" layoutY="239.0" prefHeight="482.0" prefWidth="1026.0">
         <columns>
           <TableColumn prefWidth="45.60003662109375" text="no" />
-          <TableColumn prefWidth="104.79998779296875" text="C2" />
+          <TableColumn prefWidth="383.20001220703125" text="Tanggal" />
+            <TableColumn prefWidth="45.60003662109375" text="target"/>
         </columns>
       </TableView>
         </children>
