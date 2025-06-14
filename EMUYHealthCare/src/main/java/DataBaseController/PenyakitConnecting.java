@@ -261,17 +261,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
         // ===== IF: Semua gejala cocok pada 1 penyakit =====
         if (FullMatch) {
-            HashMap<String, String> kodeKeGejalaAsli = penyakitConnecting.getKodeKeGejalaAsli();
-
-            ArrayList<String> daftarGejalaUser = new ArrayList<>();
-            for (String kode : matchedKode) {
-                if (kodeKeGejalaAsli.containsKey(kode)) {
-                    daftarGejalaUser.add(kodeKeGejalaAsli.get(kode));
-                }
-            }
-
-            PenyakitAPI.gejalaUser = daftarGejalaUser;
-
+            
         }
 
 
