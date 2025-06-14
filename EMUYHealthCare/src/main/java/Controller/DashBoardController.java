@@ -113,22 +113,7 @@ public class DashBoardController {
     @FXML
     private LineChart tabelOlaraga;
 
-    //@FXML
-//    public void initialize(){
-//        loginnew.setVisible(true);
-//        inputNewlogin.setOnAction(actionEvent -> newInput());
-//
-//
-//    }
-
-//    private handleInput(){
-//        String gulaDarah = inputGUladarah;
-//        String tekananDarah = inputTekanandarah;
-//        String result = validasiInput(inputGUladarah, inputTekanandarah);
-//        result
-//
-//    }
-
+    private LineChart tabelTekanandarah;
 }
 
 
