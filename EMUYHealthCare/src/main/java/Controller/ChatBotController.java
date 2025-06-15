@@ -1,7 +1,7 @@
 package Controller;
 
 import API.LoginApiV2;
-import chatBotEngine.TestingCakapEmuy.CakapEmuyService;
+import chatBotEngine.CakapEmuyService;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -10,7 +10,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.chart.LineChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -20,14 +19,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 import java.sql.SQLException;
-
-import static com.sun.javafx.logging.PulseLogger.newInput;
 
 
 public class ChatBotController {

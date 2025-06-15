@@ -1,4 +1,4 @@
-package chatBotEngine.TestingCakapEmuy;
+package chatBotEngine;
 
 import java.sql.*;
 import java.util.*;
@@ -122,28 +122,4 @@ public class CakapEmuyService {
         return Collections.unmodifiableList(qaList);
     }
 
-    // Contoh penggunaan dari kelas lain
-    public static void main(String[] args) {
-        try {
-            CakapEmuyService chatbot = new CakapEmuyService();
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("Halo, aku Emuy! 😊");
-            System.out.println("Ketik sesuatu (ketik 'keluar' untuk keluar):");
-
-            while (true) {
-                System.out.print("> ");
-                String input = scanner.nextLine().trim();
-
-                String response = chatbot.processInput(input);
-                System.out.println("Emuy: " + response);
-
-                if (input.equalsIgnoreCase("keluar")) break;
-            }
-
-            scanner.close();
-        } catch (SQLException e) {
-            System.out.println("Error inisialisasi chatbot: " + e.getMessage());
-        }
-    }
 }
