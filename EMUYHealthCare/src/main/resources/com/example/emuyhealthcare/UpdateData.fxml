@@ -76,7 +76,7 @@
              </ImageView>
             <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="153.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                   <Image url="@/images/note.png" />
+                   <Image url="@../../../images/note.png" />
                </image></ImageView>
             <JFXButton fx:id="buttonGuladarah" layoutX="156.0" layoutY="106.0" prefHeight="31.0" prefWidth="26.0" text="." />
          </children></AnchorPane>
@@ -104,7 +104,7 @@
             <TextField fx:id="tfTekananDarah" layoutX="17.0" layoutY="111.0" prefHeight="27.0" prefWidth="142.0" promptText="Perbarui Data" />
             <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="163.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                   <Image url="@/images/note.png" />
+                   <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="buttonTekanandarah" layoutX="167.0" layoutY="109.0" prefHeight="31.0" prefWidth="25.0" text="." />
@@ -135,7 +135,7 @@
             <TextField fx:id="tfTargetolahraga" layoutX="24.0" layoutY="122.0" prefHeight="26.0" prefWidth="101.0" promptText="Target Olahraga" />
             <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="128.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                   <Image url="@/images/note.png" />
+                   <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="buttonOlahraga" layoutX="159.0" layoutY="121.0" prefHeight="31.0" prefWidth="26.0" text="." />
@@ -165,7 +165,7 @@
             <TextField fx:id="tfBeratBadan" layoutX="23.0" layoutY="111.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
             <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="173.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                   <Image url="@/images/note.png" />
+                   <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="buttonBeratbadan" layoutX="178.0" layoutY="111.0" prefHeight="30.0" prefWidth="24.0" text="." />
@@ -195,7 +195,7 @@
             <TextField fx:id="tfTinggiBadan" layoutX="31.0" layoutY="111.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
             <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="177.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/images/note.png" />
+                   <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="buttonTinggibadan" layoutX="182.0" layoutY="110.0" prefHeight="30.0" prefWidth="24.0" text="." />
