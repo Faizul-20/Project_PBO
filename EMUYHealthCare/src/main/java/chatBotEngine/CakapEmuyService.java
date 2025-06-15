@@ -1,5 +1,7 @@
 package chatBotEngine;
 
+import API.PenyakitAPI;
+
 import java.sql.*;
 import java.util.*;
 
@@ -114,7 +116,7 @@ public class CakapEmuyService {
             }
         }
 
-        return (bestMatch != null) ? bestMatch.getAnswer() : "Maaf, aku belum mengerti itu";
+        return (bestMatch != null) ? bestMatch.getAnswer() : PenyakitAPI.diagnosa;
     }
 
     // Dapatkan semua entri QA (untuk debugging atau analisis)
