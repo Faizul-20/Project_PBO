@@ -1,6 +1,7 @@
 package Controller;
 
 import API.LoginApiV2;
+import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,8 +21,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Map;
 
-import static com.sun.javafx.logging.PulseLogger.newInput;
-
 
 public class DashBoardController {
     @FXML
@@ -29,7 +28,7 @@ public class DashBoardController {
     @FXML
     private  AnchorPane loginnew;
     @FXML
-    private TextField inputGUladarah;
+    private TextField inputGuladarah;
     @FXML
     private TextField inputTekanandarah;
     @FXML
@@ -77,16 +76,6 @@ public class DashBoardController {
     //indikator tak gawe 3
     @FXML
     private AnchorPane tabelTekanandarahnormal;
-    @FXML
-    private Label labelTekanandarahnormal; // iki angka indikator
-    @FXML
-    private AnchorPane tabelTekanandarahwaspada;
-    @FXML
-    private Label labelTekanandarahwaspada; // iki angka indikator
-    @FXML
-    private AnchorPane tabelTekanandarahbahaya;
-    @FXML
-    private Label labelTekanandarahbahaya; // iki angka indikator
 
     //tabel bmi
     //tabel tinggi badan
@@ -148,11 +137,12 @@ public class DashBoardController {
 
 
     SceneController sceneController = new SceneController();
+    UserConnecting userConnecting = new UserConnecting();
     @FXML
     public void initialize(){
         try {
+            loginnew.setVisible(checkMember());
             handleMenuDashboard();
-            loginnew.setVisible(false);
             judulUsername.setText("Hai " + LoginApiV2.getUsername() + " !!");
             getValuesLogin();
             bmiArrowIndikator();
@@ -161,7 +151,7 @@ public class DashBoardController {
             BMIvalues(LoginApiV2.BMIIndeksBadan);
             Platform.runLater(() -> updateGulaDarahColor());
             Platform.runLater(() -> updateTekananDarahColor());
-
+            inputNewlogin.setOnAction(event -> handleNewLogin());
 
         } catch (Exception e) {
             System.err.println("Terjadi Eror");
@@ -171,23 +161,45 @@ public class DashBoardController {
 
     }
 
+
+    private void handleNewLogin(){
+        double gulaDarah = Double.parseDouble(inputGuladarah.getText());
+        double tekananDarah = Double.parseDouble(inputTekanandarah.getText());
+
+        if (gulaDarah != 0 && tekananDarah != 0 ) {
+            userConnecting.InsertDarah(gulaDarah, tekananDarah);
+            userConnecting.SignInV2(LoginApiV2.getUsername(), LoginApiV2.getPassword());
+            loginnew.setVisible(false);
+            LoginApiV2.CetakValue();
+        }else {
+            System.out.println("Input Tidak Berhasil di masukan ke database");
+        }
+        getValuesLogin();
+        inputGuladarah.clear();
+        inputTekanandarah.clear();
+
+    }
+
     private void handleInput(){
     }
 
     private void handleMenuDashboard(){
         //Pilihan Dashboard
         hoMe.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK(),"DashBoard");
         });
         //Pilihan Chatbot
         chatBot.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getCHATBOT_LINK());
+            sceneController.SceneChange(sceneController.getCHATBOT_LINK(),"ChatBot");
         });
         // Pilihan Logout
         buttonLogout.setOnAction(e -> {
             LoginApiV2.Logout();
-            sceneController.SceneChange(sceneController.getLOGIN_PAGE());
+            sceneController.SceneChange(sceneController.getLOGIN_PAGE(),"Login");
             LoginApiV2.CetakValue();
+        });
+        bodyMesh.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getUPDATE_LINK(),"Update");
         });
     }
 
@@ -195,13 +207,16 @@ public class DashBoardController {
         labelBmivalue.setText(String.valueOf(LoginApiV2.BMIIndeksBadan));
         labelTInggibadan.setText(String.valueOf(LoginApiV2.tinggiBadan));
         labelBeratbedan.setText(String.valueOf(LoginApiV2.beratBadan));
+        angkaGuladarah.setText(String.valueOf(LoginApiV2.gulaDarah));
+        angkaTekanandarah.setText(String.valueOf(LoginApiV2.TekananDarah));
+
     }
 
     private boolean checkMember(){
         if (LoginApiV2.gulaDarah == 0 && LoginApiV2.TekananDarah == 0){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     private void bmiArrowIndikator(){
         kursorIndikator.setLayoutY(kursorIndikator.getLayoutY());

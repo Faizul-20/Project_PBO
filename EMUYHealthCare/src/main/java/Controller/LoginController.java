@@ -1,9 +1,7 @@
 package Controller;
 
-import API.LoginAPI;
 import API.LoginApiV2;
 import API.SignUpAPI;
-import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -119,6 +117,13 @@ public class LoginController implements Initializable {
 
         setupEnterKeyHandling();
         btnSignin(null);
+        signInlogin.setOnAction(event -> handleLogin());
+        signUpusername.setOnAction(e-> signUplahir.requestFocus());
+        signUplahir.setOnAction(e-> signUpBB.requestFocus());
+        signUpBB.setOnAction(e-> signUpTB.requestFocus());
+        signUpTB.setOnAction(e-> signUppass.requestFocus());
+        signUppass.setOnAction(e-> handleSignup());
+
 
     }
 
@@ -263,17 +268,12 @@ public class LoginController implements Initializable {
         String password = signInpass.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Login Error", "Username dan password tidak boleh kosong!");
+            System.out.println("Username and password are empty");
+            alert.AlertWarning("Warning!!", "Username and password are empty");
             return;
         }
 
-        // Contoh sederhana autentikasi
-       /* if (username.equals("admin") && password.equals("admin")) {
-            showAlert("Login Berhasil", "Selamat datang di Emuy Health Care!");
-            // Tambahkan kode untuk navigasi ke halaman utama
-        } else {
-            showAlert("Login Gagal", "Username atau password salah!");
-        }*/
+
         LoginApiV2 loginAPI = new LoginApiV2(username,password);
         loginAPI.CekValue();
         loginAPI.Login();
@@ -285,22 +285,26 @@ public class LoginController implements Initializable {
     private void handleSignup(MouseEvent event) {
         String username = signUpusername.getText().trim();
         String password = signUppass.getText().trim();
-        String bb = signUpBB.getText().trim();
-        String tb = signUpTB.getText().trim();
+        //Maaf ini kebalik jadi nanti benerin sendiri
+        String bb = signUpTB.getText().trim();
+        String tb = signUpBB.getText().trim();
         String UlangTahun = signUplahir.getValue().toString();
 
 
         if (username.length() < 3) {
-            showAlert("Registrasi Error", "Username harus minimal 3 karakter!");
+            System.out.println("Username is too short");
+            alert.AlertEror("Eror!", "Username is too short");
             return;
         }
         if (password.length() < 6) {
-            showAlert("Registrasi Error", "Password harus minimal 6 karakter!");
+            System.out.println("Password is less than 6 characters");
+            alert.AlertEror("Eror!", "Password is less than 6 characters");
             return;
         }
 
         if (signUplahir.getValue() == null) {
-            showAlert("Registrasi Error", "Tanggal lahir harus diisi!");
+            System.out.println("Tanggal lahir harus diisi");
+            alert.AlertEror("Registrasi Error", "Tanggal lahir harus diisi!");
             return;
         }
 
@@ -309,16 +313,24 @@ public class LoginController implements Initializable {
             double tinggiBadan = Double.parseDouble(tb);
 
             if (beratBadan <= 0 || tinggiBadan <= 0) {
-                showAlert("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
+                alert.AlertInfo("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
                 return;
             }
+            try {
+                if (!username.isEmpty() && !password.isEmpty() && !bb.isEmpty() && !tb.isEmpty() && !UlangTahun.isEmpty()) {
+                    SignUpAPI SignUp = new SignUpAPI(username, password, UlangTahun, bb, tb);
+                    SignUp.CekValue();
+                    SignUp.PostDataUserTodatabase();
+                } else {
+                    throw new NullPointerException("You Have to full fill all of questions");
+                }
+            }catch (NullPointerException e){
+                System.err.println("Pesan Eror : " + e.getMessage());
+                alert.AlertWarning("Pesan Eror", e.getMessage());
+            }
 
+            alert.AlertInfo("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
 
-            SignUpAPI SignUp = new SignUpAPI(username,password,UlangTahun,bb,tb);
-            SignUp.CekValue();
-            SignUp.PostDataUserTodatabase();
-
-            showAlert("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
 
             // Reset form
             signUpusername.clear();
@@ -331,15 +343,80 @@ public class LoginController implements Initializable {
             btnSignin(null);
 
         } catch (NumberFormatException e) {
-            showAlert("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
+            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("Berat badan dan tinggi badan harus berupa angka!");
+            alert.AlertWarning("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    //Untuk menekan tombol
+    @FXML
+    private void handleSignup() {
+        String username = signUpusername.getText().trim();
+        String password = signUppass.getText().trim();
+        //Maaf ini kebalik jadi nanti benerin sendiri
+        String bb = signUpTB.getText().trim();
+        String tb = signUpBB.getText().trim();
+        String UlangTahun = signUplahir.getValue().toString();
+
+
+        if (username.length() < 3) {
+            System.out.println("Username is too short");
+            alert.AlertEror("Eror!", "Username is too short");
+            return;
+        }
+        if (password.length() < 6) {
+            System.out.println("Password is less than 6 characters");
+            alert.AlertEror("Eror!", "Password is less than 6 characters");
+            return;
+        }
+
+        if (signUplahir.getValue() == null) {
+            System.out.println("Tanggal lahir harus diisi");
+            alert.AlertEror("Registrasi Error", "Tanggal lahir harus diisi!");
+            return;
+        }
+
+        try {
+            double beratBadan = Double.parseDouble(bb);
+            double tinggiBadan = Double.parseDouble(tb);
+
+            if (beratBadan <= 0 || tinggiBadan <= 0) {
+                alert.AlertInfo("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
+                return;
+            }
+            try {
+                if (!username.isEmpty() && !password.isEmpty() && !bb.isEmpty() && !tb.isEmpty() && !UlangTahun.isEmpty()) {
+                    SignUpAPI SignUp = new SignUpAPI(username, password, UlangTahun, bb, tb);
+                    SignUp.CekValue();
+                    SignUp.PostDataUserTodatabase();
+                } else {
+                    throw new NullPointerException("You Have to full fill all of questions");
+                }
+            }catch (NullPointerException e){
+                System.err.println("Pesan Eror : " + e.getMessage());
+                alert.AlertWarning("Pesan Eror", e.getMessage());
+            }
+
+            alert.AlertInfo("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
+
+
+            // Reset form
+            signUpusername.clear();
+            signUppass.clear();
+            signUpBB.clear();
+            signUpTB.clear();
+            signUplahir.setValue(null);
+
+            // Beralih ke tampilan login
+            btnSignin(null);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("Berat badan dan tinggi badan harus berupa angka!");
+            alert.AlertWarning("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
+        }
     }
+
+
 }

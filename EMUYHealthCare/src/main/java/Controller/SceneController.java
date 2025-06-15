@@ -15,6 +15,7 @@ public class SceneController {
     private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard1.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
     private final String CHATBOT_LINK = "/com/example/emuyhealthcare/chatBot.fxml";
+    private final String UPDATE_LINK = "/com/example/emuyhealthcare/UpdateData.fxml";
     Stage stage;
 
 
@@ -26,7 +27,7 @@ public class SceneController {
     public SceneController(){};
 
     //Method For Building New Window
-    public void BuildWindow(String Url){
+    public void BuildWindow(String Url,String Scene){
         try {
             Parent Load = FXMLLoader.load(getClass().getResource(Url));
             stage.centerOnScreen();
@@ -34,14 +35,14 @@ public class SceneController {
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
-
+            System.out.println("Berhasil Menampilkan :  " + Scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     //Method For ChangeScene
-    public void SceneChange(String Url){
+    public void SceneChange(String Url,String Scene){
         try {
             Parent Loader = FXMLLoader.load(getClass().getResource(Url));
             stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
@@ -50,7 +51,7 @@ public class SceneController {
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
-            System.out.println("Berhasil menampilkan layar");
+            System.out.println("Berhasil menampilkan layar " + Scene);
         }catch (IOException e){
             System.out.println("Pesan Eror : " + e.getMessage());
             System.out.println("Tidak Dapat menampilkan Layar");
@@ -61,7 +62,9 @@ public class SceneController {
     public String getDASHBOARD_LINK() {
         return DASHBOARD_LINK;
     }
-
+    public String getUPDATE_LINK() {
+        return UPDATE_LINK;
+    }
     public String getLOGIN_PAGE() {
         return LOGIN_PAGE;
     }

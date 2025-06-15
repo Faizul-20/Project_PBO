@@ -3,6 +3,7 @@ package Controller;
 import API.LoginApiV2;
 import API.PenyakitAPI;
 import DataBaseController.PenyakitConnecting;
+import chatBotEngine.CakapEmuyService;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -11,7 +12,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.chart.LineChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -21,12 +21,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-import static com.sun.javafx.logging.PulseLogger.newInput;
+import java.sql.SQLException;
 
 
 public class ChatBotController {
@@ -74,8 +72,16 @@ public class ChatBotController {
     private TextArea kolomDiagnosa;
 
     String Pesan = "";
+    CakapEmuyService EmuyService;
+    PenyakitConnecting PenyakitConnecting = new PenyakitConnecting();
 
-    PenyakitConnecting penyakitConnecting = new PenyakitConnecting();
+    {
+        try {
+            EmuyService = new CakapEmuyService();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     SceneController sceneController = new SceneController();
     public void initialize() {
@@ -88,8 +94,8 @@ public class ChatBotController {
 
     private void sendMessage() {
         Pesan = kolomtext.getText();
-        penyakitConnecting.feedbackChatBot(Pesan);
-        String input = PenyakitAPI.feedback;
+        PenyakitConnecting.feedbackChatBot(Pesan);
+        String Input = PenyakitAPI.feedback;
 
         if (!Pesan.isEmpty()) {
             HBox userChat = createBubbleMessage(Pesan, Pos.CENTER_RIGHT, "#375FAD", "White");
@@ -107,7 +113,7 @@ public class ChatBotController {
             PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
             delay.setOnFinished(event -> {
                 layearbublechat.getChildren().remove(typingBubble);
-                showTypingBot(input);
+                showTypingBot(Input);
             });
             delay.play();
         }
@@ -123,7 +129,7 @@ public class ChatBotController {
         Timeline tl = new Timeline();
         for (int i = 0; i < fullText.length(); i++) {
             int j = i;
-            tl.getKeyFrames().add(new KeyFrame(Duration.millis(40 * (j + 1)), e -> {
+            tl.getKeyFrames().add(new KeyFrame(Duration.millis(10 * (j + 1)), e -> {
                 sb.append(fullText.charAt(j));
                 botLabel.setText(sb.toString());
                 scrollToBottom();
@@ -170,17 +176,20 @@ public class ChatBotController {
     private void handleMenuDashboard(){
         //Pilihan Dashboard
         hoMe.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK(),"DashBoard");
         });
         //Pilihan Chatbot
         chatBot.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getCHATBOT_LINK());
+            sceneController.SceneChange(sceneController.getCHATBOT_LINK(),"ChatBot");
         });
         // Pilihan Logout
         buttonLogout.setOnAction(e -> {
             LoginApiV2.Logout();
-            sceneController.SceneChange(sceneController.getLOGIN_PAGE());
+            sceneController.SceneChange(sceneController.getLOGIN_PAGE(),"Login");
             LoginApiV2.CetakValue();
+        });
+        bodyMesh.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getUPDATE_LINK(),"Update");
         });
     }
 

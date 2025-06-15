@@ -2,6 +2,7 @@ package API;
 
 import Controller.SceneController;
 import DataBaseController.UserConnecting;
+import javafx.scene.control.Alert;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -9,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LoginApiV2 {
+    public static int ID = 0;
     public static String Username;
     public static String Password;
     public static double tinggiBadan;
@@ -26,8 +28,12 @@ public class LoginApiV2 {
         this.Password = Password;
     }
 
+    public void RefreshData(){
+
+    }
     public static void Logout() {
         Map<String,Double> target = new LinkedHashMap<>();
+        setID(0);
         setTarget(target);
         setUsername(null);
         setPassword(null);
@@ -38,12 +44,15 @@ public class LoginApiV2 {
     }
 
     public static void CetakValue() {
-        System.out.println("CetakValue");
-        System.out.println("Username: " + Username + " Password: " + Password);
+        System.out.println("===================Cek Value=======================");
+        System.out.println("Id : " + ID);
+        System.out.println("Username: " + Username + "\n Password: " + Password);
         System.out.println("Target: " + Target);
         System.out.println("Berat: " + beratBadan);
         System.out.println("BMI: " + BMIIndeksBadan);
-        System.out.println("Gula: " + gulaDarah);
+        System.out.println("Gula Darah : " + gulaDarah);
+        System.out.println("Tekanan Darah : " + TekananDarah);
+        System.out.println("===================================================");
     }
 
     public void CekValue(){
@@ -54,6 +63,8 @@ public class LoginApiV2 {
     public void Login(){
         if (userConnecting.SignInV2(Username,Password)){
             System.out.println("Login Successful");
+            System.out.println("======================User Masuk============================");
+            System.out.println("Id : " + ID);
             System.out.println("Username : " + Username);
             System.out.println("Password : " + Password);
             System.out.println("BMI : " + BMICalculate(tinggiBadan,beratBadan));
@@ -61,10 +72,16 @@ public class LoginApiV2 {
             System.out.println("Tekanan Darah : " + TekananDarah);
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
-            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+            System.out.println("===========================================================");
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK(),"DashBoard");
             cetakTarget();
 
         }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Username or Password is incorrect");
+            alert.showAndWait();
             System.out.println("Login Failed");
             Username = null;
             Password = null;
@@ -137,5 +154,8 @@ public class LoginApiV2 {
 
     public static void setTarget(Map<String, Double> target) {
         Target = target;
+    }
+    public static void setID(int Id) {
+        ID = Id;
     }
 }
