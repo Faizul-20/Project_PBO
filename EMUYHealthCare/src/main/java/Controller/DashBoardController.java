@@ -21,6 +21,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -142,6 +143,10 @@ public class DashBoardController {
 
     SceneController sceneController = new SceneController();
     UserConnecting userConnecting = new UserConnecting();
+    private final Map<String, Image> imageCache = new HashMap<>();
+
+
+
     @FXML
     public void initialize(){
         try {
@@ -250,36 +255,42 @@ public class DashBoardController {
     private void BMIvalues(double value) {
         if (value <= 18.5) {
             System.out.println("\nMenampilkan Gambar... Kurus");
-            Image image = new Image(getClass().getResource("/images/bmikurus.png").toExternalForm());
+            Image image = getImageFromCache("kurus", "/images/bmikurus.png");
             UpdateFotoBMI(image);
             indikatorIdeal.setText("Berat badan kurang");
+
         } else if (value > 18.5 && value < 25) {
             System.out.println("\nMenampilkan Gambar... Ideal");
-            Image image = new Image(getClass().getResource("/images/bminormal.png").toExternalForm());
+            Image image = getImageFromCache("bminormal", "/images/bminormal.png");
             UpdateFotoBMI(image);
             indikatorIdeal.setText("Ideal");
-        } else if (value > 25 && value < 30) {
+
+        } else if (value >= 25 && value < 30) {
             System.out.println("\nMenampilkan Gambar... Kelebihan Berat Badan");
-            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            Image image = getImageFromCache("kelebihan", "/images/bmiobesitas.png");
             UpdateFotoBMI(image);
             indikatorIdeal.setText("Kelebihan Berat Badan");
-        } else if (value > 30 && value < 35) {
+
+        } else if (value >= 30 && value < 35) {
             System.out.println("\nMenampilkan Gambar... Obesitas 1");
-            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            Image image = getImageFromCache("obesitas1", "/images/bmiobesitas.png");
             UpdateFotoBMI(image);
             indikatorIdeal.setText("Obesitas 1");
-        } else if (value > 35 && value < 40) {
+
+        } else if (value >= 35 && value < 40) {
             System.out.println("\nMenampilkan Gambar... Obesitas 2");
-            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            Image image = getImageFromCache("obesitas2", "/images/bmiobesitas.png");
             UpdateFotoBMI(image);
             indikatorIdeal.setText("Obesitas 2");
-        } else if (value > 40) {
+
+        } else if (value >= 40) {
             System.out.println("\nMenampilkan Gambar... Obesitas 3");
-            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            Image image = getImageFromCache("obesitas3", "/images/bmiobesitas.png");
             UpdateFotoBMI(image);
             indikatorIdeal.setText("Obesitas 3");
         }
     }
+
 
 
 
@@ -378,6 +389,10 @@ public class DashBoardController {
 
     private void UpdateFotoBMI(Image fotoBMI){
         fotoBmi.setImage(fotoBMI);
+    }
+
+    private Image getImageFromCache(String key, String path) {
+        return imageCache.computeIfAbsent(key, k -> new Image(getClass().getResource(path).toExternalForm()));
     }
 }
 
