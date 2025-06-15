@@ -20,7 +20,7 @@ public class MainTesting extends Application {
 
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
-        Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
+        Control.BuildWindow(Control.getUPDATE_LINK(),"Login");
         new TimeLogger().start();
 
     }
