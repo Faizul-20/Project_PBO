@@ -5,6 +5,7 @@ import DataBaseController.UserConnecting;
 import javafx.scene.control.Alert;
 
 import java.math.BigDecimal;
+import java.sql.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class LoginApiV2 {
     public static double gulaDarah;
     public static double TekananDarah;
     public static Map<String,Double> Target = new LinkedHashMap<>();
+    private final String USER_DATA = "jdbc:sqlite:EMUYHealthCare/Database/User/Users.db";
 
     UserConnecting userConnecting = new UserConnecting();
     SceneController sceneController = new SceneController();
@@ -27,6 +29,7 @@ public class LoginApiV2 {
         this.Username = Username;
         this.Password = Password;
     }
+    public LoginApiV2(){}
 
     public void RefreshData(){
 
@@ -106,6 +109,107 @@ public class LoginApiV2 {
         System.out.println("=============================================================================");
     }
 
+    public void updateGulaDarah(double GulaDarah){
+        String query = "UPDATE riwayat_gula_tekanan SET gula_darah = ?, tekanan_darah = ? WHERE id = ?";
+
+        try {
+            Connection connection = DriverManager.getConnection(getUserData());
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDouble(1,GulaDarah);
+            preparedStatement.setDouble(2,this.TekananDarah);
+            preparedStatement.setInt(3,this.ID);
+
+            preparedStatement.executeUpdate();
+            System.out.println("Data Gula Darah Berhasil Diupdate");
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("\nTerjadi Kesalahan");
+            System.out.println("Data Tekanan Darah Tidak Berhasil Diupdate");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
+        }
+    }
+    public void updateTekananDarah(double TekananDarah){
+        String query = "UPDATE riwayat_gula_tekanan SET gula_darah = ?, tekanan_darah = ? WHERE id = ?";
+
+        try {
+            Connection connection = DriverManager.getConnection(getUserData());
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDouble(1,this.gulaDarah);
+            preparedStatement.setDouble(2,TekananDarah);
+            preparedStatement.setInt(3,this.ID);
+
+            preparedStatement.executeUpdate();
+            System.out.println("Data Gula Darah Berhasil Diupdate");
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("\nTerjadi Kesalahan");
+            System.out.println("Data Tekanan Darah Tidak Berhasil Diupdate");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
+        }
+    }
+
+    public void updateTinggiBadan(double TinggiBadan){
+        String Query = "UPDATE users SET tinggi_badan = ? WHERE id = ?";
+        try{
+            Connection connection = DriverManager.getConnection(getUserData());
+            PreparedStatement preparedStatement = connection.prepareStatement(Query);
+
+            preparedStatement.setDouble(1,TinggiBadan);
+            preparedStatement.setInt(2,this.ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Data Tinggi Badan Berhasil Diupdate");
+            preparedStatement.close();
+            connection.close();
+        }catch (SQLException e){
+            System.out.println("\nTerjadi Kesalahan");
+            System.out.println("Data Tinggi anda Tidak Berhasil Diupdate");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
+
+        }
+    }
+
+    public void updateBeratBadan(double BeratBadan){
+        String Query = "UPDATE users SET tinggi_badan = ? WHERE id = ?";
+        try{
+            Connection connection = DriverManager.getConnection(getUserData());
+            PreparedStatement preparedStatement = connection.prepareStatement(Query);
+
+            preparedStatement.setDouble(1,BeratBadan);
+            preparedStatement.setInt(2,this.ID);
+            preparedStatement.executeUpdate();
+            System.out.println("Data Berat Badan Berhasil Diupdate");
+            preparedStatement.close();
+            connection.close();
+        }catch (SQLException e){
+            System.out.println("\nTerjadi Kesalahan");
+            System.out.println("Data Berat Badan Tidak Berhasil Diupdate");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
+
+        }
+    }
+    public void updateTargetLari(String TanggalLari,int JarakLari){
+        String Query = "INSERT INTO riwayat VALUES(?,?,?)";
+        try{
+            Connection connection = DriverManager.getConnection(getUserData());
+            PreparedStatement preparedStatement = connection.prepareStatement(Query);
+            preparedStatement.setDouble(3,JarakLari);
+            preparedStatement.setInt(1,this.ID);
+            preparedStatement.setString(2,TanggalLari);
+            LoginApiV2.Target.put(TanggalLari,(double)JarakLari);
+            preparedStatement.executeUpdate();
+            System.out.println("Data Target Lari Berhasil Diupdate");
+            preparedStatement.close();
+            connection.close();
+        }catch (SQLException e){
+            System.out.println("\nTerjadi Kesalahan");
+            System.out.println("Data Target Lari Tidak Berhasil Diupdate");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
+        }
+
+    }
+
 
 
     public static String getUsername() {
@@ -157,5 +261,8 @@ public class LoginApiV2 {
     }
     public static void setID(int Id) {
         ID = Id;
+    }
+    public String getUserData() {
+        return USER_DATA;
     }
 }

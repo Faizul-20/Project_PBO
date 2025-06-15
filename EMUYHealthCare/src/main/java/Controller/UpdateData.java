@@ -2,6 +2,11 @@ package Controller;
 
 import API.LoginApiV2;
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -10,6 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+import java.util.Map;
 
 public class UpdateData {
 
@@ -55,16 +62,18 @@ public class UpdateData {
     @FXML private JFXButton buttonTinggibadan;
 
     // Table Components
-    @FXML private TableView<?> tabel;
-    @FXML private TableColumn<?, ?> colNo;
-    @FXML private TableColumn<?, ?> colTanggal;
-    @FXML private TableColumn<?, ?> colTarget;
+    @FXML private TableView<Map.Entry<String,Double>> tabel;
+    @FXML private TableColumn<Map.Entry<String,Double>,Integer> colNo;
+    @FXML private TableColumn<Map.Entry<String,Double>,String> colTanggal;
+    @FXML private TableColumn<Map.Entry<String,Double>,Double> colTarget;
 
     SceneController sceneController = new SceneController();
+    LoginApiV2 loginApiV2 = new LoginApiV2();
     // Initialize method (optional)
     @FXML
     public void initialize() {
         handleMenuDashboard();
+        handleUpdateData();
     }
 
     private void handleMenuDashboard(){
@@ -86,4 +95,56 @@ public class UpdateData {
             sceneController.SceneChange(sceneController.getUPDATE_LINK(),"Update");
         });
     }
+
+    private void handleUpdateData(){
+        buttonGuladarah.setOnAction(e-> UpdateGulaDarah());
+        buttonTekanandarah.setOnAction(e-> UpdateTekananDarah());
+        buttonBeratbadan.setOnAction(e-> UpdateBeratBadan());
+        buttonTinggibadan.setOnAction(e-> UpdateTinggiBadan());
+        Platform.runLater(this::UpdateTargetOlahraga);
+    }
+
+    private void UpdateGulaDarah(){
+        double GulaDarah = Double.parseDouble(tfGulaDarah.getText());
+        LoginApiV2.gulaDarah = GulaDarah;
+        loginApiV2.updateGulaDarah(GulaDarah);
+        labelGulaDarah.setText(tfGulaDarah.getText());
+        tfGulaDarah.clear();
+    }
+    private void UpdateTekananDarah(){
+        double TekananDarah = Double.parseDouble(tfTekananDarah.getText());
+        LoginApiV2.TekananDarah = TekananDarah;
+        loginApiV2.updateTekananDarah(TekananDarah);
+        labelTekananDarah.setText(tfTekananDarah.getText());
+        tfTekananDarah.clear();
+    }
+
+    private void UpdateTinggiBadan(){
+        double TinggiBadan = Double.parseDouble(tfTinggiBadan.getText());
+        LoginApiV2.tinggiBadan = TinggiBadan;
+        loginApiV2.updateTinggiBadan(TinggiBadan);
+        labelTinggiBadan.setText(tfTinggiBadan.getText());
+        tfTinggiBadan.clear();
+    }
+
+    private void UpdateBeratBadan(){
+        double BeratBadan = Double.parseDouble(tfBeratBadan.getText());
+        LoginApiV2.beratBadan = BeratBadan;
+        loginApiV2.updateBeratBadan(BeratBadan);
+        labelBeratBadan.setText(tfBeratBadan.getText());
+        tfBeratBadan.clear();
+    }
+
+    private void UpdateTargetOlahraga(){
+        colTanggal.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKey()));
+        colTarget.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValue()).asObject());
+
+        ObservableList<Map.Entry<String, Double>> dataList =
+                FXCollections.observableArrayList(LoginApiV2.Target.entrySet());
+        System.out.println("===================================================");
+        System.out.println("Update Target Olahraga");
+        System.out.println("===================================================");
+        tabel.setItems(dataList);
+    }
+
 }

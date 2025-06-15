@@ -17,17 +17,11 @@ public class MainTesting extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-<<<<<<< Updated upstream
-        SceneController Control = new SceneController(primaryStage);
-        primaryStage.centerOnScreen();
-        Control.SceneChange(Control.getCHATBOT_LINK(),"Login");
-=======
 
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
         Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
         new TimeLogger().start();
->>>>>>> Stashed changes
 
     }
 }
