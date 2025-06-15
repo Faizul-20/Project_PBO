@@ -7,7 +7,7 @@ public class Tokenization {
 
     public static HashSet<String> Gejala(String inputGejala) {
         String[] stopWords = {
-                "saya", "aku", "kami", "kita", "anda", "gue", "nih", "ya", "lah", "deh", "dong",
+                "saya", "kami", "kita", "anda", "gue", "nih", "ya", "lah", "deh", "dong",
                 "cuma", "aja", "kok", "lagi", "kayaknya", "kayak", "seperti", "macam", "mirip",
                 "yang", "itu", "ini", "tersebut", "terasa", "rasanya", "begitu", "banget", "sekali",
                 "sedikit", "agak", "lumayan", "sangat", "sudah", "belum", "baru", "akan", "lagi",
