@@ -10,8 +10,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class PenyakitConnecting extends ConnectionData implements SQLConnection{
@@ -26,7 +24,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
             Connection connection = DriverManager.getConnection(Url);
             System.out.println("Data Berhasil Terhubung!!");
         } catch (SQLException e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Data Tidak Terhubung Periksa Koneksi Anda");
+            System.out.println("Data Tidak Berhasil Terhubung!!");
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }

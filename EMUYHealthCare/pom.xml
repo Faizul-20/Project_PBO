@@ -12,7 +12,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.10.2</junit.version>
-    <javafx.version>17.0.12</javafx.version> <!-- Updated version -->
+    <javafx.version>23.0.2</javafx.version> <!-- Updated version -->
     <sqlite.version>3.45.0.0</sqlite.version> <!-- Latest version -->
   </properties>
 
@@ -57,13 +57,20 @@
       <version>9.0.10</version>
     </dependency>
 
+  <dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>2.0.13</version>
+  </dependency>
     <dependency>
-          <groupId>org.openjfx</groupId>
-          <artifactId>javafx-controls</artifactId>
-          <version>25-ea+18</version>
-          <scope>compile</scope>
-      </dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.13</version>
+    </dependency>
+
+
   </dependencies>
+
 
   <build>
     <plugins>

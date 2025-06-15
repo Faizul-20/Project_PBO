@@ -1,8 +1,8 @@
-package Main;
+package Testing;
 
 import Controller.SceneController;
-import Controller.TimeLogger;
-import Controller.alert;
+import Utils.TimeLogger;
+import Utils.alert;
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
