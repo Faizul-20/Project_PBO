@@ -19,7 +19,6 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
     private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
     private final String QUERY_selectTabelPenyakit = "SELECT Id_penyakit, nama_penyakit FROM penyakit";
     private final String QUERY_selectPenanganan = "SELECT Id_penyakit, penanganan FROM penyakit";
-    private final String QUERY_selectEmuyCakap = ""
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -92,19 +91,22 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
     ) {
         ArrayList<String> matchedKode = new ArrayList<>();
 
+        // Jika ini adalah respons konfirmasi, kembalikan list kosong
+        if (inputUser.contains("konfirmasi")) {
+            return matchedKode;
+        }
+
         for (String kode : mapGejala.keySet()) {
             ArrayList<String> gejalaWords = mapGejala.get(kode);
 
-            // Cek apakah ada irisan antara HashSet dan value (ArrayList)
             for (String kata : gejalaWords) {
                 if (inputUser.contains(kata)) {
                     matchedKode.add(kode);
-                    break; // cukup 1 kata cocok, langsung ambil key
+                    break;
                 }
             }
         }
 
-        // ✅ Bersihkan spasi tambahan (jika ada)
         for (int i = 0; i < matchedKode.size(); i++) {
             matchedKode.set(i, matchedKode.get(i).trim());
         }
@@ -262,6 +264,27 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
         DataConnecting dataConnecting = new DataConnecting();
         dataConnecting.ConnectToDatabase(dataConnecting.getPENYAKIT_DATA());
 
+        if (PenyakitAPI.diagnosa != null &&
+                PenyakitAPI.diagnosa.equals("Perlu konfirmasi lanjutan") &&
+                PenyakitAPI.kodeGejalaKonfirmasi != null) {
+
+            ArrayList<String> selectedKodes = processNumberInput(userInput, PenyakitAPI.kodeGejalaKonfirmasi);
+
+            if (selectedKodes != null && !selectedKodes.isEmpty()) {
+                // Gabungkan dengan matchedKode sebelumnya
+                HashSet<String> inputUserSet = new HashSet<>();
+                inputUserSet.add("konfirmasi"); // Flag khusus untuk konfirmasi
+                LinkedHashMap<String, ArrayList<String>> dataGejala = addMapGejala();
+                ArrayList<String> matchedKode = getMatchedKodeGejala(inputUserSet, dataGejala);
+
+                matchedKode.addAll(selectedKodes);
+
+                // Proses ulang dengan gejala yang telah dikonfirmasi
+                processConfirmedSymptoms(matchedKode, userInput);
+                return;
+            }
+        }
+
         // Tokenisasi input user jadi kode gejala
         String inputGejala = userInput.toLowerCase();
 
@@ -277,6 +300,34 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
         // Ambil kode gejala hasil pencocokan
         ArrayList<String> matchedKode = penyakitConnecting.getMatchedKodeGejala(inputUserSet, dataGejala);
+        // ===== DEBUGGING: matchedKode dari input user =====
+        System.out.println("===== DEBUGGING: matchedKode dari input user =====");
+        System.out.println("matchedKode: " + matchedKode);
+
+// Ambil seluruh tabel penyakit_gejala
+        LinkedHashMap<Integer, ArrayList<String>> semuaPenyakitGejala = penyakitConnecting.tabelPenyakitGejala();
+
+// Tampilkan baris penyakit yang mengandung salah satu dari matchedKode
+        System.out.println("\n===== DEBUGGING: Baris penyakit_gejala yang mengandung matchedKode =====");
+        for (Map.Entry<Integer, ArrayList<String>> entry : semuaPenyakitGejala.entrySet()) {
+            Integer idPenyakit = entry.getKey();
+            ArrayList<String> kodeGejala = entry.getValue();
+
+            // Cek apakah baris ini mengandung salah satu kode yang cocok
+            boolean mengandung = false;
+            for (String kode : matchedKode) {
+                if (kodeGejala.contains(kode)) {
+                    mengandung = true;
+                    break;
+                }
+            }
+
+            if (mengandung) {
+                System.out.println("ID Penyakit: " + idPenyakit + " -> " + kodeGejala);
+            }
+        }
+        System.out.println("===================================================");
+
 
         // Ambil data semua penyakit dan kode gejalanya
         LinkedHashMap<Integer, ArrayList<String>> tabelPenyakitGejala = penyakitConnecting.tabelPenyakitGejala();
@@ -287,7 +338,16 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
         for (Map.Entry<Integer, ArrayList<String>> entry : tabelPenyakitGejala.entrySet()) {
             ArrayList<String> kodeGejalaPenyakit = entry.getValue();
-            if (kodeGejalaPenyakit.containsAll(matchedKode) && matchedKode.containsAll(kodeGejalaPenyakit)) {
+            boolean semuaGejalaPenyakitAdaDiInput = true;
+
+            for (String kodePenyakit : kodeGejalaPenyakit) {
+                if (!matchedKode.contains(kodePenyakit.trim())) {
+                    semuaGejalaPenyakitAdaDiInput = false;
+                    break;
+                }
+            }
+
+            if (semuaGejalaPenyakitAdaDiInput) {
                 FullMatch = true;
                 IdFullMatch = entry.getKey();
                 break;
@@ -334,7 +394,6 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
             ArrayList<Integer> top3Id = (ArrayList<Integer>) hasilTop3.get("top3IdPenyakit");
             ArrayList<String> sisaKode = (ArrayList<String>) hasilTop3.get("kodeTidakTerpakai");
 
-
             if (top3Id.isEmpty()) {
                 PenyakitAPI.feedback = "Gejala Anda tidak cocok dengan data penyakit manapun.";
                 PenyakitAPI.diagnosa = "Tidak dapat disimpulkan";
@@ -366,6 +425,8 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
                 sisaList.append(i + 1).append(". ").append(sisaGejala.get(i)).append("\n");
             }
 
+            PenyakitAPI.kodeGejalaKonfirmasi = sisaKode;
+
             // Simpan ke API
             PenyakitAPI.gejalaUser = inputGejala;
             PenyakitAPI.feedback =
@@ -377,6 +438,129 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
         }
 
     }
+
+    private ArrayList<String> processNumberInput(String userInput, ArrayList<String> kodeGejalaKonfirmasi) {
+        ArrayList<String> selectedKodes = new ArrayList<>();
+
+        // Handle multiple choices (e.g., "1,2,3")
+        String[] choices = userInput.split("[,\\s]+");
+
+        for (String choiceStr : choices) {
+            try {
+                int choice = Integer.parseInt(choiceStr.trim());
+                if (choice > 0 && choice <= kodeGejalaKonfirmasi.size()) {
+                    String selectedKode = kodeGejalaKonfirmasi.get(choice - 1);
+                    if (!selectedKodes.contains(selectedKode)) {
+                        selectedKodes.add(selectedKode);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        return selectedKodes.isEmpty() ? null : selectedKodes;
+    }
+
+    private void processConfirmedSymptoms(ArrayList<String> matchedKode, String userInput) {
+        // Ambil data semua penyakit dan kode gejalanya
+        LinkedHashMap<Integer, ArrayList<String>> tabelPenyakitGejala = tabelPenyakitGejala();
+
+        // Cek FullMatch lagi dengan gejala yang telah diperbarui
+        boolean FullMatch = false;
+        int IdFullMatch = -1;
+
+        for (Map.Entry<Integer, ArrayList<String>> entry : tabelPenyakitGejala.entrySet()) {
+            ArrayList<String> kodeGejalaPenyakit = entry.getValue();
+            boolean semuaGejalaPenyakitAdaDiInput = true;
+
+            for (String kodePenyakit : kodeGejalaPenyakit) {
+                if (!matchedKode.contains(kodePenyakit.trim())) {
+                    semuaGejalaPenyakitAdaDiInput = false;
+                    break;
+                }
+            }
+
+            if (semuaGejalaPenyakitAdaDiInput) {
+                FullMatch = true;
+                IdFullMatch = entry.getKey();
+                break;
+            }
+        }
+
+        if (FullMatch) {
+            HashMap<String, String> kodeKeGejalaAsli = getKodeKeGejalaAsli();
+
+            ArrayList<String> daftarGejalaUser = new ArrayList<>();
+            for (String kode : matchedKode) {
+                if (kodeKeGejalaAsli.containsKey(kode)) {
+                    daftarGejalaUser.add(kodeKeGejalaAsli.get(kode));
+                }
+            }
+
+            LinkedHashMap<Integer, String> mapPenyakit = tabelPenyakit();
+            String namaPenyakit = mapPenyakit.getOrDefault(IdFullMatch, "Tidak Diketahui");
+
+            LinkedHashMap<Integer, String> mapPenanganan = addPenanganan();
+            String penanganan = mapPenanganan.getOrDefault(IdFullMatch,"Belum ada penanganan");
+
+            PenyakitAPI.gejalaUser = String.join(", ", daftarGejalaUser);
+            PenyakitAPI.feedback = "Anda tampaknya terkena " + namaPenyakit;
+            PenyakitAPI.diagnosa = namaPenyakit;
+            PenyakitAPI.penanganan = penanganan;
+            PenyakitAPI.kodeGejalaKonfirmasi = null; // Reset konfirmasi
+        } else {
+            // Jika masih belum FullMatch, tampilkan pertanyaan lanjutan
+            Map<String, Object> hasilTop3 = getTop3PenyakitBesertaGejalaTidakTerpakai(matchedKode);
+            ArrayList<Integer> top3Id = (ArrayList<Integer>) hasilTop3.get("top3IdPenyakit");
+            ArrayList<String> sisaKode = (ArrayList<String>) hasilTop3.get("kodeTidakTerpakai");
+
+            if (top3Id.isEmpty()) {
+                PenyakitAPI.feedback = "Gejala Anda tidak cocok dengan data penyakit manapun.";
+                PenyakitAPI.diagnosa = "Tidak dapat disimpulkan";
+                return;
+            }
+
+            // Ambil map kode ke gejala asli
+            HashMap<String, String> mapKodeKeGejala = getKodeKeGejalaAsli();
+
+            // Ubah sisa kode jadi kalimat gejala
+            ArrayList<String> sisaGejala = new ArrayList<>();
+            for (String kode : sisaKode) {
+                if (mapKodeKeGejala.containsKey(kode)) {
+                    sisaGejala.add(mapKodeKeGejala.get(kode));
+                }
+            }
+
+            // Ambil nama penyakit dari top 3
+            LinkedHashMap<Integer, String> mapPenyakit = tabelPenyakit();
+            StringBuilder kemungkinan = new StringBuilder();
+            for (Integer id : top3Id) {
+                String nama = mapPenyakit.get(id);
+                kemungkinan.append("- ").append(nama).append("\n");
+            }
+
+            // Buat string list sisa gejala
+            StringBuilder sisaList = new StringBuilder();
+            for (int i = 0; i < sisaGejala.size(); i++) {
+                sisaList.append(i + 1).append(". ").append(sisaGejala.get(i)).append("\n");
+            }
+
+            PenyakitAPI.kodeGejalaKonfirmasi = sisaKode;
+
+            // Simpan ke API
+            PenyakitAPI.gejalaUser = userInput;
+            PenyakitAPI.feedback =
+                    "Gejala Anda belum cocok seluruhnya.\n" +
+                            "Kemungkinan penyakit:\n" + kemungkinan.toString() +
+                            "\nSisa gejala yang perlu dikonfirmasi:\n" + sisaList.toString() +
+                            "\nSilakan pilih gejala dengan memasukkan NOMOR saja (contoh: 1 atau 1,2,3).";
+            PenyakitAPI.diagnosa = "Perlu konfirmasi lanjutan";
+        }
+    }
+
+
+
 
 
 
