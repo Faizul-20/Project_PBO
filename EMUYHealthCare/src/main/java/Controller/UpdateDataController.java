@@ -1,6 +1,7 @@
 package Controller;
 
 import API.LoginApiV2;
+import Utils.alert;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -19,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.Map;
 
-public class UpdateData {
+public class UpdateDataController {
 
     // Menu Dashboard Components
     @FXML private AnchorPane menuDasboard;

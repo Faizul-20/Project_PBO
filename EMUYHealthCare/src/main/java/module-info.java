@@ -12,4 +12,6 @@ module com.example.emuyhealthcare {
     exports Main;
     exports Controller;
     exports DataBaseController;
+    exports Utils;
+    opens Utils to javafx.fxml;
 }

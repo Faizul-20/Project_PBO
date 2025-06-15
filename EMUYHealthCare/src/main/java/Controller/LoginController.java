@@ -2,6 +2,7 @@ package Controller;
 
 import API.LoginApiV2;
 import API.SignUpAPI;
+import Utils.alert;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;

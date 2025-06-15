@@ -1,13 +1,9 @@
 package Main;
 
 import Controller.SceneController;
-import Controller.TimeLogger;
-import Controller.alert;
+import Utils.TimeLogger;
 import javafx.application.Application;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MainTesting extends Application {
 
