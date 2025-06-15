@@ -19,7 +19,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
     private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
     private final String QUERY_selectTabelPenyakit = "SELECT Id_penyakit, nama_penyakit FROM penyakit";
     private final String QUERY_selectPenanganan = "SELECT Id_penyakit, penanganan FROM penyakit";
-    private final String QUERY_selectEmuyCakap = ""
+    private final String QUERY_selectEmuyCakap = "";
 
     @Override
     public void ConnectToDatabase(String Url) {
