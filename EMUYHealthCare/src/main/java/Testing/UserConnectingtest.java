@@ -4,8 +4,6 @@ import DataBaseController.ConnectionData;
 import DataBaseController.SQLConnection;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserConnectingtest extends ConnectionData implements SQLConnection {
     private final String INSERT_DATA ="INSERT INTO users VALUES (NULL,?, ?, ?, ?, ?)";
@@ -21,7 +19,7 @@ public class UserConnectingtest extends ConnectionData implements SQLConnection 
             Connection connection = DriverManager.getConnection(Url);
             System.out.println("Data Berhasil Terhubung!!");
         } catch (SQLException e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Data Tidak Terhubung Periksa Koneksi Anda");
+            System.out.println("Data Tidak Berhasil Terhubung!!");
             System.out.println("Pesan Eror : " + e.getMessage());
         }
     }
