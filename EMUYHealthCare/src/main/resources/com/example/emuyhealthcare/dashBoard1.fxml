@@ -133,11 +133,19 @@
                         <Font size="39.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="fotoBmi" fitHeight="343.0" fitWidth="265.0" layoutX="63.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="fotoBmi" fitHeight="425.0" fitWidth="283.0" layoutX="63.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                       <!--  <Image url="@../../../../../../../../../../../foto%20bahan/20250327_131231.png" /> -->
                     </image>
                 </ImageView>
+<<<<<<< Updated upstream
+=======
+            <Label fx:id="indikatorIdeal" alignment="TOP_CENTER" layoutX="112.0" layoutY="701.0" prefHeight="55.0" prefWidth="200.0" text="Ideal">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+>>>>>>> Stashed changes
             </children></AnchorPane>
         <LineChart fx:id="tabelOlaraga" layoutX="214.0" layoutY="262.0" prefHeight="390.0" prefWidth="706.0" title="table">
             <xAxis>
@@ -213,8 +221,20 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
+<<<<<<< Updated upstream
                 <AnchorPane layoutX="156.0" layoutY="16.0" prefHeight="30.0" prefWidth="238.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;" />
                 <Label layoutX="465.0" layoutY="17.0" prefHeight="28.0" prefWidth="70.0" text="Lari 2km">
+=======
+                <AnchorPane layoutX="156.0" layoutY="16.0" prefHeight="30.0" prefWidth="238.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
+               <children>
+                  <Label fx:id="tanggal" alignment="TOP_CENTER" layoutX="45.0" layoutY="4.0" prefHeight="30.0" prefWidth="158.0" text="00/00/000" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+                <Label fx:id="JarakLari" layoutX="425.0" layoutY="17.0" prefHeight="28.0" prefWidth="110.0" text="Lari 2km">
+>>>>>>> Stashed changes
                     <font>
                         <Font size="16.0" />
                     </font></Label>
