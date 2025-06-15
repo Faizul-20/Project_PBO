@@ -280,8 +280,9 @@ public class LoginController implements Initializable {
     private void handleSignup(MouseEvent event) {
         String username = signUpusername.getText().trim();
         String password = signUppass.getText().trim();
-        String bb = signUpBB.getText().trim();
-        String tb = signUpTB.getText().trim();
+        //Maaf ini kebalik jadi nanti benerin sendiri
+        String bb = signUpTB.getText().trim();
+        String tb = signUpBB.getText().trim();
         String UlangTahun = signUplahir.getValue().toString();
 
 

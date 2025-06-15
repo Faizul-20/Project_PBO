@@ -28,6 +28,9 @@ public class LoginApiV2 {
         this.Password = Password;
     }
 
+    public void RefreshData(){
+
+    }
     public static void Logout() {
         Map<String,Double> target = new LinkedHashMap<>();
         setID(0);
@@ -43,11 +46,12 @@ public class LoginApiV2 {
     public static void CetakValue() {
         System.out.println("===================Cek Value=======================");
         System.out.println("Id : " + ID);
-        System.out.println("Username: " + Username + " Password: " + Password);
+        System.out.println("Username: " + Username + "\n Password: " + Password);
         System.out.println("Target: " + Target);
         System.out.println("Berat: " + beratBadan);
         System.out.println("BMI: " + BMIIndeksBadan);
-        System.out.println("Gula: " + gulaDarah);
+        System.out.println("Gula Darah : " + gulaDarah);
+        System.out.println("Tekanan Darah : " + TekananDarah);
         System.out.println("===================================================");
     }
 

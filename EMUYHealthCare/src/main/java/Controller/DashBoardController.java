@@ -143,8 +143,8 @@ public class DashBoardController {
     @FXML
     public void initialize(){
         try {
-            handleMenuDashboard();
             loginnew.setVisible(checkMember());
+            handleMenuDashboard();
             judulUsername.setText("Hai " + LoginApiV2.getUsername() + " !!");
             getValuesLogin();
             bmiArrowIndikator();
@@ -170,10 +170,13 @@ public class DashBoardController {
 
         if (gulaDarah != 0 && tekananDarah != 0 ) {
             userConnecting.InsertDarah(gulaDarah, tekananDarah);
+            userConnecting.SignInV2(LoginApiV2.getUsername(), LoginApiV2.getPassword());
             loginnew.setVisible(false);
+            LoginApiV2.CetakValue();
         }else {
             System.out.println("Input Tidak Berhasil di masukan ke database");
         }
+        getValuesLogin();
         inputGuladarah.clear();
         inputTekanandarah.clear();
 
@@ -206,6 +209,9 @@ public class DashBoardController {
         labelBmivalue.setText(String.valueOf(LoginApiV2.BMIIndeksBadan));
         labelTInggibadan.setText(String.valueOf(LoginApiV2.tinggiBadan));
         labelBeratbedan.setText(String.valueOf(LoginApiV2.beratBadan));
+        angkaGuladarah.setText(String.valueOf(LoginApiV2.gulaDarah));
+        angkaTekanandarah.setText(String.valueOf(LoginApiV2.TekananDarah));
+
     }
 
     private boolean checkMember(){
