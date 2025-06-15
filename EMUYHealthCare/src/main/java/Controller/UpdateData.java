@@ -38,6 +38,7 @@ public class UpdateData {
     @FXML private TextField tfBeratBadan;
     @FXML private TextField tfTinggiBadan;
     @FXML private DatePicker dpOlahraga;
+    @FXML private TextField tfTargetolahraga;
 
     // Komponen tabel
     @FXML private TableView<?> tabel;
@@ -51,6 +52,14 @@ public class UpdateData {
     @FXML private Label labelOlahraga;
     @FXML private Label labelBeratBadan;
     @FXML private Label labelTinggiBadan;
+
+    //button kirim
+    @FXML private JFXButton buttonGuladarah;
+    @FXML private JFXButton buttonTekanandarah;
+    @FXML private JFXButton buttonOlahraga;
+    @FXML private JFXButton buttonBeratbadan;
+    @FXML private JFXButton buttonTinggibadan;
+
 
     // Inisialisasi controller
     SceneController sceneController = new SceneController();
