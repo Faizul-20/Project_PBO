@@ -40,7 +40,7 @@ public class Tokenization {
                 "beberapa kali", "berulang", "udah lama", "baru aja", "kemarin", "tadi", "barusan", "besok", "nanti",
                 "badan", "tubuh", "bagian", "area", "daerah", "sebagian", "semua bagian",
                 "soalnya", "gimana ya", "gak ngerti", "bingung", "aneh", "nggak biasa", "nggak normal", "berbeda", "beda",
-                "ya gitu", "yaudah", "jadi gini", "makanya", "kalau", "ya gitu deh"
+                "ya gitu", "yaudah", "jadi gini", "makanya", "kalau", "ya gitu deh", "sakit"
         };
 
         Set<String> stopWordSet = new HashSet<>(Arrays.asList(stopWords));

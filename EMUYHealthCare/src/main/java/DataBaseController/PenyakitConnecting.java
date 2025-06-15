@@ -259,13 +259,35 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
             }
         }
 
-        // ===== IF: Semua gejala cocok pada 1 penyakit =====
-        if (FullMatch) {
-            
+        //Jika inputan tidak cocok dengan gejala apapun
+        if (getMatchedKodeGejala(inputUserSet,dataGejala).isEmpty()){
+            PenyakitAPI.gejalaUser = inputGejala;
+            PenyakitAPI.feedback = "Gejala tidak cocok dengan penyakait manapun / Gejala diluar data yang ada";
+            PenyakitAPI.diagnosa = "Tidak bisa disimpulkan";
         }
 
+        // ===== IF: Semua gejala cocok pada 1 penyakit =====
+        if (FullMatch) {
+            HashMap<String, String> kodeKeGejalaAsli = penyakitConnecting.getKodeKeGejalaAsli();
 
-        // ===== ELSE IF: Tidak ada yang cocok sempurna, tampilkan top 3 dan kode tidak terpakai =====
+            ArrayList<String> daftarGejalaUser = new ArrayList<>();
+            for (String kode : matchedKode) {
+                if (kodeKeGejalaAsli.containsKey(kode)) {
+                    daftarGejalaUser.add(kodeKeGejalaAsli.get(kode));
+                }
+            }
+
+            // Ambil nama penyakit dari IdFullMatch
+            LinkedHashMap<Integer, String> mapPenyakit = penyakitConnecting.tabelPenyakit();
+            String namaPenyakit = mapPenyakit.getOrDefault(IdFullMatch, "Tidak Diketahui");
+
+            // Simpan ke API
+            PenyakitAPI.gejalaUser = inputGejala;
+            PenyakitAPI.feedback = "Anda tampaknya terkena " + namaPenyakit;
+            PenyakitAPI.diagnosa = namaPenyakit;
+        }
+
+        // Feedback untuk menanyakan sisa gejala dari top3 penyakit yg disimpulkan
         else {
             Map<String, Object> result = penyakitConnecting.getTop3PenyakitBesertaGejalaTidakTerpakai(matchedKode);
             ArrayList<Integer> top3 = (ArrayList<Integer>) result.get("top3IdPenyakit");
