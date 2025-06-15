@@ -35,7 +35,7 @@ public class SceneController {
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
-            System.out.println("Berhasil Menampilkan : " + Scene);
+            System.out.println("Berhasil Menampilkan :  " + Scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

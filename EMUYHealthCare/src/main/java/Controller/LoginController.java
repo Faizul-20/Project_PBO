@@ -117,6 +117,13 @@ public class LoginController implements Initializable {
 
         setupEnterKeyHandling();
         btnSignin(null);
+        signInlogin.setOnAction(event -> handleLogin());
+        signUpusername.setOnAction(e-> signUplahir.requestFocus());
+        signUplahir.setOnAction(e-> signUpBB.requestFocus());
+        signUpBB.setOnAction(e-> signUpTB.requestFocus());
+        signUpTB.setOnAction(e-> signUppass.requestFocus());
+        signUppass.setOnAction(e-> handleSignup());
+
 
     }
 
@@ -323,6 +330,76 @@ public class LoginController implements Initializable {
             }
 
             alert.AlertInfo("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
+
+
+            // Reset form
+            signUpusername.clear();
+            signUppass.clear();
+            signUpBB.clear();
+            signUpTB.clear();
+            signUplahir.setValue(null);
+
+            // Beralih ke tampilan login
+            btnSignin(null);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("Berat badan dan tinggi badan harus berupa angka!");
+            alert.AlertWarning("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
+        }
+    }
+
+    //Untuk menekan tombol
+    @FXML
+    private void handleSignup() {
+        String username = signUpusername.getText().trim();
+        String password = signUppass.getText().trim();
+        //Maaf ini kebalik jadi nanti benerin sendiri
+        String bb = signUpTB.getText().trim();
+        String tb = signUpBB.getText().trim();
+        String UlangTahun = signUplahir.getValue().toString();
+
+
+        if (username.length() < 3) {
+            System.out.println("Username is too short");
+            alert.AlertEror("Eror!", "Username is too short");
+            return;
+        }
+        if (password.length() < 6) {
+            System.out.println("Password is less than 6 characters");
+            alert.AlertEror("Eror!", "Password is less than 6 characters");
+            return;
+        }
+
+        if (signUplahir.getValue() == null) {
+            System.out.println("Tanggal lahir harus diisi");
+            alert.AlertEror("Registrasi Error", "Tanggal lahir harus diisi!");
+            return;
+        }
+
+        try {
+            double beratBadan = Double.parseDouble(bb);
+            double tinggiBadan = Double.parseDouble(tb);
+
+            if (beratBadan <= 0 || tinggiBadan <= 0) {
+                alert.AlertInfo("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
+                return;
+            }
+            try {
+                if (!username.isEmpty() && !password.isEmpty() && !bb.isEmpty() && !tb.isEmpty() && !UlangTahun.isEmpty()) {
+                    SignUpAPI SignUp = new SignUpAPI(username, password, UlangTahun, bb, tb);
+                    SignUp.CekValue();
+                    SignUp.PostDataUserTodatabase();
+                } else {
+                    throw new NullPointerException("You Have to full fill all of questions");
+                }
+            }catch (NullPointerException e){
+                System.err.println("Pesan Eror : " + e.getMessage());
+                alert.AlertWarning("Pesan Eror", e.getMessage());
+            }
+
+            alert.AlertInfo("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
+
 
             // Reset form
             signUpusername.clear();

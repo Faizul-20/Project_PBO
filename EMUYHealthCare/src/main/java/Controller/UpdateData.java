@@ -13,56 +13,55 @@ import javafx.scene.layout.AnchorPane;
 
 public class UpdateData {
 
-    // Komponen menu dashboard
+    // Menu Dashboard Components
     @FXML private AnchorPane menuDasboard;
     @FXML private ImageView logoChatBot;
     @FXML private ImageView fotomenuBMI;
     @FXML private ImageView fotologout;
     @FXML private ImageView fotomenuChatbot;
     @FXML private ImageView fotomenudashboard;
+
+    // Menu Buttons
     @FXML private JFXButton buttonLogout;
     @FXML private JFXButton bodyMesh;
     @FXML private JFXButton chatBot;
     @FXML private JFXButton hoMe;
 
-    // Komponen panel kesehatan
-    @FXML private ImageView gambargulaDarah;
-    @FXML private ImageView gambarTekanandarah;
-    @FXML private ImageView gamabarOlga;
-    @FXML private ImageView gambarBerat;
-    @FXML private ImageView gambarTinggi;
-
-    // Komponen input data
+    // Data Panel Components
+    @FXML private Label labelGulaDarah;
     @FXML private TextField tfGulaDarah;
+    @FXML private ImageView gambargulaDarah;
+    @FXML private JFXButton buttonGuladarah;
+
+    @FXML private Label labelTekananDarah;
     @FXML private TextField tfTekananDarah;
-    @FXML private TextField tfBeratBadan;
-    @FXML private TextField tfTinggiBadan;
+    @FXML private ImageView gambarTekanandarah;
+    @FXML private JFXButton buttonTekanandarah;
+
+    @FXML private Label labelOlahraga;
     @FXML private DatePicker dpOlahraga;
     @FXML private TextField tfTargetolahraga;
+    @FXML private ImageView gamabarOlga;
+    @FXML private JFXButton buttonOlahraga;
 
-    // Komponen tabel
+    @FXML private Label labelBeratBadan;
+    @FXML private TextField tfBeratBadan;
+    @FXML private ImageView gambarBerat;
+    @FXML private JFXButton buttonBeratbadan;
+
+    @FXML private Label labelTinggiBadan;
+    @FXML private TextField tfTinggiBadan;
+    @FXML private ImageView gambarTinggi;
+    @FXML private JFXButton buttonTinggibadan;
+
+    // Table Components
     @FXML private TableView<?> tabel;
     @FXML private TableColumn<?, ?> colNo;
     @FXML private TableColumn<?, ?> colTanggal;
     @FXML private TableColumn<?, ?> colTarget;
 
-    // Label informasi
-    @FXML private Label labelGulaDarah;
-    @FXML private Label labelTekananDarah;
-    @FXML private Label labelOlahraga;
-    @FXML private Label labelBeratBadan;
-    @FXML private Label labelTinggiBadan;
-
-    //button kirim
-    @FXML private JFXButton buttonGuladarah;
-    @FXML private JFXButton buttonTekanandarah;
-    @FXML private JFXButton buttonOlahraga;
-    @FXML private JFXButton buttonBeratbadan;
-    @FXML private JFXButton buttonTinggibadan;
-
-
-    // Inisialisasi controller
     SceneController sceneController = new SceneController();
+    // Initialize method (optional)
     @FXML
     public void initialize() {
         handleMenuDashboard();
@@ -87,5 +86,4 @@ public class UpdateData {
             sceneController.SceneChange(sceneController.getUPDATE_LINK(),"Update");
         });
     }
-
 }

@@ -18,7 +18,7 @@ public class MainTesting extends Application {
     public void start(Stage primaryStage) {
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
-        Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
+        Control.SceneChange(Control.getCHATBOT_LINK(),"Login");
 
     }
 }

@@ -30,7 +30,7 @@ public class TimeLogger extends Thread {
                         usedMemory, totalMemory, maxMemory);
 
                 if (usedMemory > 200) {
-                    System.out.println("⚠️ " + info);
+                    System.out.println("[LOG] " + info);
                 } else {
                     System.out.println(info);
                 }
