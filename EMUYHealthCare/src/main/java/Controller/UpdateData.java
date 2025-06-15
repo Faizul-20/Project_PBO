@@ -126,40 +126,105 @@ public class UpdateData {
         buttonOlahraga.setOnAction(e-> addNewTarget());
         Platform.runLater(this::UpdateTargetOlahraga);
     }
-
-    private void UpdateGulaDarah(){
-        double GulaDarah = Double.parseDouble(tfGulaDarah.getText());
-        LoginApiV2.gulaDarah = GulaDarah;
-        loginApiV2.updateGulaDarah(GulaDarah);
-        labelGulaDarah.setText(tfGulaDarah.getText());
-        tfGulaDarah.clear();
-        LoginApiV2.CetakValue();
-    }
-    private void UpdateTekananDarah(){
-        double TekananDarah = Double.parseDouble(tfTekananDarah.getText());
-        LoginApiV2.TekananDarah = TekananDarah;
-        loginApiV2.updateTekananDarah(TekananDarah);
-        labelTekananDarah.setText(tfTekananDarah.getText());
-        tfTekananDarah.clear();
-        LoginApiV2.CetakValue();
-    }
-
-    private void UpdateTinggiBadan(){
-        double TinggiBadan = Double.parseDouble(tfTinggiBadan.getText());
-        LoginApiV2.tinggiBadan = TinggiBadan;
-        loginApiV2.updateTinggiBadan(TinggiBadan);
-        labelTinggiBadan.setText(tfTinggiBadan.getText());
-        tfTinggiBadan.clear();
-        LoginApiV2.CetakValue();
+    private void UpdateGulaDarah() {
+        try {
+            if (tfGulaDarah.getText().isEmpty()) {
+                throw new IllegalArgumentException("Gula darah tidak boleh kosong.");
+            }
+            double GulaDarah = Double.parseDouble(tfGulaDarah.getText());
+            LoginApiV2.gulaDarah = GulaDarah;
+            loginApiV2.updateGulaDarah(GulaDarah);
+            labelGulaDarah.setText(tfGulaDarah.getText());
+            tfGulaDarah.clear();
+            LoginApiV2.CetakValue();
+        } catch (NumberFormatException e) {
+            alert.AlertWarning("Input Tidak Valid", "Gula darah harus berupa angka yang valid.");
+        } catch (IllegalArgumentException e) {
+            alert.AlertWarning("Input Kosong", e.getMessage());
+        }
     }
 
-    private void UpdateBeratBadan(){
-        double BeratBadan = Double.parseDouble(tfBeratBadan.getText());
-        LoginApiV2.beratBadan = BeratBadan;
-        loginApiV2.updateBeratBadan(BeratBadan);
-        labelBeratBadan.setText(tfBeratBadan.getText());
-        tfBeratBadan.clear();
-        LoginApiV2.CetakValue();
+    private void UpdateTekananDarah() {
+        try {
+            if (tfTekananDarah.getText().isEmpty()) {
+                throw new IllegalArgumentException("Tekanan darah tidak boleh kosong.");
+            }
+            double TekananDarah = Double.parseDouble(tfTekananDarah.getText());
+            LoginApiV2.TekananDarah = TekananDarah;
+            loginApiV2.updateTekananDarah(TekananDarah);
+            labelTekananDarah.setText(tfTekananDarah.getText());
+            tfTekananDarah.clear();
+            LoginApiV2.CetakValue();
+        } catch (NumberFormatException e) {
+            alert.AlertWarning("Input Tidak Valid", "Tekanan darah harus berupa angka yang valid.");
+        } catch (IllegalArgumentException e) {
+            alert.AlertWarning("Input Kosong", e.getMessage());
+        }
+    }
+
+    private void UpdateTinggiBadan() {
+        try {
+            if (tfTinggiBadan.getText().isEmpty()) {
+                throw new IllegalArgumentException("Tinggi badan tidak boleh kosong.");
+            }
+            double TinggiBadan = Double.parseDouble(tfTinggiBadan.getText());
+            LoginApiV2.tinggiBadan = TinggiBadan;
+            loginApiV2.updateTinggiBadan(TinggiBadan);
+            labelTinggiBadan.setText(tfTinggiBadan.getText());
+            tfTinggiBadan.clear();
+            LoginApiV2.CetakValue();
+        } catch (NumberFormatException e) {
+            alert.AlertWarning("Input Tidak Valid", "Tinggi badan harus berupa angka yang valid.");
+        } catch (IllegalArgumentException e) {
+            alert.AlertWarning("Input Kosong", e.getMessage());
+        }
+    }
+
+    private void UpdateBeratBadan() {
+        try {
+            if (tfBeratBadan.getText().isEmpty()) {
+                throw new IllegalArgumentException("Berat badan tidak boleh kosong.");
+            }
+            double BeratBadan = Double.parseDouble(tfBeratBadan.getText());
+            LoginApiV2.beratBadan = BeratBadan;
+            loginApiV2.updateBeratBadan(BeratBadan);
+            labelBeratBadan.setText(tfBeratBadan.getText());
+            tfBeratBadan.clear();
+            LoginApiV2.CetakValue();
+        } catch (NumberFormatException e) {
+            alert.AlertWarning("Input Tidak Valid", "Berat badan harus berupa angka yang valid.");
+        } catch (IllegalArgumentException e) {
+            alert.AlertWarning("Input Kosong", e.getMessage());
+        }
+    }
+
+    private void addNewTarget() {
+        try {
+            if (dpOlahraga.getValue() == null) {
+                throw new IllegalArgumentException("Silakan pilih tanggal terlebih dahulu.");
+            }
+            if (tfTargetolahraga.getText().isEmpty()) {
+                throw new IllegalArgumentException("Target olahraga tidak boleh kosong.");
+            }
+
+            String Tanggal = dpOlahraga.getValue().toString();
+            int Target = Integer.parseInt(tfTargetolahraga.getText());
+
+            loginApiV2.updateTargetLari(Tanggal, Target);
+            labelOlahraga.setText(String.valueOf(Target));
+
+            dataList.setAll(LoginApiV2.Target.entrySet());
+            tabel.setItems(dataList);
+            tabel.refresh();
+
+            tfTargetolahraga.clear();
+            dpOlahraga.setValue(null);
+            LoginApiV2.CetakValue();
+        } catch (NumberFormatException e) {
+            alert.AlertWarning("Input Tidak Valid", "Target harus berupa angka bulat yang valid.");
+        } catch (IllegalArgumentException e) {
+            alert.AlertWarning("Input Kosong", e.getMessage());
+        }
     }
 
     private void setupTable() {
@@ -174,21 +239,6 @@ public class UpdateData {
         tabel.setItems(dataList);
     }
 
-    private void addNewTarget(){
-        String Tanggal = dpOlahraga.getValue().toString();
-        int Target = Integer.parseInt(tfTargetolahraga.getText());
-        loginApiV2.updateTargetLari(Tanggal, Target);
-        labelOlahraga.setText(String.valueOf(Target));
-
-        dataList.setAll(LoginApiV2.Target.entrySet());
-        tabel.setItems(dataList);
-        tabel.refresh();
-
-
-        tfTargetolahraga.clear();
-        dpOlahraga.setValue(null);
-        LoginApiV2.CetakValue();
-    }
 
     private void UpdateTargetOlahraga(){
         colNo.setCellValueFactory(cellData ->
