@@ -5,16 +5,12 @@ import API.TestingDb.ConnectionData;
 import API.TestingDb.DataConnecting;
 import chatBotEngine.Tokenization;
 
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class PenyakitConnecting extends ConnectionData implements SQLConnection{
+public class PenyakitConnecting extends ConnectionData implements SQLConnection {
     private final String QUERY_selectTabelGejala = "SELECT kodeGejala, gejala FROM gejala";
     private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
     private final String QUERY_selectTabelPenyakit = "SELECT Id_penyakit, nama_penyakit FROM penyakit";
@@ -33,358 +29,283 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
     public LinkedHashMap<String, ArrayList<String>> addMapGejala() {
         LinkedHashMap<String, ArrayList<String>> mapGejala = new LinkedHashMap<>();
-
-        try {
-            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_selectTabelGejala);
+        try (Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(QUERY_selectTabelGejala)) {
 
             while (resultSet.next()) {
                 String kodeGejala = resultSet.getString("kodeGejala");
                 String gejala = resultSet.getString("gejala");
-
-                // Split dan bersihkan kata dari tanda baca
                 String[] splitGejala = gejala.toLowerCase().split("[\\p{Punct}\\s]+");
-                ArrayList<String> kataList = new ArrayList<>(Arrays.asList(splitGejala));
-
-                mapGejala.put(kodeGejala, kataList);
+                mapGejala.put(kodeGejala.trim(), new ArrayList<>(Arrays.asList(splitGejala)));
             }
-
-            resultSet.close();
-            statement.close();
-            connection.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return mapGejala;
     }
 
     public HashMap<String, String> getKodeKeGejalaAsli() {
         HashMap<String, String> map = new HashMap<>();
-        try {
-            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_selectTabelGejala);
+        try (Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(QUERY_selectTabelGejala)) {
 
             while (resultSet.next()) {
-                String kodeGejala = resultSet.getString("kodeGejala").trim();
-                String gejala = resultSet.getString("gejala").trim();
-                map.put(kodeGejala, gejala);
+                map.put(resultSet.getString("kodeGejala").trim(), resultSet.getString("gejala").trim());
             }
-
-            resultSet.close();
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return map;
     }
 
-
-    public ArrayList<String> getMatchedKodeGejala(
-            HashSet<String> inputUser,
-            HashMap<String, ArrayList<String>> mapGejala
-    ) {
+    public ArrayList<String> getMatchedKodeGejala(HashSet<String> inputUser, HashMap<String, ArrayList<String>> mapGejala) {
         ArrayList<String> matchedKode = new ArrayList<>();
-
-        for (String kode : mapGejala.keySet()) {
-            ArrayList<String> gejalaWords = mapGejala.get(kode);
-
-            // Cek apakah ada irisan antara HashSet dan value (ArrayList)
-            for (String kata : gejalaWords) {
+        for (Map.Entry<String, ArrayList<String>> entry : mapGejala.entrySet()) {
+            for (String kata : entry.getValue()) {
                 if (inputUser.contains(kata)) {
-                    matchedKode.add(kode);
-                    break; // cukup 1 kata cocok, langsung ambil key
+                    matchedKode.add(entry.getKey().trim());
+                    break;
                 }
             }
         }
-
-        // ✅ Bersihkan spasi tambahan (jika ada)
-        for (int i = 0; i < matchedKode.size(); i++) {
-            matchedKode.set(i, matchedKode.get(i).trim());
-        }
-
         return matchedKode;
     }
 
+    public LinkedHashMap<Integer, ArrayList<String>> tabelPenyakitGejala() {
+        LinkedHashMap<Integer, ArrayList<String>> map = new LinkedHashMap<>();
+        try (Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(QUERY_selectTabelPenyakitGejala)) {
 
-    public LinkedHashMap<Integer, ArrayList<String>> tabelPenyakitGejala(){
-        LinkedHashMap<Integer, ArrayList<String>> mapPenyakitGejala = new LinkedHashMap<>();
-
-        try {
-            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_selectTabelPenyakitGejala);
-
-            while (resultSet.next()){
-                Integer Id_Penyakit = resultSet.getInt("Id_penyakit");
-                String kodeGejala = resultSet.getString("kodeGejala");
-                String[] kodeSplit = kodeGejala.split("\\s*,\\s*"); // sudah bagus: hilangkan spasi antar koma
-                ArrayList<String> kode = new ArrayList<>();
-                for (String k : kodeSplit) {
-                    kode.add(k.trim()); // jika yakin semua angka, bisa tambahkan .toString() atau biarkan sebagai String
+            while (resultSet.next()) {
+                int id = resultSet.getInt("Id_penyakit");
+                String[] kodeArray = resultSet.getString("kodeGejala").split("\\s*,\\s*");
+                ArrayList<String> kodeList = new ArrayList<>();
+                for (String k : kodeArray) {
+                    kodeList.add(k.trim());
                 }
-
-
-                mapPenyakitGejala.put(Id_Penyakit,kode);
+                map.put(id, kodeList);
             }
-
-            resultSet.close();
-            statement.close();
-            connection.close();
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return mapPenyakitGejala;
-
+        return map;
     }
 
-    public LinkedHashMap<Integer, String> tabelPenyakit(){
-        LinkedHashMap<Integer, String> mapPenyakit = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, String> tabelPenyakit() {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+        try (Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(QUERY_selectTabelPenyakit)) {
 
-        try {
-            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_selectTabelPenyakit);
-
-            while (resultSet.next()){
-                Integer Id_Penyakit = resultSet.getInt("Id_penyakit");
-                String NamaPenyakit = resultSet.getString("nama_penyakit");
-                mapPenyakit.put(Id_Penyakit, NamaPenyakit);
+            while (resultSet.next()) {
+                map.put(resultSet.getInt("Id_penyakit"), resultSet.getString("nama_penyakit"));
             }
-
-            resultSet.close();
-            statement.close();
-            connection.close();
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return mapPenyakit;
-
+        return map;
     }
 
-    public LinkedHashMap<Integer, String> addPenanganan(){
-        LinkedHashMap<Integer, String> mapPenanganan = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, String> addPenanganan() {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+        try (Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(QUERY_selectPenanganan)) {
 
-        try {
-            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_selectPenanganan);
-
-            while (resultSet.next()){
-                Integer Id_Penyakit = resultSet.getInt("Id_penyakit");
-                String penanganan = resultSet.getString("penanganan");
-                mapPenanganan.put(Id_Penyakit, penanganan);
+            while (resultSet.next()) {
+                map.put(resultSet.getInt("Id_penyakit"), resultSet.getString("penanganan"));
             }
-
-            resultSet.close();
-            statement.close();
-            connection.close();
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return mapPenanganan;
-
-
+        return map;
     }
 
     public Map<String, Object> getTop3PenyakitBesertaGejalaTidakTerpakai(ArrayList<String> matchedKode) {
-        LinkedHashMap<Integer, ArrayList<String>> dataPenyakit = tabelPenyakitGejala();
-        HashMap<Integer, Integer> skorPenyakit = new HashMap<>();
+        LinkedHashMap<Integer, ArrayList<String>> data = tabelPenyakitGejala();
+        HashMap<Integer, Integer> skor = new HashMap<>();
 
-        // Hitung skor kesesuaian
-        for (Map.Entry<Integer, ArrayList<String>> entry : dataPenyakit.entrySet()) {
-            Integer idPenyakit = entry.getKey();
-            ArrayList<String> daftarKode = entry.getValue();
-
-            int skor = 0;
-            for (String kode : daftarKode) {
-                if (matchedKode.contains(kode.trim())) {
-                    skor++;
-                }
+        for (Map.Entry<Integer, ArrayList<String>> entry : data.entrySet()) {
+            int s = 0;
+            for (String kode : entry.getValue()) {
+                if (matchedKode.contains(kode.trim())) s++;
             }
-
-            if (skor > 0) {
-                skorPenyakit.put(idPenyakit, skor);
-            }
+            if (s > 0) skor.put(entry.getKey(), s);
         }
 
-        // Urutkan berdasarkan skor
-        List<Map.Entry<Integer, Integer>> sortedList = new ArrayList<>(skorPenyakit.entrySet());
-        sortedList.sort((a, b) -> b.getValue() - a.getValue());
+        List<Map.Entry<Integer, Integer>> sorted = new ArrayList<>(skor.entrySet());
+        sorted.sort((a, b) -> b.getValue() - a.getValue());
 
-        // Ambil 3 teratas
-        ArrayList<Integer> top3IdPenyakit = new ArrayList<>();
-        for (int i = 0; i < Math.min(3, sortedList.size()); i++) {
-            top3IdPenyakit.add(sortedList.get(i).getKey());
+        ArrayList<Integer> top3 = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, sorted.size()); i++) {
+            top3.add(sorted.get(i).getKey());
         }
 
-        // Gabungkan semua kode gejala dari top 3 penyakit
-        HashSet<String> kodeGejalaTop3 = new HashSet<>();
-        for (Integer id : top3IdPenyakit) {
-            ArrayList<String> kodeGejala = dataPenyakit.get(id);
-            if (kodeGejala != null) {
-                for (String kode : kodeGejala) {
-                    kodeGejalaTop3.add(kode.trim());
-                }
-            }
+        HashSet<String> semuaGejalaTop3 = new HashSet<>();
+        for (Integer id : top3) {
+            semuaGejalaTop3.addAll(data.getOrDefault(id, new ArrayList<>()));
         }
 
-        // Cari kode gejala di top 3 yang tidak cocok dengan input user
-        ArrayList<String> kodeTidakTerpakai = new ArrayList<>();
-        for (String kode : kodeGejalaTop3) {
-            if (!matchedKode.contains(kode)) {
-                kodeTidakTerpakai.add(kode);
-            }
+        ArrayList<String> tidakTerpakai = new ArrayList<>();
+        for (String kode : semuaGejalaTop3) {
+            if (!matchedKode.contains(kode.trim())) tidakTerpakai.add(kode.trim());
         }
 
-        // Simpan hasil
         Map<String, Object> hasil = new HashMap<>();
-        hasil.put("top3IdPenyakit", top3IdPenyakit);
-        hasil.put("kodeTidakTerpakai", kodeTidakTerpakai);
-
+        hasil.put("top3IdPenyakit", top3);
+        hasil.put("kodeTidakTerpakai", tidakTerpakai);
         return hasil;
     }
 
-
-
-
     public void feedbackChatBot(String userInput) {
-        // Koneksi ke DB
-        DataConnecting dataConnecting = new DataConnecting();
-        dataConnecting.ConnectToDatabase(dataConnecting.getPENYAKIT_DATA());
-
-        // Tokenisasi input user jadi kode gejala
         String inputGejala = userInput.toLowerCase();
-        HashSet<String> inputUserSet = Tokenization.Gejala(inputGejala); // set hasil input user
+        HashSet<String> inputUser = Tokenization.Gejala(inputGejala);
 
-        //Debugging inputan user yg diclean
-        System.out.println("=====Debugging inputan user yg diclean=====");
-        System.out.println(inputUserSet);
-        System.out.println("===========================================");
+        //tes inputan
+        System.out.println(inputUser);
+        //
 
-        PenyakitConnecting penyakitConnecting = new PenyakitConnecting();
-        LinkedHashMap<String, ArrayList<String>> dataGejala = penyakitConnecting.addMapGejala();
+        LinkedHashMap<String, ArrayList<String>> dataGejala = addMapGejala();
 
-        // Ambil kode gejala hasil pencocokan
-        ArrayList<String> matchedKode = penyakitConnecting.getMatchedKodeGejala(inputUserSet, dataGejala);
+        //Tes add map gejala
+        System.out.println("Map gejala: " + dataGejala);
 
-        // Ambil data semua penyakit dan kode gejalanya
-        LinkedHashMap<Integer, ArrayList<String>> tabelPenyakitGejala = penyakitConnecting.tabelPenyakitGejala();
+        ArrayList<String> matchedKode = new ArrayList<>();
+        try {
+            matchedKode = getMatchedKodeGejala(inputUser, dataGejala);
+            System.out.println("Matched kode: " + matchedKode);
+        } catch (Exception e) {
+            e.printStackTrace();  // <-- ini penting
+        }
 
-        // ===== IF: Cek apakah matchedKode cocok 100% dengan salah satu baris gejala penyakit =====
-        boolean FullMatch = false;
-        int IdFullMatch = -1;
 
-        for (Map.Entry<Integer, ArrayList<String>> entry : tabelPenyakitGejala.entrySet()) {
-            ArrayList<String> kodeGejalaPenyakit = entry.getValue();
-            if (kodeGejalaPenyakit.containsAll(matchedKode) && matchedKode.containsAll(kodeGejalaPenyakit)) {
-                FullMatch = true;
-                IdFullMatch = entry.getKey();
+        LinkedHashMap<Integer, ArrayList<String>> dataPenyakit = tabelPenyakitGejala();
+
+        boolean fullMatch = false;
+        int idFullMatch = -1;
+
+        for (Map.Entry<Integer, ArrayList<String>> entry : dataPenyakit.entrySet()) {
+            ArrayList<String> list = new ArrayList<>();
+            for (String s : entry.getValue()) list.add(s.trim());
+            Collections.sort(list);
+
+            ArrayList<String> matchedCopy = new ArrayList<>();
+            for (String s : matchedKode) matchedCopy.add(s.trim());
+            Collections.sort(matchedCopy);
+
+            System.out.println("list: " + list);
+            System.out.println("matched: " + matchedCopy);
+            System.out.println("Apakah sama? " + list.equals(matchedCopy));
+
+            if (list.equals(matchedCopy)) {
+                fullMatch = true;
+                idFullMatch = entry.getKey();
                 break;
             }
         }
 
-        //Jika inputan tidak cocok dengan gejala apapun
-        if (matchedKode.isEmpty()){
+
+        if (matchedKode.isEmpty()) {
             PenyakitAPI.gejalaUser = inputGejala;
-            PenyakitAPI.feedback = "Gejala tidak cocok dengan penyakait manapun / Gejala diluar data yang ada";
-            PenyakitAPI.diagnosa = "Tidak bisa disimpulkan";
+            PenyakitAPI.feedback = "Gejala tidak cocok dengan penyakit manapun.";
+            PenyakitAPI.diagnosa = "Tidak dapat disimpulkan";
+            return;
         }
 
-        // ===== IF: Semua gejala cocok pada 1 penyakit =====
-        if (FullMatch) {
-            HashMap<String, String> kodeKeGejalaAsli = penyakitConnecting.getKodeKeGejalaAsli();
-
+        if (fullMatch) {
+            HashMap<String, String> mapKodeGejala = getKodeKeGejalaAsli();
             ArrayList<String> daftarGejalaUser = new ArrayList<>();
             for (String kode : matchedKode) {
-                if (kodeKeGejalaAsli.containsKey(kode)) {
-                    daftarGejalaUser.add(kodeKeGejalaAsli.get(kode));
-                }
+                daftarGejalaUser.add(mapKodeGejala.getOrDefault(kode, kode));
             }
+            String namaPenyakit = tabelPenyakit().getOrDefault(idFullMatch, "Tidak Diketahui");
+            String penanganan = addPenanganan().getOrDefault(idFullMatch, "Belum ada penanganan");
 
-            // Ambil nama penyakit dari IdFullMatch
-            LinkedHashMap<Integer, String> mapPenyakit = penyakitConnecting.tabelPenyakit();
-            String namaPenyakit = mapPenyakit.getOrDefault(IdFullMatch, "Tidak Diketahui");
-
-            //get penanganan
-            LinkedHashMap<Integer, String> mapPenanganan = penyakitConnecting.addPenanganan();
-            String penanganan = mapPenanganan.getOrDefault(IdFullMatch,"Belum ada penanganan");
-
-            // Simpan ke API
             PenyakitAPI.gejalaUser = inputGejala;
             PenyakitAPI.feedback = "Anda tampaknya terkena " + namaPenyakit;
             PenyakitAPI.diagnosa = namaPenyakit;
             PenyakitAPI.penanganan = penanganan;
+            return;
         }
 
-        // Feedback untuk menanyakan sisa gejala dari top3 penyakit yg disimpulkan
-        else {
-            // Ambil data top 3 penyakit dan sisa kode gejala yang belum cocok
-            Map<String, Object> hasilTop3 = penyakitConnecting.getTop3PenyakitBesertaGejalaTidakTerpakai(matchedKode);
-            ArrayList<Integer> top3Id = (ArrayList<Integer>) hasilTop3.get("top3IdPenyakit");
-            ArrayList<String> sisaKode = (ArrayList<String>) hasilTop3.get("kodeTidakTerpakai");
+        Map<String, Object> hasilTop3 = getTop3PenyakitBesertaGejalaTidakTerpakai(matchedKode);
+        ArrayList<Integer> top3Id = (ArrayList<Integer>) hasilTop3.get("top3IdPenyakit");
+        ArrayList<String> sisaKode = (ArrayList<String>) hasilTop3.get("kodeTidakTerpakai");
 
-
-            if (top3Id.isEmpty()) {
-                PenyakitAPI.feedback = "Gejala Anda tidak cocok dengan data penyakit manapun.";
-                PenyakitAPI.diagnosa = "Tidak dapat disimpulkan";
-                return;
-            }
-
-            // Ambil map kode ke gejala asli
-            HashMap<String, String> mapKodeKeGejala = penyakitConnecting.getKodeKeGejalaAsli();
-
-            // Ubah sisa kode jadi kalimat gejala
-            ArrayList<String> sisaGejala = new ArrayList<>();
-            for (String kode : sisaKode) {
-                if (mapKodeKeGejala.containsKey(kode)) {
-                    sisaGejala.add(mapKodeKeGejala.get(kode));
-                }
-            }
-
-            // Ambil nama penyakit dari top 3
-            LinkedHashMap<Integer, String> mapPenyakit = penyakitConnecting.tabelPenyakit();
-            StringBuilder kemungkinan = new StringBuilder();
-            for (Integer id : top3Id) {
-                String nama = mapPenyakit.get(id);
-                kemungkinan.append("- ").append(nama).append("\n");
-            }
-
-            // Buat string list sisa gejala
-            StringBuilder sisaList = new StringBuilder();
-            for (int i = 0; i < sisaGejala.size(); i++) {
-                sisaList.append(i + 1).append(". ").append(sisaGejala.get(i)).append("\n");
-            }
-
-            // Simpan ke API
-            PenyakitAPI.gejalaUser = inputGejala;
-            PenyakitAPI.feedback =
-                    "Gejala Anda belum cocok seluruhnya.\n" +
-                            "Kemungkinan penyakit:\n" + kemungkinan.toString() +
-                            "\nSisa gejala yang perlu dikonfirmasi:\n" + sisaList.toString() +
-                            "\nSilakan pilih/konfirmasi gejala yang Anda alami.";
-            PenyakitAPI.diagnosa = "Perlu konfirmasi lanjutan";
+        if (top3Id.isEmpty()) {
+            PenyakitAPI.feedback = "Gejala Anda tidak cocok dengan data penyakit manapun.";
+            PenyakitAPI.diagnosa = "Tidak dapat disimpulkan";
+            return;
         }
 
+        HashMap<String, String> mapKodeKeGejala = getKodeKeGejalaAsli();
+        StringBuilder sisaList = new StringBuilder();
+        for (int i = 0; i < sisaKode.size(); i++) {
+            sisaList.append(i + 1).append(". ").append(mapKodeKeGejala.getOrDefault(sisaKode.get(i), sisaKode.get(i))).append("\n");
+        }
+
+        StringBuilder kemungkinan = new StringBuilder();
+        for (Integer id : top3Id) {
+            kemungkinan.append("- ").append(tabelPenyakit().getOrDefault(id, "Tidak Diketahui")).append("\n");
+        }
+
+        PenyakitAPI.gejalaUser = inputGejala;
+        PenyakitAPI.feedback = "Gejala Anda belum cocok seluruhnya.\nKemungkinan penyakit:\n" + kemungkinan + "\nSisa gejala yang perlu dikonfirmasi:\n" + sisaList + "\nSilakan pilih/konfirmasi gejala yang Anda alami.";
+        PenyakitAPI.diagnosa = "Perlu konfirmasi lanjutan";
     }
 
+    public boolean konfirmasiDanEvaluasiUlangGejala(String inputAngkaUser, ArrayList<String> sisaKode, ArrayList<String> matchedKode) {
+        // Step 1: Bersihkan input angka dari tanda baca dan spasi
+        inputAngkaUser = inputAngkaUser.replaceAll("[^0-9\\s,]", " ");
+        String[] inputNumbers = inputAngkaUser.trim().split("[\\s,]+");
 
+        // Step 2: Ubah ke kode gejala dari daftar sisa
+        for (String s : inputNumbers) {
+            try {
+                int index = Integer.parseInt(s) - 1; // karena ditampilkan dari angka 1
+                if (index >= 0 && index < sisaKode.size()) {
+                    String kode = sisaKode.get(index).trim();
+                    if (!matchedKode.contains(kode)) {
+                        matchedKode.add(kode); // tambahkan ke matchedKode jika belum ada
+                    }
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
 
+        // Step 3: Ambil ulang semua data penyakit
+        LinkedHashMap<Integer, ArrayList<String>> dataPenyakit = tabelPenyakitGejala();
 
+        // Step 4: Cek apakah matched kode sekarang sama persis dengan salah satu data penyakit
+        for (Map.Entry<Integer, ArrayList<String>> entry : dataPenyakit.entrySet()) {
+            ArrayList<String> listGejala = new ArrayList<>();
+            for (String kode : entry.getValue()) listGejala.add(kode.trim());
+            Collections.sort(listGejala);
 
+            ArrayList<String> matchedCopy = new ArrayList<>();
+            for (String kode : matchedKode) matchedCopy.add(kode.trim());
+            Collections.sort(matchedCopy);
 
+            if (listGejala.equals(matchedCopy)) {
+                // Match ditemukan
+                String namaPenyakit = tabelPenyakit().getOrDefault(entry.getKey(), "Tidak Diketahui");
+                String penanganan = addPenanganan().getOrDefault(entry.getKey(), "Belum ada penanganan");
 
+                PenyakitAPI.feedback = "Setelah konfirmasi, Anda kemungkinan besar mengalami " + namaPenyakit + ".";
+                PenyakitAPI.diagnosa = namaPenyakit;
+                PenyakitAPI.penanganan = penanganan;
 
+                return true;
+            }
+        }
 
-
-
+        // Jika tidak cocok penuh
+        PenyakitAPI.feedback = "Setelah konfirmasi, gejala Anda masih belum cocok sepenuhnya.";
+        PenyakitAPI.diagnosa = "Perlu pemeriksaan lanjutan.";
+        return false;
+    }
 
 }
