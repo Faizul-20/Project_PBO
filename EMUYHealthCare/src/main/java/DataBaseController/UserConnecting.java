@@ -18,6 +18,8 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
                     "WHERE users.Username = ? AND users.Password = ? " +
                     "ORDER BY riwayat.Tanggal ASC" ;
 
+    private final String INSERT_DARAH = "INSERT INTO riwayat_gula_tekanan VALUES (NULL,?,?,?)";
+
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -62,7 +64,8 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
             connection.close();
 
         } catch (SQLException e) {
-            System.out.println("Pesan Erorr : " + e.getMessage());
+            System.out.println("\nTerjadi Kesalahan");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
         }
     }
 
@@ -117,6 +120,7 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
             int i = 1;
             while (rs.next()) {
                 if (isFirst) {
+                    LoginApiV2.ID = rs.getInt("id");
                     LoginApiV2.beratBadan = rs.getDouble("Berat_Badan");
                     LoginApiV2.tinggiBadan = rs.getDouble("Tinggi_Badan");
                     isFirst = false;
@@ -146,10 +150,31 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
             return hasData;
 
         }catch (SQLException e){
-            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("\nTerjadi Kesalahan");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
         }
         return false;
     }
+
+    //Untuk Menambah Data Gula Darah dan Tekanan
+    public void InsertDarah(double GulaDarah, double TekananDarah){
+        try {
+        Connection connection =  DriverManager.getConnection(getUserData());
+        PreparedStatement pstmt = connection.prepareStatement(INSERT_DARAH);
+        pstmt.setDouble(1,LoginApiV2.ID);
+        pstmt.setDouble(2,GulaDarah);
+        pstmt.setDouble(3,TekananDarah);
+        pstmt.executeUpdate();
+        pstmt.close();
+            System.out.println("Data darah berhasil disimpan!");
+
+        } catch (SQLException e) {
+            System.out.println("\nData darah tidak berhasil disimpan!");
+            System.err.println("Pesan Eror : " + e.getMessage() + "\n");
+        }
+    }
+
+
     public String getINSERT_DATA(){
         return INSERT_DATA;
     }
@@ -160,6 +185,9 @@ public class UserConnecting extends ConnectionData  implements SQLConnection {
 
     public String getSIGN_INV2() {
         return SIGN_INV2;
+    }
+    public String getINSERT_DARAH() {
+        return INSERT_DARAH;
     }
 
 }

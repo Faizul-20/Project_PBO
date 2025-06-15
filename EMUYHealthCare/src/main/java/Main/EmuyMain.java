@@ -1,6 +1,8 @@
 package Main;
+import API.LoginApiV2;
 import API.SignUpAPI;
 import Controller.SceneController;
+import Controller.TimeLogger;
 import DataBaseController.UserConnecting;
 import  javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,5 +19,6 @@ public class EmuyMain extends Application {
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
         Control.BuildWindow(Control.getLOGIN_PAGE());
+        new TimeLogger().start();
     }
 }

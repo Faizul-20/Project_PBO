@@ -20,11 +20,13 @@ public class SignUpAPI {
     }
 
     public void CekValue(){
+        System.out.println("=================User Baru Terdaftar====================");
         System.out.println("Username : " + Username);
         System.out.println("Password : " + Password);
         System.out.println("TTL      : " + UlangTahun);
         System.out.println("Tinggi   : " + TinggiBadan);
         System.out.println("Berat    :" + BeratBadan );
+        System.out.println("=========================================================");
     }
 
     public void PostDataUserTodatabase(){

@@ -104,7 +104,7 @@
                                 <Font size="23.0" />
                             </font>
                         </Label>
-                        <Label fx:id="labelBmivalue" layoutX="26.0" layoutY="35.0" text="32.8" textFill="WHITE">
+                        <Label fx:id="labelBmivalue" layoutX="26.0" layoutY="35.0" text="0.0" textFill="WHITE">
                             <font>
                                 <Font size="32.0" />
                             </font>
@@ -114,16 +114,16 @@
                 <AnchorPane fx:id="tabelTinggibadan" layoutX="22.0" layoutY="95.0" prefHeight="81.0" prefWidth="100.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
                     <children>
                         <Label layoutX="15.0" layoutY="5.0" text="Tinggi Badan" textFill="WHITE" />
-                        <Label fx:id="labelTInggibadan" layoutX="18.0" layoutY="32.0" prefHeight="30.0" prefWidth="64.0" text="180.0" textFill="WHITE">
+                        <Label fx:id="labelTInggibadan" alignment="CENTER" layoutY="32.0" prefHeight="40.0" prefWidth="100.0" text="0.0" textFill="WHITE">
                             <font>
-                                <Font size="24.0" />
+                                <Font size="28.0" />
                             </font>
                         </Label>
                     </children></AnchorPane>
                 <AnchorPane fx:id="tabelBeratbadan" layoutX="22.0" layoutY="183.0" prefHeight="81.0" prefWidth="100.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
                     <children>
                         <Label layoutX="21.0" layoutY="5.0" text="Berat Badan" textFill="WHITE" />
-                        <Label fx:id="labelBeratbedan" alignment="CENTER" layoutX="14.0" layoutY="28.0" prefHeight="40.0" prefWidth="67.0" text="90" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="labelBeratbedan" alignment="CENTER" layoutX="14.0" layoutY="28.0" prefHeight="40.0" prefWidth="67.0" text="0.0" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font size="28.0" />
                             </font></Label>
@@ -160,7 +160,7 @@
                 <AnchorPane fx:id="tabelGuladarahnormal" layoutX="94.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-radius: 20;">
                     <children>
                         <Label layoutX="55.0" layoutY="14.0" text="Mg/DL" />
-                        <Label fx:id="angkaGuladarah" layoutX="14.0" layoutY="9.0" text="88">
+                        <Label fx:id="angkaGuladarah" layoutX="14.0" layoutY="9.0" text="0.0">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -191,7 +191,7 @@
                 </Label>
                 <AnchorPane layoutX="156.0" layoutY="16.0" prefHeight="30.0" prefWidth="238.0" style="-fx-background-color: #0b1746; -fx-background-radius: 20;">
                <children>
-                  <Label fx:id="tanggal" alignment="TOP_CENTER" layoutX="45.0" layoutY="4.0" prefHeight="30.0" prefWidth="158.0" text="14-10-2025" textFill="WHITE">
+                  <Label fx:id="tanggal" alignment="TOP_CENTER" layoutX="45.0" layoutY="4.0" prefHeight="30.0" prefWidth="158.0" text="00/00/000" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -217,7 +217,7 @@
             <AnchorPane fx:id="tabelTekanandarahnormal" layoutX="99.0" layoutY="33.0" prefHeight="66.0" prefWidth="150.0" style="-fx-background-radius: 20;">
                <children>
                   <Label layoutX="58.0" layoutY="14.0" text="MmHg" />
-                  <Label fx:id="angkaTekanandarah" layoutX="14.0" layoutY="9.0" text="88">
+                  <Label fx:id="angkaTekanandarah" layoutX="14.0" layoutY="9.0" text="0.0">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -231,9 +231,9 @@
             </AnchorPane>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="loginnew" layoutX="356.0" layoutY="311.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
+        <AnchorPane fx:id="loginnew" layoutX="356.0" layoutY="252.0" prefHeight="307.0" prefWidth="455.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 20; -fx-border-radius: 20;">
             <children>
-                <Label layoutX="46.0" layoutY="24.0" prefHeight="51.0" prefWidth="399.0" text="Hallo Pengguna Baru Masukan Data ">
+                <Label layoutX="41.0" prefHeight="64.0" prefWidth="399.0" text="Hallo Pengguna Baru Masukan Data ">
                     <font>
                         <Font size="23.0" />
                     </font>

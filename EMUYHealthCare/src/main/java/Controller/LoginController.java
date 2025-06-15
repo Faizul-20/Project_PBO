@@ -263,17 +263,12 @@ public class LoginController implements Initializable {
         String password = signInpass.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Login Error", "Username dan password tidak boleh kosong!");
+            System.out.println("Username and password are empty");
+            alert.AlertWarning("Warning!!", "Username and password are empty");
             return;
         }
 
-        // Contoh sederhana autentikasi
-       /* if (username.equals("admin") && password.equals("admin")) {
-            showAlert("Login Berhasil", "Selamat datang di Emuy Health Care!");
-            // Tambahkan kode untuk navigasi ke halaman utama
-        } else {
-            showAlert("Login Gagal", "Username atau password salah!");
-        }*/
+
         LoginApiV2 loginAPI = new LoginApiV2(username,password);
         loginAPI.CekValue();
         loginAPI.Login();
@@ -291,16 +286,19 @@ public class LoginController implements Initializable {
 
 
         if (username.length() < 3) {
-            showAlert("Registrasi Error", "Username harus minimal 3 karakter!");
+            System.out.println("Username is too short");
+            alert.AlertEror("Eror!", "Username is too short");
             return;
         }
         if (password.length() < 6) {
-            showAlert("Registrasi Error", "Password harus minimal 6 karakter!");
+            System.out.println("Password is less than 6 characters");
+            alert.AlertEror("Eror!", "Password is less than 6 characters");
             return;
         }
 
         if (signUplahir.getValue() == null) {
-            showAlert("Registrasi Error", "Tanggal lahir harus diisi!");
+            System.out.println("Tanggal lahir harus diisi");
+            alert.AlertEror("Registrasi Error", "Tanggal lahir harus diisi!");
             return;
         }
 
@@ -309,16 +307,23 @@ public class LoginController implements Initializable {
             double tinggiBadan = Double.parseDouble(tb);
 
             if (beratBadan <= 0 || tinggiBadan <= 0) {
-                showAlert("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
+                alert.AlertInfo("Input Error", "Berat badan dan tinggi badan harus lebih dari 0!");
                 return;
             }
+            try {
+                if (!username.isEmpty() && !password.isEmpty() && !bb.isEmpty() && !tb.isEmpty() && !UlangTahun.isEmpty()) {
+                    SignUpAPI SignUp = new SignUpAPI(username, password, UlangTahun, bb, tb);
+                    SignUp.CekValue();
+                    SignUp.PostDataUserTodatabase();
+                } else {
+                    throw new NullPointerException("You Have to full fill all of questions");
+                }
+            }catch (NullPointerException e){
+                System.err.println("Pesan Eror : " + e.getMessage());
+                alert.AlertWarning("Pesan Eror", e.getMessage());
+            }
 
-
-            SignUpAPI SignUp = new SignUpAPI(username,password,UlangTahun,bb,tb);
-            SignUp.CekValue();
-            SignUp.PostDataUserTodatabase();
-
-            showAlert("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
+            alert.AlertInfo("Registrasi Berhasil", "Akun berhasil dibuat! Silakan login.");
 
             // Reset form
             signUpusername.clear();
@@ -331,15 +336,11 @@ public class LoginController implements Initializable {
             btnSignin(null);
 
         } catch (NumberFormatException e) {
-            showAlert("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
+            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("Berat badan dan tinggi badan harus berupa angka!");
+            alert.AlertWarning("Input Error", "Berat badan dan tinggi badan harus berupa angka!");
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }

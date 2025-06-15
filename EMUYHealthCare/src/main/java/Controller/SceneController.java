@@ -15,6 +15,7 @@ public class SceneController {
     private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard1.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
     private final String CHATBOT_LINK = "/com/example/emuyhealthcare/chatBot.fxml";
+    private final String UPDATE_LINK = "/com/example/emuyhealthcare/UpdateData.fxml";
     Stage stage;
 
 
@@ -61,7 +62,9 @@ public class SceneController {
     public String getDASHBOARD_LINK() {
         return DASHBOARD_LINK;
     }
-
+    public String getUPDATE_LINK() {
+        return UPDATE_LINK;
+    }
     public String getLOGIN_PAGE() {
         return LOGIN_PAGE;
     }

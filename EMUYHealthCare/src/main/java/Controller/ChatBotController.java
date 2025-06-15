@@ -189,6 +189,9 @@ public class ChatBotController {
             sceneController.SceneChange(sceneController.getLOGIN_PAGE());
             LoginApiV2.CetakValue();
         });
+        bodyMesh.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getUPDATE_LINK());
+        });
     }
 
 

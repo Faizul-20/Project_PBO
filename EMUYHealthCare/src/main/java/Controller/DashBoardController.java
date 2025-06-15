@@ -1,6 +1,7 @@
 package Controller;
 
 import API.LoginApiV2;
+import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ public class DashBoardController {
     @FXML
     private  AnchorPane loginnew;
     @FXML
-    private TextField inputGUladarah;
+    private TextField inputGuladarah;
     @FXML
     private TextField inputTekanandarah;
     @FXML
@@ -77,16 +78,6 @@ public class DashBoardController {
     //indikator tak gawe 3
     @FXML
     private AnchorPane tabelTekanandarahnormal;
-    @FXML
-    private Label labelTekanandarahnormal; // iki angka indikator
-    @FXML
-    private AnchorPane tabelTekanandarahwaspada;
-    @FXML
-    private Label labelTekanandarahwaspada; // iki angka indikator
-    @FXML
-    private AnchorPane tabelTekanandarahbahaya;
-    @FXML
-    private Label labelTekanandarahbahaya; // iki angka indikator
 
     //tabel bmi
     //tabel tinggi badan
@@ -148,11 +139,12 @@ public class DashBoardController {
 
 
     SceneController sceneController = new SceneController();
+    UserConnecting userConnecting = new UserConnecting();
     @FXML
     public void initialize(){
         try {
             handleMenuDashboard();
-            loginnew.setVisible(false);
+            loginnew.setVisible(checkMember());
             judulUsername.setText("Hai " + LoginApiV2.getUsername() + " !!");
             getValuesLogin();
             bmiArrowIndikator();
@@ -161,13 +153,29 @@ public class DashBoardController {
             BMIvalues(LoginApiV2.BMIIndeksBadan);
             Platform.runLater(() -> updateGulaDarahColor());
             Platform.runLater(() -> updateTekananDarahColor());
-
+            inputNewlogin.setOnAction(event -> handleNewLogin());
 
         } catch (Exception e) {
             System.err.println("Terjadi Eror");
             System.out.println("Pesan Eror :"+ e.getMessage());
         }
 
+
+    }
+
+
+    private void handleNewLogin(){
+        double gulaDarah = Double.parseDouble(inputGuladarah.getText());
+        double tekananDarah = Double.parseDouble(inputTekanandarah.getText());
+
+        if (gulaDarah != 0 && tekananDarah != 0 ) {
+            userConnecting.InsertDarah(gulaDarah, tekananDarah);
+            loginnew.setVisible(false);
+        }else {
+            System.out.println("Input Tidak Berhasil di masukan ke database");
+        }
+        inputGuladarah.clear();
+        inputTekanandarah.clear();
 
     }
 
@@ -189,6 +197,9 @@ public class DashBoardController {
             sceneController.SceneChange(sceneController.getLOGIN_PAGE());
             LoginApiV2.CetakValue();
         });
+        bodyMesh.setOnAction(e-> {
+            sceneController.SceneChange(sceneController.getUPDATE_LINK());
+        });
     }
 
     private void getValuesLogin(){
@@ -199,9 +210,9 @@ public class DashBoardController {
 
     private boolean checkMember(){
         if (LoginApiV2.gulaDarah == 0 && LoginApiV2.TekananDarah == 0){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     private void bmiArrowIndikator(){
         kursorIndikator.setLayoutY(kursorIndikator.getLayoutY());
