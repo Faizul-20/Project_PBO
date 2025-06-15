@@ -1,6 +1,8 @@
 package Controller;
 
 import API.LoginApiV2;
+import API.PenyakitAPI;
+import DataBaseController.PenyakitConnecting;
 import chatBotEngine.CakapEmuyService;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.KeyFrame;
@@ -71,6 +73,7 @@ public class ChatBotController {
 
     String Pesan = "";
     CakapEmuyService EmuyService;
+    PenyakitConnecting PenyakitConnecting = new PenyakitConnecting();
 
     {
         try {
@@ -91,7 +94,8 @@ public class ChatBotController {
 
     private void sendMessage() {
         Pesan = kolomtext.getText();
-        String Input = EmuyService.processInput(Pesan);
+        PenyakitConnecting.feedbackChatBot(Pesan);
+        String Input = PenyakitAPI.feedback;
 
         if (!Pesan.isEmpty()) {
             HBox userChat = createBubbleMessage(Pesan, Pos.CENTER_RIGHT, "#375FAD", "White");

@@ -16,7 +16,9 @@ public class MainTesting extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        alert.AlertEror("eror","Apakah Kamu ingin keluar?");
+        SceneController Control = new SceneController(primaryStage);
+        primaryStage.centerOnScreen();
+        Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
 
     }
 }
