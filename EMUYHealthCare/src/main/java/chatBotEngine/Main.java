@@ -35,14 +35,14 @@ public class Main {
         //Tes kode gejala match
         HashSet<String> InputUser = Tokenization.Gejala(inputGejala);
         ArrayList<String> resultMatchCode = penyakitConnecting.getMatchedKodeGejala(InputUser, dataGejala);
-//        if (resultMatchCode.isEmpty()) {
-//            System.out.println("Tidak ada gejala yang cocok.");
-//        } else {
-//            System.out.println("Gejala cocok ditemukan untuk kode:");
-//            for (String kode : resultMatchCode) {
-//                System.out.println("- " + kode);
-//            }
-//        }
+        if (resultMatchCode.isEmpty()) {
+            System.out.println("Tidak ada gejala yang cocok.");
+        } else {
+            System.out.println("Gejala cocok ditemukan untuk kode:");
+            for (String kode : resultMatchCode) {
+                System.out.println("- " + kode);
+            }
+        }
 
         //Tes tabel penyakit gejala
         LinkedHashMap<Integer, ArrayList<String>> TabelPenyakitGejala = penyakitConnecting.tabelPenyakitGejala();
@@ -55,8 +55,11 @@ public class Main {
         ArrayList<Integer> top3 = (ArrayList<Integer>) result.get("top3IdPenyakit");
         ArrayList<String> tidakTerpakai = (ArrayList<String>) result.get("kodeTidakTerpakai");
 
-        System.out.println("Top 3 ID Penyakit: " + top3);
-        System.out.println("Kode gejala tidak ditemukan: " + tidakTerpakai);
+//        System.out.println("Top 3 ID Penyakit: " + top3);
+//        System.out.println("Kode gejala tidak ditemukan: " + tidakTerpakai);
+
+        HashSet<String> gejala = Tokenization.Gejala(inputGejala);
+        System.out.println(gejala);
 
     }
 }
