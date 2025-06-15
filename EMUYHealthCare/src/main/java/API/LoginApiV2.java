@@ -100,10 +100,28 @@ public class LoginApiV2 {
     }
 
 
-    double BMICalculate(double TinggiBadan,double BeratBadan){
-        double BMI = BeratBadan/Math.pow((TinggiBadan/100),2);
-        BigDecimal bigDecimal = new BigDecimal(BMI).setScale(1, BigDecimal.ROUND_HALF_UP);
-        BMIIndeksBadan = bigDecimal.doubleValue();
+    double BMICalculate(double TinggiBadan, double BeratBadan) {
+        try {
+            if (TinggiBadan <= 0 || BeratBadan <= 0) {
+                throw new IllegalArgumentException("Tinggi atau Berat tidak boleh <= 0");
+            }
+
+            double BMI = BeratBadan / Math.pow((TinggiBadan / 100), 2);
+
+            if (Double.isInfinite(BMI) || Double.isNaN(BMI)) {
+                throw new ArithmeticException("BMI hasilnya tidak valid (Infinite atau NaN)");
+            }
+
+            BigDecimal bigDecimal = new BigDecimal(BMI).setScale(1, BigDecimal.ROUND_HALF_UP);
+            BMIIndeksBadan = bigDecimal.doubleValue();
+
+        } catch (Exception e) {
+            System.err.println("=====================================");
+            System.out.println("BMICalculate failed: " + e.getMessage());
+            System.err.println("=====================================");
+            BMIIndeksBadan = 0;
+        }
+
         return BMIIndeksBadan;
     }
 

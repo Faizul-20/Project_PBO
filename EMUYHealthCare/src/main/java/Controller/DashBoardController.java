@@ -10,6 +10,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -19,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.util.AbstractMap;
 import java.util.Map;
 
@@ -136,6 +138,8 @@ public class DashBoardController {
     private Label angkaTekanandarah;
 
 
+    @FXML
+    private ImageView fotoBmi;
 
     SceneController sceneController = new SceneController();
     UserConnecting userConnecting = new UserConnecting();
@@ -244,18 +248,36 @@ public class DashBoardController {
         tabelOlaraga.getData().add(series);
     }
 
-    private void BMIvalues(double value){
-        if (value <= 18.5){
+    private void BMIvalues(double value) {
+        if (value <= 18.5) {
+            System.out.println("\nMenampilkan Gambar... Kurus");
+            Image image = new Image(getClass().getResource("/images/bmikurus.png").toExternalForm());
+            UpdateFotoBMI(image);
             indikatorIdeal.setText("Berat badan kurang");
-        } else if (value > 18.5 && value < 25   ) {
+        } else if (value > 18.5 && value < 25) {
+            System.out.println("\nMenampilkan Gambar... Ideal");
+            Image image = new Image(getClass().getResource("/images/bminormal.png").toExternalForm());
+            UpdateFotoBMI(image);
             indikatorIdeal.setText("Ideal");
-        }else if (value > 25 && value < 30){
+        } else if (value > 25 && value < 30) {
+            System.out.println("\nMenampilkan Gambar... Kelebihan Berat Badan");
+            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            UpdateFotoBMI(image);
             indikatorIdeal.setText("Kelebihan Berat Badan");
         } else if (value > 30 && value < 35) {
+            System.out.println("\nMenampilkan Gambar... Obesitas 1");
+            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            UpdateFotoBMI(image);
             indikatorIdeal.setText("Obesitas 1");
         } else if (value > 35 && value < 40) {
+            System.out.println("\nMenampilkan Gambar... Obesitas 2");
+            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            UpdateFotoBMI(image);
             indikatorIdeal.setText("Obesitas 2");
         } else if (value > 40) {
+            System.out.println("\nMenampilkan Gambar... Obesitas 3");
+            Image image = new Image(getClass().getResource("/images/bmiobesitas.png").toExternalForm());
+            UpdateFotoBMI(image);
             indikatorIdeal.setText("Obesitas 3");
         }
     }
@@ -353,6 +375,10 @@ public class DashBoardController {
             LoginApiV2.Target.put(targetLari.getKey(), targetLari.getValue());
             LoginApiV2.LastTarget = 0.0;
         }
+    }
+
+    private void UpdateFotoBMI(Image fotoBMI){
+        fotoBmi.setImage(fotoBMI);
     }
 }
 
