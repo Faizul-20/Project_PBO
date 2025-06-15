@@ -1,4 +1,4 @@
-package Main;
+package Testing;
 
 import Controller.SceneController;
 import Utils.TimeLogger;
@@ -16,7 +16,7 @@ public class MainTesting extends Application {
 
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
-        Control.BuildWindow(Control.getUPDATE_LINK(),"Login");
+        Control.BuildWindow(Control.getDASHBOARD_LINK(),"Login");
         new TimeLogger().start();
 
     }

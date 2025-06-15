@@ -88,6 +88,7 @@ public class UpdateDataController {
         labelTekananDarah.setText(String.valueOf(LoginApiV2.TekananDarah));
         labelTinggiBadan.setText(String.valueOf(LoginApiV2.tinggiBadan));
         labelBeratBadan.setText(String.valueOf(LoginApiV2.beratBadan));
+        labelOlahraga.setText(String.valueOf(LoginApiV2.LastTarget));
         setupTable();
     }
 

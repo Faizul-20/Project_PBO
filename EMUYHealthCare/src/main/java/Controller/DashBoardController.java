@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
+import java.util.AbstractMap;
 import java.util.Map;
 
 
@@ -229,7 +230,7 @@ public class DashBoardController {
 
     private void getTargetUser() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName(null);
+        series.setName("Target Lari");
 
         //Memasukan nilai Target ke dalam LineChart
         for (Map.Entry<String, Double> entry : LoginApiV2.Target.entrySet()) {
@@ -330,14 +331,28 @@ public class DashBoardController {
 
     private void updateTargetLari(){
         Map.Entry<String,Double> targetLari = null;
+        try {
+            System.out.println("=======================Update Target Lari=========================");
+            for (Map.Entry<String, Double> LastEntry : LoginApiV2.Target.entrySet()) {
+                System.out.println("Tanggal : " + LastEntry.getKey() + "  Jarak : " + LastEntry.getValue());
+                targetLari = LastEntry;
+                LoginApiV2.LastTarget = LastEntry.getValue();
+            }
+            tanggal.setText(targetLari.getKey());
+            JarakLari.setText("Lari " + targetLari.getValue().toString() + " KM");
+            System.out.println("===================================================================");
+        }catch (NullPointerException e){
+            System.err.println("Terjadi Eror");
+            System.out.println("Pesan Eror : " + e.getMessage());
 
-        for (Map.Entry<String,Double> LastEntry : LoginApiV2.Target.entrySet()){
-            System.out.println("Tanggal : " +LastEntry.getKey() + "  Jarak : " + LastEntry.getValue());
-            targetLari = LastEntry;
+            // Set default value ketika terjadi NullPointerException
+            tanggal.setText("Belum Ada Data");
+            JarakLari.setText("Lari 0 KM");
+            // Optional: Set nilai default ke targetLari dan LoginApiV2.LastTarget
+            targetLari = new AbstractMap.SimpleEntry<>("Belum Ada", 0.0);
+            LoginApiV2.Target.put(targetLari.getKey(), targetLari.getValue());
+            LoginApiV2.LastTarget = 0.0;
         }
-        tanggal.setText(targetLari.getKey());
-        JarakLari.setText("Lari " + targetLari.getValue().toString() + " KM");
-
     }
 }
 

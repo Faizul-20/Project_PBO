@@ -14,4 +14,5 @@ module com.example.emuyhealthcare {
     exports DataBaseController;
     exports Utils;
     opens Utils to javafx.fxml;
+    exports Testing;
 }

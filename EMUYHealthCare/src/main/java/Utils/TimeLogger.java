@@ -24,17 +24,16 @@ public class TimeLogger extends Thread {
                 long maxMemory = runtime.maxMemory() / MB;
 
                 String username = LoginApiV2.getUsername();
-                String info = String.format("[%s] %s | Memori: Digunakan %d MB / Total %d MB / Max %d MB",
-                        username != null ? username : "UNKNOWN",
+                String info = String.format("[%s] %s | Used Memori : %d MB / Total Memory %d MB / Max Memory %d MB",
+                        username != null ? username :"[EMUYLOG] UNKNOWN",
                         timestamp,
                         usedMemory, totalMemory, maxMemory);
 
                 if (usedMemory > 200) {
-                    System.out.println("[LOG] " + info);
+                    System.out.println("[EMUYLOG] " + info);
                 } else {
                     System.out.println(info);
                 }
-
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("[LOGGER] Dihentikan.");
