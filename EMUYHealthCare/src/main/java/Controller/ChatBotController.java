@@ -1,6 +1,8 @@
 package Controller;
 
 import API.LoginApiV2;
+import API.PenyakitAPI;
+import DataBaseController.PenyakitConnecting;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -73,6 +75,8 @@ public class ChatBotController {
 
     String Pesan = "";
 
+    PenyakitConnecting penyakitConnecting = new PenyakitConnecting();
+
     SceneController sceneController = new SceneController();
     public void initialize() {
         layearbublechat.setFillWidth(true);
@@ -84,6 +88,8 @@ public class ChatBotController {
 
     private void sendMessage() {
         Pesan = kolomtext.getText();
+        penyakitConnecting.feedbackChatBot(Pesan);
+        String input = PenyakitAPI.feedback;
 
         if (!Pesan.isEmpty()) {
             HBox userChat = createBubbleMessage(Pesan, Pos.CENTER_RIGHT, "#375FAD", "White");
@@ -101,7 +107,7 @@ public class ChatBotController {
             PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
             delay.setOnFinished(event -> {
                 layearbublechat.getChildren().remove(typingBubble);
-                showTypingBot("Ini adalah Jawaban Dari Chat Bot");
+                showTypingBot(input);
             });
             delay.play();
         }

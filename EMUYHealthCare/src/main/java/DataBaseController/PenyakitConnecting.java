@@ -18,6 +18,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
     private final String QUERY_selectTabelGejala = "SELECT kodeGejala, gejala FROM gejala";
     private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
     private final String QUERY_selectTabelPenyakit = "SELECT Id_penyakit, nama_penyakit FROM penyakit";
+    private final String QUERY_selectPenanganan = "SELECT Id_penyakit, penanganan FROM penyakit";
 
     @Override
     public void ConnectToDatabase(String Url) {
@@ -168,6 +169,32 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
     }
 
+    public LinkedHashMap<Integer, String> addPenanganan(){
+        LinkedHashMap<Integer, String> mapPenanganan = new LinkedHashMap<>();
+
+        try {
+            Connection connection = DriverManager.getConnection(getPENYAKIT_DATA());
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_selectPenanganan);
+
+            while (resultSet.next()){
+                Integer Id_Penyakit = resultSet.getInt("Id_penyakit");
+                String penanganan = resultSet.getString("penanganan");
+                mapPenanganan.put(Id_Penyakit, penanganan);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return mapPenanganan;
+
+
+    }
+
     public Map<String, Object> getTop3PenyakitBesertaGejalaTidakTerpakai(ArrayList<String> matchedKode) {
         LinkedHashMap<Integer, ArrayList<String>> dataPenyakit = tabelPenyakitGejala();
         HashMap<Integer, Integer> skorPenyakit = new HashMap<>();
@@ -237,6 +264,12 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
         // Tokenisasi input user jadi kode gejala
         String inputGejala = userInput.toLowerCase();
         HashSet<String> inputUserSet = Tokenization.Gejala(inputGejala); // set hasil input user
+
+        //Debugging inputan user yg diclean
+        System.out.println("=====Debugging inputan user yg diclean=====");
+        System.out.println(inputUserSet);
+        System.out.println("===========================================");
+
         PenyakitConnecting penyakitConnecting = new PenyakitConnecting();
         LinkedHashMap<String, ArrayList<String>> dataGejala = penyakitConnecting.addMapGejala();
 
@@ -252,7 +285,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
 
         for (Map.Entry<Integer, ArrayList<String>> entry : tabelPenyakitGejala.entrySet()) {
             ArrayList<String> kodeGejalaPenyakit = entry.getValue();
-            if (kodeGejalaPenyakit.containsAll(matchedKode)) {
+            if (kodeGejalaPenyakit.containsAll(matchedKode) && matchedKode.containsAll(kodeGejalaPenyakit)) {
                 FullMatch = true;
                 IdFullMatch = entry.getKey();
                 break;
@@ -260,7 +293,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
         }
 
         //Jika inputan tidak cocok dengan gejala apapun
-        if (getMatchedKodeGejala(inputUserSet,dataGejala).isEmpty()){
+        if (matchedKode.isEmpty()){
             PenyakitAPI.gejalaUser = inputGejala;
             PenyakitAPI.feedback = "Gejala tidak cocok dengan penyakait manapun / Gejala diluar data yang ada";
             PenyakitAPI.diagnosa = "Tidak bisa disimpulkan";
@@ -281,22 +314,66 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection{
             LinkedHashMap<Integer, String> mapPenyakit = penyakitConnecting.tabelPenyakit();
             String namaPenyakit = mapPenyakit.getOrDefault(IdFullMatch, "Tidak Diketahui");
 
+            //get penanganan
+            LinkedHashMap<Integer, String> mapPenanganan = penyakitConnecting.addPenanganan();
+            String penanganan = mapPenanganan.getOrDefault(IdFullMatch,"Belum ada penanganan");
+
             // Simpan ke API
             PenyakitAPI.gejalaUser = inputGejala;
             PenyakitAPI.feedback = "Anda tampaknya terkena " + namaPenyakit;
             PenyakitAPI.diagnosa = namaPenyakit;
+            PenyakitAPI.penanganan = penanganan;
         }
 
         // Feedback untuk menanyakan sisa gejala dari top3 penyakit yg disimpulkan
         else {
-            Map<String, Object> result = penyakitConnecting.getTop3PenyakitBesertaGejalaTidakTerpakai(matchedKode);
-            ArrayList<Integer> top3 = (ArrayList<Integer>) result.get("top3IdPenyakit");
-            ArrayList<String> tidakTerpakai = (ArrayList<String>) result.get("kodeTidakTerpakai");
+            // Ambil data top 3 penyakit dan sisa kode gejala yang belum cocok
+            Map<String, Object> hasilTop3 = penyakitConnecting.getTop3PenyakitBesertaGejalaTidakTerpakai(matchedKode);
+            ArrayList<Integer> top3Id = (ArrayList<Integer>) hasilTop3.get("top3IdPenyakit");
+            ArrayList<String> sisaKode = (ArrayList<String>) hasilTop3.get("kodeTidakTerpakai");
 
-            System.out.println("⚠ Tidak ada penyakit yang cocok 100%.");
-            System.out.println("🥇 Top 3 kemungkinan penyakit: " + top3);
-            System.out.println("❌ Kode gejala tidak terpakai dalam top 3: " + tidakTerpakai);
+
+            if (top3Id.isEmpty()) {
+                PenyakitAPI.feedback = "Gejala Anda tidak cocok dengan data penyakit manapun.";
+                PenyakitAPI.diagnosa = "Tidak dapat disimpulkan";
+                return;
+            }
+
+            // Ambil map kode ke gejala asli
+            HashMap<String, String> mapKodeKeGejala = penyakitConnecting.getKodeKeGejalaAsli();
+
+            // Ubah sisa kode jadi kalimat gejala
+            ArrayList<String> sisaGejala = new ArrayList<>();
+            for (String kode : sisaKode) {
+                if (mapKodeKeGejala.containsKey(kode)) {
+                    sisaGejala.add(mapKodeKeGejala.get(kode));
+                }
+            }
+
+            // Ambil nama penyakit dari top 3
+            LinkedHashMap<Integer, String> mapPenyakit = penyakitConnecting.tabelPenyakit();
+            StringBuilder kemungkinan = new StringBuilder();
+            for (Integer id : top3Id) {
+                String nama = mapPenyakit.get(id);
+                kemungkinan.append("- ").append(nama).append("\n");
+            }
+
+            // Buat string list sisa gejala
+            StringBuilder sisaList = new StringBuilder();
+            for (int i = 0; i < sisaGejala.size(); i++) {
+                sisaList.append(i + 1).append(". ").append(sisaGejala.get(i)).append("\n");
+            }
+
+            // Simpan ke API
+            PenyakitAPI.gejalaUser = inputGejala;
+            PenyakitAPI.feedback =
+                    "Gejala Anda belum cocok seluruhnya.\n" +
+                            "Kemungkinan penyakit:\n" + kemungkinan.toString() +
+                            "\nSisa gejala yang perlu dikonfirmasi:\n" + sisaList.toString() +
+                            "\nSilakan pilih/konfirmasi gejala yang Anda alami.";
+            PenyakitAPI.diagnosa = "Perlu konfirmasi lanjutan";
         }
+
     }
 
 
