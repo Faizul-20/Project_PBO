@@ -62,22 +62,21 @@ public class UpdateData {
     private void handleMenuDashboard(){
         //Pilihan Dashboard
         hoMe.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK(),"DashBoard");
         });
         //Pilihan Chatbot
         chatBot.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getCHATBOT_LINK());
+            sceneController.SceneChange(sceneController.getCHATBOT_LINK(),"ChatBot");
         });
         // Pilihan Logout
         buttonLogout.setOnAction(e -> {
             LoginApiV2.Logout();
-            sceneController.SceneChange(sceneController.getLOGIN_PAGE());
+            sceneController.SceneChange(sceneController.getLOGIN_PAGE(),"Login");
             LoginApiV2.CetakValue();
         });
         bodyMesh.setOnAction(e-> {
-            sceneController.SceneChange(sceneController.getUPDATE_LINK());
+            sceneController.SceneChange(sceneController.getUPDATE_LINK(),"Update");
         });
     }
-
 
 }

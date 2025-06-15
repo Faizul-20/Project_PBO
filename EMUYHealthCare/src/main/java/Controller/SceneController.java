@@ -42,7 +42,7 @@ public class SceneController {
     }
 
     //Method For ChangeScene
-    public void SceneChange(String Url){
+    public void SceneChange(String Url,String Scene){
         try {
             Parent Loader = FXMLLoader.load(getClass().getResource(Url));
             stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
@@ -51,7 +51,7 @@ public class SceneController {
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
-            System.out.println("Berhasil menampilkan layar");
+            System.out.println("Berhasil menampilkan layar " + Scene);
         }catch (IOException e){
             System.out.println("Pesan Eror : " + e.getMessage());
             System.out.println("Tidak Dapat menampilkan Layar");

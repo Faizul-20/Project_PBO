@@ -1,9 +1,7 @@
 package Controller;
 
-import API.LoginAPI;
 import API.LoginApiV2;
 import API.SignUpAPI;
-import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;

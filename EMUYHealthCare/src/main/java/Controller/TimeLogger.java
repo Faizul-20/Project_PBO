@@ -11,19 +11,31 @@ public class TimeLogger extends Thread {
     @Override
     public void run() {
         Runtime runtime = Runtime.getRuntime();
+        final int MB = 1024 * 1024;
 
         while (true) {
             try {
                 String timestamp = java.time.LocalDateTime.now()
                         .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-                long usedMemory = runtime.totalMemory() - runtime.freeMemory();
-                String formattedMemory = String.format("%.2f MB", usedMemory / (1024.0 * 1024.0));
+                long totalMemory = runtime.totalMemory() / MB;
+                long freeMemory = runtime.freeMemory() / MB;
+                long usedMemory = totalMemory - freeMemory;
+                long maxMemory = runtime.maxMemory() / MB;
 
-                System.out.println("[" + LoginApiV2.getUsername() + "] " + timestamp +
-                        " | Memori digunakan: " + formattedMemory);
+                String username = LoginApiV2.getUsername();
+                String info = String.format("[%s] %s | Memori: Digunakan %d MB / Total %d MB / Max %d MB",
+                        username != null ? username : "UNKNOWN",
+                        timestamp,
+                        usedMemory, totalMemory, maxMemory);
 
-                Thread.sleep(1000); // setiap 1 detik
+                if (usedMemory > 200) {
+                    System.out.println("⚠️ " + info);
+                } else {
+                    System.out.println(info);
+                }
+
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("[LOGGER] Dihentikan.");
                 break;

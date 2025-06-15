@@ -73,7 +73,7 @@ public class LoginApiV2 {
             System.out.println("Tinggi Badan : " + tinggiBadan);
             System.out.println("Berat Badan : " + beratBadan);
             System.out.println("===========================================================");
-            sceneController.SceneChange(sceneController.getDASHBOARD_LINK());
+            sceneController.SceneChange(sceneController.getDASHBOARD_LINK(),"DashBoard");
             cetakTarget();
 
         }else {
