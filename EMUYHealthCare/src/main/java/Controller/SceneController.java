@@ -27,7 +27,7 @@ public class SceneController {
     public SceneController(){};
 
     //Method For Building New Window
-    public void BuildWindow(String Url){
+    public void BuildWindow(String Url,String Scene){
         try {
             Parent Load = FXMLLoader.load(getClass().getResource(Url));
             stage.centerOnScreen();
@@ -35,7 +35,7 @@ public class SceneController {
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
-
+            System.out.println("Berhasil Menampilkan : " + Scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
