@@ -1,13 +1,9 @@
 package Main;
 
 import Controller.SceneController;
-import Controller.TimeLogger;
-import Controller.alert;
+import Utils.TimeLogger;
 import javafx.application.Application;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MainTesting extends Application {
 
@@ -20,7 +16,7 @@ public class MainTesting extends Application {
 
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
-        Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
+        Control.BuildWindow(Control.getUPDATE_LINK(),"Login");
         new TimeLogger().start();
 
     }

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateData">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateDataController">
 <children>
             <AnchorPane fx:id="menuDasboard" layoutX="-3.0" layoutY="-3.2" prefHeight="772.0" prefWidth="183.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="1186.0" AnchorPane.topAnchor="-3.0">
                 <children>
@@ -46,11 +46,6 @@
                     <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text="." />
                 </children>
             </AnchorPane>
-            <Label layoutX="212.0" layoutY="4.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
-                <font>
-                    <Font size="25.0" />
-                </font>
-            </Label>
       <AnchorPane layoutX="198.0" layoutY="56.0" prefHeight="162.0" prefWidth="194.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
             <ImageView fx:id="gambargulaDarah" fitHeight="112.0" fitWidth="118.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
@@ -60,12 +55,12 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="labelGulaDarah" layoutX="63.0" layoutY="49.0" text="90">
+            <Label fx:id="labelGulaDarah" layoutX="63.0" layoutY="50.0" text="100.0">
                <font>
-                  <Font size="21.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="90.0" layoutY="49.0" prefHeight="32.0" prefWidth="89.0" text="Mg/Dl">
+            <Label layoutX="122.0" layoutY="50.0" prefHeight="32.0" prefWidth="67.0" text="Mg/Dl">
                <font>
                   <Font size="22.0" />
                </font>
@@ -80,7 +75,12 @@
                </image></ImageView>
             <JFXButton fx:id="buttonGuladarah" layoutX="156.0" layoutY="106.0" prefHeight="31.0" prefWidth="26.0" text="." />
          </children></AnchorPane>
-      <AnchorPane layoutX="400.0" layoutY="56.0" prefHeight="162.0" prefWidth="213.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+            <Label layoutX="212.0" layoutY="4.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
+                <font>
+                    <Font size="25.0" />
+                </font>
+            </Label>
+      <AnchorPane layoutX="400.0" layoutY="56.0" prefHeight="162.0" prefWidth="202.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
             <ImageView fx:id="gambarTekanandarah" fitHeight="112.0" fitWidth="118.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
              <ImageView fitHeight="104.0" fitWidth="90.0" layoutX="-14.0" layoutY="2.0">
@@ -91,12 +91,12 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="labelTekananDarah" layoutX="70.0" layoutY="49.0" text="90">
+            <Label fx:id="labelTekananDarah" layoutX="70.0" layoutY="49.0" text="100.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="96.0" layoutY="49.0" prefHeight="32.0" prefWidth="89.0" text="MmHg">
+            <Label layoutX="129.0" layoutY="48.0" prefHeight="32.0" prefWidth="76.0" text="MmHg">
                <font>
                   <Font size="22.0" />
                </font>
@@ -116,17 +116,17 @@
              <ImageView fitHeight="91.0" fitWidth="89.0" layoutX="14.0" layoutY="11.0">
                  <Image url="@../../../images/lari.png" />
              </ImageView>
-            <Label layoutX="93.0" layoutY="17.0" prefHeight="35.0" prefWidth="108.0" text="Olah raga">
+            <Label layoutX="93.0" layoutY="17.0" prefHeight="35.0" prefWidth="108.0" text="Olahraga">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="labelOlahraga" layoutX="95.0" layoutY="49.0" text="10">
+            <Label fx:id="labelOlahraga" layoutX="95.0" layoutY="49.0" text="100.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="132.0" layoutY="49.0" prefHeight="32.0" prefWidth="43.0" text="KM">
+            <Label layoutX="151.0" layoutY="48.0" prefHeight="32.0" prefWidth="43.0" text="KM">
                <font>
                   <Font size="22.0" />
                </font>
@@ -152,23 +152,23 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="labelBeratBadan" layoutX="121.0" layoutY="55.0" text="90">
+            <Label fx:id="labelBeratBadan" layoutX="104.0" layoutY="55.0" text="100.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="149.0" layoutY="55.0" prefHeight="32.0" prefWidth="36.0" text="Kg">
+            <Label layoutX="160.0" layoutY="55.0" prefHeight="32.0" prefWidth="36.0" text="Kg">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <TextField fx:id="tfBeratBadan" layoutX="23.0" layoutY="111.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
-            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="173.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="173.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                <image>
                    <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="buttonBeratbadan" layoutX="178.0" layoutY="111.0" prefHeight="30.0" prefWidth="24.0" text="." />
+            <JFXButton fx:id="buttonBeratbadan" layoutX="178.0" layoutY="109.0" prefHeight="30.0" prefWidth="24.0" text="." />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="835.0" layoutY="56.0" prefHeight="162.0" prefWidth="243.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
@@ -182,31 +182,36 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="labelTinggiBadan" layoutX="92.0" layoutY="57.0" text="190">
+            <Label fx:id="labelTinggiBadan" layoutX="92.0" layoutY="57.0" text="190.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="133.0" layoutY="57.0" prefHeight="32.0" prefWidth="77.0" text="CM">
+            <Label layoutX="150.0" layoutY="57.0" prefHeight="32.0" prefWidth="53.0" text="CM">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <TextField fx:id="tfTinggiBadan" layoutX="31.0" layoutY="111.0" prefHeight="26.0" prefWidth="141.0" promptText="Perbarui Data" />
-            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="177.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="177.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                <image>
                    <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="buttonTinggibadan" layoutX="182.0" layoutY="110.0" prefHeight="30.0" prefWidth="24.0" text="." />
+            <JFXButton fx:id="buttonTinggibadan" layoutX="180.0" layoutY="109.0" prefHeight="30.0" prefWidth="24.0" text="." />
          </children>
       </AnchorPane>
-      <TableView fx:id="tabel" layoutX="248.0" layoutY="239.0" prefHeight="482.0" prefWidth="1026.0" style="-fx-background-color: #ffffff;">
+      <TableView fx:id="tabel" layoutX="248.0" layoutY="296.0" prefHeight="450.0" prefWidth="1026.0" style="-fx-background-color: #ffffff;">
         <columns>
           <TableColumn fx:id="colNo" prefWidth="99.7332763671875" text="no" />
           <TableColumn fx:id="colTanggal" prefWidth="330.6667175292969" text="Tanggal" />
             <TableColumn fx:id="colTarget" prefWidth="595.1999877929688" text="target" />
         </columns>
       </TableView>
+      <Label layoutX="247.0" layoutY="226.0" prefHeight="61.0" prefWidth="269.0" text="Target Olahraga" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
         </children>
     </AnchorPane>
