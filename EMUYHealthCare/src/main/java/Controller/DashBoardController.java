@@ -3,10 +3,15 @@ package Controller;
 import API.LoginApiV2;
 import DataBaseController.UserConnecting;
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,10 +24,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class DashBoardController {
@@ -240,16 +244,57 @@ public class DashBoardController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Target Lari");
 
-        //Memasukan nilai Target ke dalam LineChart
-        for (Map.Entry<String, Double> entry : LoginApiV2.Target.entrySet()) {
-            try {
-                series.getData().add(new XYChart.Data<>(entry.getKey(),entry.getValue()));
-            } catch (NumberFormatException e) {
-                System.err.println("Error parsing value: " + entry.getValue());
-            }
-        }
-        // Tambahkan series ke chart
+        // Sumbu X dikunci
+        CategoryAxis xAxis = (CategoryAxis) tabelOlaraga.getXAxis();
+        List<String> semuaLabel = new ArrayList<>(LoginApiV2.Target.keySet());
+        xAxis.setCategories(FXCollections.observableArrayList(semuaLabel));
+
+        // Sumbu Y dikunci
+        NumberAxis yAxis = (NumberAxis) tabelOlaraga.getYAxis();
+        yAxis.setAutoRanging(false);
+        double max = LoginApiV2.Target.values().stream().mapToDouble(v -> v).max().orElse(10);
+        double min = LoginApiV2.Target.values().stream().mapToDouble(v -> v).min().orElse(0);
+        yAxis.setLowerBound(Math.floor(min - 2));
+        yAxis.setUpperBound(Math.ceil(max + 2));
+        yAxis.setTickUnit(2);
+
+        tabelOlaraga.getData().clear();
         tabelOlaraga.getData().add(series);
+
+        // Siapkan data
+        List<Map.Entry<String, Double>> entries = new ArrayList<>(LoginApiV2.Target.entrySet());
+
+        Timeline timeline = new Timeline();
+        int delayPerPoint = 500;
+
+        for (int i = 0; i < entries.size(); i++) {
+            int index = i;
+            KeyFrame kf = new KeyFrame(Duration.millis(index * delayPerPoint), e -> {
+                Map.Entry<String, Double> entry = entries.get(index);
+                XYChart.Data<String, Number> data = new XYChart.Data<>(entry.getKey(), entry.getValue());
+                series.getData().add(data);
+
+                PauseTransition pause = new PauseTransition(Duration.millis(50));
+                pause.setOnFinished(ev -> {
+                    if (data.getNode() != null) {
+                        Node node = data.getNode();
+                        node.setStyle("-fx-background-color: red, white;");
+                        node.setTranslateY(10);
+                        node.setOpacity(0);
+
+                        TranslateTransition tt = new TranslateTransition(Duration.millis(300), node);
+                        tt.setToY(0);
+                        FadeTransition ft = new FadeTransition(Duration.millis(300), node);
+                        ft.setToValue(1);
+                        new ParallelTransition(tt, ft).play();
+                    }
+                });
+                pause.play();
+            });
+            timeline.getKeyFrames().add(kf);
+        }
+
+        timeline.play();
     }
 
     private void BMIvalues(double value) {
