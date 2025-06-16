@@ -1,8 +1,8 @@
-package Main;
+package Testing;
 
 import Controller.SceneController;
-import Controller.TimeLogger;
-import Controller.alert;
+import Utils.TimeLogger;
+import Utils.alert;
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -21,7 +21,7 @@ public class MainTesting extends Application {
         SceneController Control = new SceneController(primaryStage);
         primaryStage.centerOnScreen();
         Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
-        new TimeLogger().start();
+        //new TimeLogger().start();
 
 
     }
