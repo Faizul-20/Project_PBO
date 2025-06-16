@@ -1,8 +1,7 @@
-package main.java.DataBaseController;
+package DataBaseController;
 
 import API.PenyakitAPI;
-import API.TestingDb.ConnectionData;
-import API.TestingDb.DataConnecting;
+import DataBaseController.ConnectionData;
 import chatBotEngine.Tokenization;
 
 
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
-public class PenyakitConnecting extends ConnectionData implements DataBaseController.SQLConnection {
+public class PenyakitConnecting extends ConnectionData implements SQLConnection {
     private final String QUERY_selectTabelGejala = "SELECT kodeGejala, gejala FROM gejala";
     private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
     private final String QUERY_selectTabelPenyakit = "SELECT Id_penyakit, nama_penyakit FROM penyakit";
@@ -262,7 +261,7 @@ public class PenyakitConnecting extends ConnectionData implements DataBaseContro
 
     public void feedbackChatBot(String userInput) {
         // Koneksi ke DB
-        DataConnecting dataConnecting = new DataConnecting();
+        main.java.API.TestingDb.DataConnecting dataConnecting = new main.java.API.TestingDb.DataConnecting();
         dataConnecting.ConnectToDatabase(dataConnecting.getPENYAKIT_DATA());
 
         if (PenyakitAPI.diagnosa != null &&

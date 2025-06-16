@@ -1,4 +1,4 @@
-package main.java.API;
+package API;
 
 
 import java.util.ArrayList;
