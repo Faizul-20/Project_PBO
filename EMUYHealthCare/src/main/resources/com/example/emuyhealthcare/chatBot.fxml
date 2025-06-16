@@ -74,12 +74,15 @@
                                     <font>
                                         <Font size="16.0" />
                                     </font></TextField>
-                                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="557.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="gmbrKirirm" fitHeight="50.0" fitWidth="50.0" layoutX="557.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                      <!---  <Image url="@../../../../../../../../../../../../foto%20bahan/20250414_003506.png" />-->
+                                        <Image url="@../../../images/send.png" />
                                     </image>
                                 </ImageView>
-                                <JFXButton fx:id="buttonkirimChat" layoutX="557.0" layoutY="4.0" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 30;" text="," />
+                                <JFXButton fx:id="buttonkirimChat" layoutX="557.0" layoutY="4.0" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 30;" text=",">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
                             </children>
                         </AnchorPane>
                   <ScrollPane fx:id="kolomChatGeser" hbarPolicy="NEVER" layoutX="39.0" layoutY="26.0" prefHeight="497.0" prefWidth="614.0">
@@ -122,13 +125,22 @@
                         <Image url="@../../../images/logohome.png" />
                     </image>
                 </ImageView>
-                <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text="." />
+                <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
                 <JFXButton fx:id="bodyMesh" layoutX="66.0" layoutY="337.0" prefHeight="64.0" prefWidth="50.0" text=".">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
-                <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text="." />
-                <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text="." />
+                <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+                <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
             </children>
         </AnchorPane>
     </children>
