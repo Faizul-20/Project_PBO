@@ -22,7 +22,7 @@ public class MainTesting extends Application {
         primaryStage.centerOnScreen();
         System.out.println(Control.getLOGIN_PAGE());
         Control.BuildWindow(Control.getCHATBOT_LINK(),"Login");
-        new TimeLogger().start();
+        //new TimeLogger().start();
 
 
     }

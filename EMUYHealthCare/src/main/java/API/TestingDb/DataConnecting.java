@@ -1,4 +1,4 @@
-package API.TestingDb;
+package main.java.API.TestingDb;
 
 import DataBaseController.SQLConnection;
 
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataConnecting extends ConnectionData implements SQLConnection {
+public class DataConnecting extends DataBaseController.ConnectionData implements SQLConnection {
     @Override
     public void ConnectToDatabase(String Url) {
         try {
