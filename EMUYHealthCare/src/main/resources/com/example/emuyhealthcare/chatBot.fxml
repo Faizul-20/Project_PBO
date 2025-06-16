@@ -36,27 +36,27 @@
                                     <children>
                                         <HBox prefHeight="35.0" prefWidth="262.0">
                                             <children>
-                                                <Label text="Gejela yang Diterima:">
+                                                <Label text="Gejala yang Diterima:">
                                                     <font>
                                                         <Font size="18.0" />
                                                     </font>
                                                 </Label>
                                             </children>
                                         </HBox>
-                              <TextArea fx:id="kolomGejalaDiterima" prefHeight="148.0" prefWidth="262.0" wrapText="true">
+                              <TextArea fx:id="kolomGejalaDiterima" prefHeight="148.0" prefWidth="262.0" style="-fx-background-color: #ffffff;" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </TextArea>
                                         <HBox prefHeight="30.0" prefWidth="262.0">
                                             <children>
-                                                <Label text="Diagnosa Dokter Emuy:">
+                                                <Label text="Penanganan yang disarankan:">
                                                     <font>
                                                         <Font size="18.0" />
                                                     </font>
                                                 </Label>
                                             </children></HBox>
-                              <TextArea fx:id="kolomDiagnosa" prefHeight="148.0" prefWidth="262.0" wrapText="true">
+                              <TextArea fx:id="kolomDiagnosa" prefHeight="148.0" prefWidth="262.0" style="-fx-background-color: #ffffff;" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -85,9 +85,9 @@
                            </cursor></JFXButton>
                             </children>
                         </AnchorPane>
-                  <ScrollPane fx:id="kolomChatGeser" hbarPolicy="NEVER" layoutX="39.0" layoutY="26.0" prefHeight="497.0" prefWidth="614.0">
+                  <ScrollPane fx:id="kolomChatGeser" hbarPolicy="NEVER" layoutX="39.0" layoutY="26.0" prefHeight="497.0" prefWidth="614.0" style="-fx-background-color: #ffffff;">
                      <content>
-                        <VBox fx:id="layearbublechat" maxHeight="1.7976931348623157E308" prefHeight="494.0" prefWidth="601.0" spacing="5.0">
+                        <VBox fx:id="layearbublechat" maxHeight="1.7976931348623157E308" prefHeight="494.0" prefWidth="601.0" spacing="5.0" style="-fx-background-color: #ffffff;">
                            <padding>
                               <Insets left="10.0" right="10.0" />
                            </padding>
