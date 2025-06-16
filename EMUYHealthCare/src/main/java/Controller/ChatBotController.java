@@ -75,6 +75,7 @@ public class ChatBotController {
     CakapEmuyService EmuyService;
     PenyakitConnecting PenyakitConnecting = new PenyakitConnecting();
 
+
     {
         try {
             EmuyService = new CakapEmuyService();
@@ -89,7 +90,11 @@ public class ChatBotController {
         handleMenuDashboard();
         InisialisasiAwal();
         kolomtext.setOnAction(e-> buttonkirimChat.fire());
-        buttonkirimChat.setOnAction(event -> sendMessage());
+        buttonkirimChat.setOnAction(event -> {
+            sendMessage();
+            initStatus();
+        });
+
     }
 
     private void sendMessage() {
@@ -191,6 +196,25 @@ public class ChatBotController {
         bodyMesh.setOnAction(e-> {
             sceneController.SceneChange(sceneController.getUPDATE_LINK(),"Update");
         });
+    }
+
+    private void initStatus(){
+        try {
+            if (!PenyakitAPI.gejalaUser.isEmpty() && !PenyakitAPI.penanganan.isEmpty()) {
+                kolomGejalaDiterima.setText(PenyakitAPI.gejalaUser);
+                kolomDiagnosa.setText(PenyakitAPI.penanganan);
+                System.out.println("==========================================================");
+                System.out.println("Gejala user: " + PenyakitAPI.gejalaUser);
+                System.out.println("Penanganan: " + PenyakitAPI.penanganan);
+                System.out.println("==========================================================");
+            } else {
+                System.out.println("==========================================================");
+                System.out.println("tidak ada!");
+                System.out.println("==========================================================");
+            }
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 

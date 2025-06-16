@@ -3,6 +3,7 @@ package DataBaseController;
 import API.PenyakitAPI;
 import API.TestingDb.DataConnecting;
 import DataBaseController.ConnectionData;
+import chatBotEngine.CakapEmuyService;
 import chatBotEngine.Tokenization;
 
 
@@ -342,10 +343,15 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection 
 
         // Jika inputan tidak cocok dengan gejala apapun
         if (matchedKode.isEmpty()){
-            PenyakitAPI.gejalaUser = inputGejala;
-            PenyakitAPI.feedback = "Gejala tidak cocok dengan penyakit manapun / Gejala diluar data yang ada";
-            PenyakitAPI.diagnosa = "Tidak bisa disimpulkan";
-            return;
+            try {
+                CakapEmuyService cakapEmuyService = new CakapEmuyService();
+                PenyakitAPI.gejalaUser = inputGejala;
+                PenyakitAPI.feedback = cakapEmuyService.processInput(inputGejala);
+                PenyakitAPI.diagnosa = "Tidak bisa disimpulkan";
+                return;
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         }
 
         // Jika semua gejala cocok pada 1 penyakit
