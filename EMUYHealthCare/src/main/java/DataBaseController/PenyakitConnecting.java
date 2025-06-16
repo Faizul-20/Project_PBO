@@ -1,4 +1,4 @@
-package DataBaseController;
+package main.java.DataBaseController;
 
 import API.PenyakitAPI;
 import API.TestingDb.ConnectionData;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
-public class PenyakitConnecting extends ConnectionData implements SQLConnection{
+public class PenyakitConnecting extends ConnectionData implements DataBaseController.SQLConnection {
     private final String QUERY_selectTabelGejala = "SELECT kodeGejala, gejala FROM gejala";
     private final String QUERY_selectTabelPenyakitGejala = "SELECT Id_penyakit, kodeGejala FROM penyakit_gejala";
     private final String QUERY_selectTabelPenyakit = "SELECT Id_penyakit, nama_penyakit FROM penyakit";

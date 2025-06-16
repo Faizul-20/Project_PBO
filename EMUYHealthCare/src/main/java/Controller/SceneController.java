@@ -11,70 +11,99 @@ import javafx.stage.Window;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SceneController {
 
-    Image Icon = new Image(getClass().getResourceAsStream("/Kelinci.png"));
+    private final Image Icon = new Image(getClass().getResourceAsStream("/Kelinci.png"));
     private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard1.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/LoginPage.fxml";
     private final String CHATBOT_LINK = "/com/example/emuyhealthcare/chatBot.fxml";
     private final String UPDATE_LINK = "/com/example/emuyhealthcare/UpdateData.fxml";
-    Stage stage;
-    LocalDateTime now = LocalDateTime.now(); // Ambil waktu sekarang
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Format waktu
-    String formattedTime = now.format(formatter);
 
+    private Stage stage;
 
-
-    //Constructor injection
+    // Cache scene yang sudah dimuat
+    private final Map<String, Parent> sceneCache = new HashMap<>();
 
     public SceneController(Stage stage) {
         this.stage = stage;
     }
-    public SceneController(){};
 
-    //Method For Building New Window
-    public void BuildWindow(String Url,String Scene){
+    public SceneController() {
+    }
+
+    // Format waktu log
+    private String getCurrentFormattedTime() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    // Caching scene pertama kali
+    private Parent loadFXML(String url) throws IOException {
+        if (sceneCache.containsKey(url)) {
+            return sceneCache.get(url);
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+        Parent root = loader.load();
+        sceneCache.put(url, root);
+        return root;
+    }
+
+    // Build window baru (untuk launch awal misalnya login)
+    public void BuildWindow(String url, String sceneName) {
         try {
-            Parent Load = FXMLLoader.load(getClass().getResource(Url));
-            stage.centerOnScreen();
-            stage.setScene(new Scene(Load));
+            Parent root = loadFXML(url);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.setTitle("Emuy HealthCare");
-            stage.getIcons().add(Icon);
+            stage.getIcons().setAll(Icon);
+            stage.centerOnScreen();
             stage.show();
-            System.out.println("[EMUYLOG] ["+ LoginApiV2.getUsername() +"] " + formattedTime +" Berhasil menampilkan layar " + Scene);
+            logSceneChange(sceneName);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
-    //Method For ChangeScene
-    public void SceneChange(String Url,String Scene){
+    // Ganti scene di window yang sama
+    public void SceneChange(String url, String sceneName) {
         try {
-            Parent Loader = FXMLLoader.load(getClass().getResource(Url));
-            stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
-            stage.centerOnScreen();
-            stage.setScene(new Scene(Loader));
+            if (stage == null) {
+                stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
+            }
+
+            Parent root = loadFXML(url);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.setTitle("Emuy HealthCare");
-            stage.getIcons().add(Icon);
+            stage.getIcons().setAll(Icon);
+            stage.centerOnScreen();
             stage.show();
-            System.out.println("[EMUYLOG] ["+ LoginApiV2.getUsername() +"] " + formattedTime +" Berhasil menampilkan layar " + Scene);
-        }catch (IOException e){
-            System.out.println("Pesan Eror : " + e.getMessage());
-            System.out.println("Tidak Dapat menampilkan Layar");
+            logSceneChange(sceneName);
+        } catch (IOException e) {
+            System.err.println("Gagal mengganti scene ke: " + sceneName);
+            e.printStackTrace();
         }
     }
 
+    private void logSceneChange(String sceneName) {
+        System.out.println("[EMUYLOG] [" + LoginApiV2.getUsername() + "] "
+                + getCurrentFormattedTime() + " Berhasil menampilkan layar " + sceneName);
+    }
 
     public String getDASHBOARD_LINK() {
         return DASHBOARD_LINK;
     }
+
     public String getUPDATE_LINK() {
         return UPDATE_LINK;
     }
+
     public String getLOGIN_PAGE() {
         return LOGIN_PAGE;
     }
+
     public String getCHATBOT_LINK() {
         return CHATBOT_LINK;
     }
