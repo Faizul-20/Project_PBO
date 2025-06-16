@@ -2,15 +2,15 @@ package chatBotEngine;
 
 import API.PenyakitAPI;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.*;
 
 public class CakapEmuyService {
-    // URL database SQLite
     private final String dbUrl;
     private final List<QAEntry> qaList = new ArrayList<>();
 
-    // Kelas untuk menyimpan setiap pertanyaan dan jawaban
     public static class QAEntry {
         private final Set<String> keywords;
         private final String answer;
@@ -45,29 +45,39 @@ public class CakapEmuyService {
         }
     }
 
-    // Konstruktor dengan URL default
+    // Konstruktor default
     public CakapEmuyService() throws SQLException {
-        this("jdbc:sqlite:EMUYHealthCare/Database/sapaEmuy/Emuycakap.db");
+        this(getDatabasePath());
     }
 
-    // Konstruktor dengan custom URL
+    // Konstruktor dengan custom path
     public CakapEmuyService(String dbUrl) throws SQLException {
-        this.dbUrl = dbUrl;
+        this.dbUrl = "jdbc:sqlite:" + dbUrl;
         initializeChatBot();
     }
 
-    // Inisialisasi chatbot
+    // Ambil path absolut ke database
+    private static String getDatabasePath() {
+        try {
+            File jarDir = new File(CakapEmuyService.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            File projectRoot = jarDir.getParentFile().getParentFile(); // naik dari /out/
+            File dbFile = new File(projectRoot, "Database/sapaEmuy/Emuycakap.db");
+            return dbFile.getAbsolutePath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return "Database/sapaEmuy/Emuycakap.db"; // fallback (IDE)
+        }
+    }
+
     private void initializeChatBot() throws SQLException {
         try (Connection conn = DriverManager.getConnection(dbUrl)) {
             loadQAData(conn);
         }
     }
 
-    // Memuat data dari database
     private void loadQAData(Connection conn) throws SQLException {
         String sql = "SELECT question, answer FROM Emuy_cakap";
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 qaList.add(new QAEntry(
                         rs.getString("question"),
@@ -77,30 +87,25 @@ public class CakapEmuyService {
         }
     }
 
-    // Proses input pengguna dan dapatkan respons
     public String processInput(String userInput) {
         if (userInput == null || userInput.trim().isEmpty()) {
             return "Coba ketik sesuatu dulu ya!";
         }
 
-        // Tokenisasi input
         Set<String> tokens = tokenizeInput(userInput);
         if (tokens.isEmpty()) {
             return "Aku belum paham maksudmu";
         }
 
-        // Cari respons terbaik
         return findBestResponse(tokens);
     }
 
-    // Tokenisasi input
     private Set<String> tokenizeInput(String input) {
         String cleanedInput = input.toLowerCase().replaceAll("[^a-z0-9\\s]", "");
         String[] words = cleanedInput.split("\\s+");
         return new HashSet<>(Arrays.asList(words));
     }
 
-    // Cari respons terbaik berdasarkan token
     private String findBestResponse(Set<String> tokens) {
         QAEntry bestMatch = null;
         int highestMatchCount = 0;
@@ -119,9 +124,7 @@ public class CakapEmuyService {
         return (bestMatch != null) ? bestMatch.getAnswer() : PenyakitAPI.diagnosa;
     }
 
-    // Dapatkan semua entri QA (untuk debugging atau analisis)
     public List<QAEntry> getAllQAEntries() {
         return Collections.unmodifiableList(qaList);
     }
-
 }

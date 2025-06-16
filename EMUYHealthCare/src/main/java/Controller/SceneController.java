@@ -9,13 +9,14 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SceneController {
 
-    Image Icon = new Image(getClass().getResourceAsStream("/Kelinci.png"));
-    private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/DashBoard1.fxml";
+    Image Icon = new Image(getClass().getResourceAsStream("/images/icon.png"));
+    private final String DASHBOARD_LINK = "/com/example/emuyhealthcare/dashBoard1.fxml";
     private final String LOGIN_PAGE = "/com/example/emuyhealthcare/loginPage.fxml";
     private final String CHATBOT_LINK = "/com/example/emuyhealthcare/chatBot.fxml";
     private final String UPDATE_LINK = "/com/example/emuyhealthcare/UpdateData.fxml";
@@ -47,22 +48,27 @@ public class SceneController {
         }
     }
 
-    //Method For ChangeScene
-    public void SceneChange(String Url,String Scene){
+    public void SceneChange(String Url,String Scene) {
         try {
-            Parent Loader = FXMLLoader.load(getClass().getResource(Url));
+            URL fxmlLocation = getClass().getResource(Url);
+            if (fxmlLocation == null) {
+                throw new RuntimeException("Resource not found: " + Url);
+            }
+
+            Parent loader = FXMLLoader.load(fxmlLocation);
             stage = (Stage) Window.getWindows().filtered(Window::isShowing).get(0);
             stage.centerOnScreen();
-            stage.setScene(new Scene(Loader));
+            stage.setScene(new Scene(loader));
             stage.setTitle("Emuy HealthCare");
             stage.getIcons().add(Icon);
             stage.show();
-            System.out.println("[EMUYLOG] ["+ LoginApiV2.getUsername() +"] " + formattedTime +" Berhasil menampilkan layar " + Scene);
-        }catch (IOException e){
-            System.out.println("Pesan Eror : " + e.getMessage());
-            System.out.println("Tidak Dapat menampilkan Layar");
+            System.out.println("[EMUYLOG] [" + LoginApiV2.getUsername() + "] " + formattedTime + " Berhasil menampilkan layar " + Scene);
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
 
 
     public String getDASHBOARD_LINK() {

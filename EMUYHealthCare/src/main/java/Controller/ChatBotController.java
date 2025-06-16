@@ -134,7 +134,7 @@ public class ChatBotController {
         Timeline tl = new Timeline();
         for (int i = 0; i < fullText.length(); i++) {
             int j = i;
-            tl.getKeyFrames().add(new KeyFrame(Duration.millis(10 * (j + 1)), e -> {
+            tl.getKeyFrames().add(new KeyFrame(Duration.millis(1 * (j + 1)), e -> {
                 sb.append(fullText.charAt(j));
                 botLabel.setText(sb.toString());
                 scrollToBottom();
