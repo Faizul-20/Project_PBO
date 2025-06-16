@@ -24,7 +24,7 @@ public class Tokenization {
                 "normalnya", "awalnya", "mulanya", "tiba-tiba", "seketika", "langsung", "perlahan",
                 "terus", "kemarin", "tadi", "barusan", "besok", "nanti", "setelah", "sebelum", "waktu",
                 "hari", "malam", "pagi", "siang", "sore", "jam", "detik", "menit", "kadang", "kadang-kadang",
-                "kayaknya", "kaya", "kayak", "gitu", "gini", "begituan", "begini", "gitulah",
+                "kayaknya", "kayak", "gitu", "gini", "begituan", "begini", "gitulah",
                 "gimana", "gitu aja", "aja sih", "pokoknya", "intinya", "semacam", "seolah", "gak ngerti",
                 "udah", "udah deh", "udah sih", "udah banget", "udah parah", "udah lama", "udah banget deh",
                 "masih", "masih sih", "udah mulai", "udah kerasa", "udah kerasa banget", "masih terasa",
