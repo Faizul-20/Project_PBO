@@ -13,9 +13,8 @@ public class EmuyMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        SceneController Control = new SceneController(primaryStage);
-        primaryStage.centerOnScreen();
-        Control.BuildWindow(Control.getLOGIN_PAGE(),"Login");
+        SceneController sceneController = new SceneController(primaryStage);
+        sceneController.BuildWindow(sceneController.getLOGIN_PAGE(), "Login");
         new TimeLogger().start();
     }
 }

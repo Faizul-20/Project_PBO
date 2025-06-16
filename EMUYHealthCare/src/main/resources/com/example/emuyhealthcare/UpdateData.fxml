@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateDataController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateDataController">
 <children>
             <AnchorPane fx:id="menuDasboard" layoutX="-3.0" layoutY="-3.2" prefHeight="772.0" prefWidth="183.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="1186.0" AnchorPane.topAnchor="-3.0">
                 <children>
@@ -40,10 +36,22 @@
                             <Image url="@../../../images/logohome.png" />
                         </image>
                     </ImageView>
-                    <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text="." />
-                    <JFXButton fx:id="bodyMesh" layoutX="66.0" layoutY="337.0" prefHeight="64.0" prefWidth="50.0" text="." />
-                    <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text="." />
-                    <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text="." />
+                    <JFXButton fx:id="buttonLogout" layoutX="66.0" layoutY="443.0" prefHeight="50.0" prefWidth="50.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+                    <JFXButton fx:id="bodyMesh" layoutX="66.0" layoutY="337.0" prefHeight="64.0" prefWidth="50.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+                    <JFXButton fx:id="chatBot" layoutX="61.0" layoutY="251.0" prefHeight="50.0" prefWidth="50.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+                    <JFXButton fx:id="hoMe" layoutX="62.0" layoutY="188.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-radius: 30;" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
                 </children>
             </AnchorPane>
       <AnchorPane layoutX="198.0" layoutY="56.0" prefHeight="162.0" prefWidth="194.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
@@ -73,7 +81,10 @@
                <image>
                    <Image url="@../../../images/note.png" />
                </image></ImageView>
-            <JFXButton fx:id="buttonGuladarah" layoutX="156.0" layoutY="106.0" prefHeight="31.0" prefWidth="26.0" text="." />
+            <JFXButton fx:id="buttonGuladarah" layoutX="156.0" layoutY="106.0" prefHeight="31.0" prefWidth="26.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children></AnchorPane>
             <Label layoutX="212.0" layoutY="4.0" prefHeight="36.0" prefWidth="142.0" text="Hallo Admin" textFill="WHITE">
                 <font>
@@ -107,7 +118,10 @@
                    <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="buttonTekanandarah" layoutX="167.0" layoutY="109.0" prefHeight="31.0" prefWidth="25.0" text="." />
+            <JFXButton fx:id="buttonTekanandarah" layoutX="167.0" layoutY="109.0" prefHeight="31.0" prefWidth="25.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="620.0" layoutY="56.0" prefHeight="161.0" prefWidth="208.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
@@ -138,7 +152,10 @@
                    <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="buttonOlahraga" layoutX="159.0" layoutY="121.0" prefHeight="31.0" prefWidth="26.0" text="." />
+            <JFXButton fx:id="buttonOlahraga" layoutX="159.0" layoutY="121.0" prefHeight="31.0" prefWidth="26.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1085.0" layoutY="56.0" prefHeight="162.0" prefWidth="243.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
@@ -168,7 +185,10 @@
                    <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="buttonBeratbadan" layoutX="178.0" layoutY="109.0" prefHeight="30.0" prefWidth="24.0" text="." />
+            <JFXButton fx:id="buttonBeratbadan" layoutX="178.0" layoutY="109.0" prefHeight="30.0" prefWidth="24.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="835.0" layoutY="56.0" prefHeight="162.0" prefWidth="243.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
@@ -198,14 +218,17 @@
                    <Image url="@../../../images/note.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="buttonTinggibadan" layoutX="180.0" layoutY="109.0" prefHeight="30.0" prefWidth="24.0" text="." />
+            <JFXButton fx:id="buttonTinggibadan" layoutX="180.0" layoutY="109.0" prefHeight="30.0" prefWidth="24.0" text=".">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </AnchorPane>
       <TableView fx:id="tabel" layoutX="248.0" layoutY="296.0" prefHeight="450.0" prefWidth="1026.0" style="-fx-background-color: #ffffff;">
         <columns>
-          <TableColumn fx:id="colNo" prefWidth="99.7332763671875" text="no" />
+          <TableColumn fx:id="colNo" prefWidth="99.7332763671875" text="No" />
           <TableColumn fx:id="colTanggal" prefWidth="330.6667175292969" text="Tanggal" />
-            <TableColumn fx:id="colTarget" prefWidth="595.1999877929688" text="target" />
+            <TableColumn fx:id="colTarget" prefWidth="595.1999877929688" text="Target" />
         </columns>
       </TableView>
       <Label layoutX="247.0" layoutY="226.0" prefHeight="61.0" prefWidth="269.0" text="Target Olahraga" textFill="WHITE">
