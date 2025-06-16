@@ -1,10 +1,10 @@
 module EMUYHealthCare {
     requires com.jfoenix;
-    requires java.sql;
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires java.sql;
 
     // Membuka package untuk FXML (agar bisa refleksi controller)
     opens API to javafx.fxml;
