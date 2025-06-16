@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateDataController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #0b1746;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateDataController">
 <children>
             <AnchorPane fx:id="menuDasboard" layoutX="-3.0" layoutY="-3.2" prefHeight="772.0" prefWidth="183.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="1186.0" AnchorPane.topAnchor="-3.0">
                 <children>
@@ -231,9 +226,9 @@
       </AnchorPane>
       <TableView fx:id="tabel" layoutX="248.0" layoutY="296.0" prefHeight="450.0" prefWidth="1026.0" style="-fx-background-color: #ffffff;">
         <columns>
-          <TableColumn fx:id="colNo" prefWidth="99.7332763671875" text="no" />
+          <TableColumn fx:id="colNo" prefWidth="99.7332763671875" text="No" />
           <TableColumn fx:id="colTanggal" prefWidth="330.6667175292969" text="Tanggal" />
-            <TableColumn fx:id="colTarget" prefWidth="595.1999877929688" text="target" />
+            <TableColumn fx:id="colTarget" prefWidth="595.1999877929688" text="Target" />
         </columns>
       </TableView>
       <Label layoutX="247.0" layoutY="226.0" prefHeight="61.0" prefWidth="269.0" text="Target Olahraga" textFill="WHITE">

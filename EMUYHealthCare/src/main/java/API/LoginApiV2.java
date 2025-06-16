@@ -36,6 +36,13 @@ public class LoginApiV2 {
 
     }
     public static void Logout() {
+        System.out.println("\n=========================User Logout=============================");
+        SetNull();
+        System.out.println("Terima kasih menggunakan Kami");
+        System.out.println("=================================================================\n");
+    }
+
+    private static void SetNull(){
         Map<String,Double> target = new LinkedHashMap<>();
         setID(0);
         setGulaDarah(0);
