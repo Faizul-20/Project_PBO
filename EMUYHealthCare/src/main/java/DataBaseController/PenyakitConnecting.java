@@ -1,6 +1,7 @@
 package DataBaseController;
 
 import API.PenyakitAPI;
+import API.TestingDb.DataConnecting;
 import DataBaseController.ConnectionData;
 import chatBotEngine.Tokenization;
 
@@ -261,7 +262,7 @@ public class PenyakitConnecting extends ConnectionData implements SQLConnection 
 
     public void feedbackChatBot(String userInput) {
         // Koneksi ke DB
-        main.java.API.TestingDb.DataConnecting dataConnecting = new main.java.API.TestingDb.DataConnecting();
+       DataConnecting dataConnecting = new DataConnecting();
         dataConnecting.ConnectToDatabase(dataConnecting.getPENYAKIT_DATA());
 
         if (PenyakitAPI.diagnosa != null &&

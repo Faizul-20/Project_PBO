@@ -1,4 +1,4 @@
-package main.java.API.TestingDb;
+package API.TestingDb;
 
 import DataBaseController.SQLConnection;
 
