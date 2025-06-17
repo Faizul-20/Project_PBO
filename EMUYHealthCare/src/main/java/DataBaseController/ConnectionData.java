@@ -21,7 +21,8 @@ public abstract class ConnectionData {
             // Ambil parent dari /out/
             projectRoot = jarDir.getParentFile().getParent();
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            System.out.println("Pesan Eror : " + e.getMessage());
+            System.out.println("TIdak Bisa Menemukan Path yang ada");
         }
 
         USER_DATA = "jdbc:sqlite:" + projectRoot + File.separator +
